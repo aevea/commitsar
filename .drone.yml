@@ -13,7 +13,7 @@ steps:
       - name: deps
         path: /go
     commands:
-      - go test -race -v ./... -cover
+      - make ci
 
   - name: release
     image: golang
