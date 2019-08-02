@@ -6,8 +6,12 @@ import (
 )
 
 // CommitMessage returns message of given commit
-func CommitMessage(repo *git.Repository, commit plumbing.Hash) string {
-	commitObject, _ := repo.CommitObject(commit)
+func CommitMessage(repo *git.Repository, commit plumbing.Hash) (string, error) {
+	commitObject, err := repo.CommitObject(commit)
 
-	return commitObject.Message
+	if err != nil {
+		return "", err
+	}
+
+	return commitObject.Message, nil
 }
