@@ -34,11 +34,12 @@ func createCommit(repo *git.Repository, message string) *object.Commit {
 	return obj
 }
 
-func TestCommitDate(t *testing.T) {
+func TestCommitMessage(t *testing.T) {
 	repo := setupRepo()
 	commit := createCommit(repo, "example commit")
 
-	message := CommitMessage(repo, commit.Hash)
+	message, err := CommitMessage(repo, commit.Hash)
 
 	assert.Equal(t, message, "example commit")
+	assert.Equal(t, err, nil)
 }
