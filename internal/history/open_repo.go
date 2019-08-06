@@ -1,4 +1,4 @@
-package git
+package history
 
 import (
 	"gopkg.in/src-d/go-git.v4"
