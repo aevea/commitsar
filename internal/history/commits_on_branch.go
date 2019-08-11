@@ -2,6 +2,7 @@ package history
 
 import (
 	"errors"
+	"log"
 
 	"gopkg.in/src-d/go-git.v4"
 	"gopkg.in/src-d/go-git.v4/plumbing"
@@ -53,7 +54,12 @@ func CommitsOnBranch(
 
 	compareCommit, _ := repo.CommitObject(compareHash)
 
-	diffCommits, _ := branchCommit.MergeBase(compareCommit)
+	diffCommits, mergeBaseErr := branchCommit.MergeBase(compareCommit)
+
+	if mergeBaseErr != nil {
+		log.Print(mergeBaseErr)
+		return nil, mergeBaseErr
+	}
 
 	commonHash = diffCommits[len(diffCommits)-1].Hash
 

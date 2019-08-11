@@ -10,25 +10,37 @@ import (
 )
 
 func runRoot(cmd *cobra.Command, args []string) {
+	debug := false
+	if cmd.Flag("verbose").Value.String() == "true" {
+		debug = true
+	}
+
 	log.Print("Starting analysis of commits on branch")
 
 	repo, repoErr := history.Repo(".")
 
 	if repoErr != nil {
+		log.Println("[ERROR] repo", repoErr)
 		panic(repoErr)
 	}
 
 	currentBranch, currentBranchErr := repo.Head()
 
 	if currentBranchErr != nil {
+		log.Println("[ERROR] currentBranch", currentBranchErr)
 		panic(currentBranchErr)
 	}
 
 	masterRef := plumbing.NewBranchReferenceName("master")
 
+	if debug {
+		log.Printf("current branch %v", currentBranch.Name().String())
+	}
+
 	commits, commitsErr := history.CommitsOnBranch(repo, currentBranch.Name(), masterRef)
 
 	if commitsErr != nil {
+		log.Println("[ERROR] commits: ", commitsErr)
 		panic(commitsErr)
 	}
 
