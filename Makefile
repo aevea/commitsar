@@ -12,3 +12,6 @@ go-mod-tidy:
 
 # Run all tests & linters in CI
 ci: test go-mod-tidy
+
+build: 
+	go build -o build/commitsar ./

@@ -15,6 +15,16 @@ steps:
     commands:
       - make ci
 
+  - name: commitsar-check
+    image: golang
+    volumes:
+      - name: deps
+        path: /go
+    commands:
+      - make build
+      - mv build/commitsar ./commitsar-app
+      - ./commitsar-app
+
   - name: release
     image: golang
     environment:
