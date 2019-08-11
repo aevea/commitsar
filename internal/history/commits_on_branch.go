@@ -50,9 +50,17 @@ func CommitsOnBranch(
 		return nil, refIterErr
 	}
 
-	branchCommit, _ := repo.CommitObject(branchHash)
+	branchCommit, branchCommitErr := repo.CommitObject(branchHash)
 
-	compareCommit, _ := repo.CommitObject(compareHash)
+	if branchCommitErr != nil {
+		return nil, branchCommitErr
+	}
+
+	compareCommit, compareCommitErr := repo.CommitObject(compareHash)
+
+	if compareCommitErr != nil {
+		return nil, compareCommitErr
+	}
 
 	diffCommits, mergeBaseErr := branchCommit.MergeBase(compareCommit)
 

@@ -21,9 +21,7 @@ steps:
       - name: deps
         path: /go
     commands:
-      - make build
-      - mv build/commitsar ./commitsar-app
-      - ./commitsar-app
+      - go run main.go -v
 
   - name: release
     image: golang

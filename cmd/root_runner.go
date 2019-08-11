@@ -9,7 +9,7 @@ import (
 	"gopkg.in/src-d/go-git.v4/plumbing"
 )
 
-func runRoot(cmd *cobra.Command, args []string) {
+func runRoot(cmd *cobra.Command, args []string) error {
 	debug := false
 	if cmd.Flag("verbose").Value.String() == "true" {
 		debug = true
@@ -20,28 +20,35 @@ func runRoot(cmd *cobra.Command, args []string) {
 	repo, repoErr := history.Repo(".")
 
 	if repoErr != nil {
-		log.Println("[ERROR] repo", repoErr)
-		panic(repoErr)
+		return repoErr
 	}
 
 	currentBranch, currentBranchErr := repo.Head()
 
-	if currentBranchErr != nil {
-		log.Println("[ERROR] currentBranch", currentBranchErr)
-		panic(currentBranchErr)
-	}
-
-	masterRef := plumbing.NewBranchReferenceName("master")
-
 	if debug {
-		log.Printf("current branch %v", currentBranch.Name().String())
+		log.Printf("Current branch %v", currentBranch.Name().String())
+		refIter, _ := repo.References()
+
+		refIterErr := refIter.ForEach(func(ref *plumbing.Reference) error {
+			log.Printf("[REF] %v", ref.Name().String())
+			return nil
+		})
+
+		if refIterErr != nil {
+			return refIterErr
+		}
 	}
+
+	if currentBranchErr != nil {
+		return currentBranchErr
+	}
+
+	masterRef := plumbing.ReferenceName("master")
 
 	commits, commitsErr := history.CommitsOnBranch(repo, currentBranch.Name(), masterRef)
 
 	if commitsErr != nil {
-		log.Println("[ERROR] commits: ", commitsErr)
-		panic(commitsErr)
+		return commitsErr
 	}
 
 	log.Printf("Found %v commit to check", len(commits))
@@ -50,15 +57,17 @@ func runRoot(cmd *cobra.Command, args []string) {
 		commitObject, commitErr := repo.CommitObject(commitHash)
 
 		if commitErr != nil {
-			panic(commitErr)
+			return commitErr
 		}
 
 		textErr := text.CheckMessageTitle(commitObject.Message)
 
 		if textErr != nil {
-			panic(textErr)
+			return textErr
 		}
 	}
 
 	log.Printf("All %v commits are conventional commit compliant", len(commits))
+
+	return nil
 }
