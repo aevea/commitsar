@@ -37,15 +37,21 @@ func TestCommitsOnBranch(t *testing.T) {
 	createCommit(repo, "test commit on master")
 	createBranch(repo)
 	createCommit(repo, "commit on new branch")
+	createCommit(repo, "second commit on new branch")
+	createCommit(repo, "third commit on new branch")
 
-	commits, err := CommitsOnBranch(repo, "my-branch")
+	headRef, _ := repo.Head()
 
-	assert.Equal(t, len(commits), 1)
+	masterRef := plumbing.NewBranchReferenceName("master")
+
+	commits, err := CommitsOnBranch(repo, headRef.Name(), masterRef)
+
+	assert.Equal(t, 3, len(commits))
 
 	commit, commitErr := repo.CommitObject(commits[0])
 
 	assert.NoError(t, commitErr)
-	assert.Equal(t, commit.Message, "commit on new branch")
+	assert.Equal(t, "third commit on new branch", commit.Message)
 	assert.Equal(t, err, nil)
 
 }
