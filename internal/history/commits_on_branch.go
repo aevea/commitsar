@@ -2,7 +2,6 @@ package history
 
 import (
 	"errors"
-	"log"
 
 	"gopkg.in/src-d/go-git.v4"
 	"gopkg.in/src-d/go-git.v4/plumbing"
@@ -35,7 +34,6 @@ func CommitsOnBranch(
 	defer allRefs.Close()
 
 	refIterErr := allRefs.ForEach(func(ref *plumbing.Reference) error {
-		log.Println(branchRef, ref.Name().String())
 		if ref.Name() == branchRef {
 			branchHash = ref.Hash()
 		}

@@ -6,7 +6,7 @@ import (
 )
 
 var (
-	titleRegex         = regexp.MustCompile(`^(?P<type>\w+?)(?P<scope>\(\w+\)?)?!?:\s(?P<message>.+)$`)
+	titleRegex         = regexp.MustCompile(`^(?P<type>\w+?)(?P<scope>\(\w+\)?)?!?:\s(?P<message>.+)`)
 	errTitleNonConform = errors.New("message title does not conform to conventional commits")
 )
 
