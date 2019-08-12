@@ -19,6 +19,6 @@ RUN  apk add --no-cache --virtual=.run-deps ca-certificates git &&\
 WORKDIR /app
 COPY --from=builder /app/build/commitsar ./commitsar
 
-RUN ln -s commitsar /usr/local/bin
+RUN ln -s $PWD/commitsar /usr/local/bin
 
 ENTRYPOINT ./commitsar
