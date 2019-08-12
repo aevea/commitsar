@@ -14,6 +14,9 @@ steps:
         path: /go
     commands:
       - make ci
+    when:
+      event: [pull_request]
+    depends_on: [fetch]
 
   - name: commitsar-check
     image: golang
@@ -22,6 +25,9 @@ steps:
         path: /go
     commands:
       - go run main.go -v
+    when:
+      event: [pull_request]
+    depends_on: [fetch]
 
   - name: release
     image: golang
