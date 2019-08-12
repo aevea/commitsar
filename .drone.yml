@@ -44,6 +44,16 @@ steps:
     when:
       event: tag
 
+  - name: docker
+    image: plugins/docker
+    settings:
+      auto_tag: true
+      repo: fallion/commitsar
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+
 volumes:
   - name: deps
     temp: {}
