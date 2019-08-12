@@ -13,7 +13,7 @@ COPY . /app/
 RUN make build/docker
 
 FROM alpine:3.10.1
-RUN  apk add --no-cache --virtual=.run-deps ca-certificates &&\
+RUN  apk add --no-cache --virtual=.run-deps ca-certificates git &&\
     mkdir /app
 
 WORKDIR /app
