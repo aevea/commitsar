@@ -13,11 +13,10 @@ COPY . /app/
 RUN make build/docker
 
 FROM alpine:3.10.1
-RUN  apk add --no-cache --virtual=.run-deps ca-certificates git ssh &&\
+RUN  apk add --no-cache --virtual=.run-deps ca-certificates git &&\
     mkdir /app
 
 WORKDIR /app
 COPY --from=builder /app/build/commitsar ./commitsar
 
-USER nobody
 ENTRYPOINT ./commitsar
