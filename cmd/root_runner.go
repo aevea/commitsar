@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"log"
 
 	"github.com/fallion/commitsar/internal/history"
@@ -46,6 +47,10 @@ func runRoot(cmd *cobra.Command, args []string) error {
 	masterRef := plumbing.ReferenceName("master")
 
 	commits, commitsErr := history.CommitsOnBranch(repo, currentBranch.Name(), masterRef)
+
+	if len(commits) == 0 {
+		return errors.New("No commits found, please check you are on a branch outside of main")
+	}
 
 	if commitsErr != nil {
 		return commitsErr
