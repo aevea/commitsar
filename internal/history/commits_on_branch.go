@@ -20,46 +20,20 @@ func CommitsOnBranch(
 ) ([]plumbing.Hash, error) {
 
 	var commits []plumbing.Hash
-	var branchHash plumbing.Hash
-	var compareHash plumbing.Hash
 
 	// common ancestor between two branches based on MergeBase
 	var commonHash plumbing.Hash
 
-	allRefs, refErr := repo.References()
+	branchCommit, err := commitFromRepo(repo, branchRef.String())
 
-	if refErr != nil {
-		return nil, refErr
+	if err != nil {
+		return nil, err
 	}
 
-	defer allRefs.Close()
+	compareCommit, err := commitFromRepo(repo, compareRef.String())
 
-	refIterErr := allRefs.ForEach(func(ref *plumbing.Reference) error {
-		if ref.Name() == branchRef {
-			branchHash = ref.Hash()
-		}
-
-		if ref.Name() == compareRef {
-			compareHash = ref.Hash()
-		}
-
-		return nil
-	})
-
-	if refIterErr != nil {
-		return nil, refIterErr
-	}
-
-	branchCommit, branchCommitErr := repo.CommitObject(branchHash)
-
-	if branchCommitErr != nil {
-		return nil, branchCommitErr
-	}
-
-	compareCommit, compareCommitErr := repo.CommitObject(compareHash)
-
-	if compareCommitErr != nil {
-		return nil, compareCommitErr
+	if err != nil {
+		return nil, err
 	}
 
 	diffCommits, mergeBaseErr := branchCommit.MergeBase(compareCommit)
@@ -95,4 +69,20 @@ func CommitsOnBranch(
 	}
 
 	return commits, nil
+}
+
+func commitFromRepo(repo *git.Repository, desiredBranch string) (*object.Commit, error) {
+	desiredHash, err := repo.ResolveRevision(plumbing.Revision(desiredBranch))
+
+	if err != nil {
+		return nil, err
+	}
+
+	desiredCommit, err := repo.CommitObject(*desiredHash)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return desiredCommit, nil
 }
