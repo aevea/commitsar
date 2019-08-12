@@ -2,7 +2,6 @@ package history
 
 import (
 	"errors"
-	"log"
 
 	"gopkg.in/src-d/go-git.v4"
 	"gopkg.in/src-d/go-git.v4/plumbing"
@@ -15,8 +14,8 @@ var ErrCommonCommitFound = errors.New("common commit found")
 // CommitsOnBranch iterates through all references and returns commit hashes on given branch
 func CommitsOnBranch(
 	repo *git.Repository,
-	branchRef plumbing.ReferenceName,
-	compareRef plumbing.ReferenceName,
+	branchHash plumbing.Hash,
+	compareBranch string,
 ) ([]plumbing.Hash, error) {
 
 	var commits []plumbing.Hash
@@ -24,17 +23,13 @@ func CommitsOnBranch(
 	// common ancestor between two branches based on MergeBase
 	var commonHash plumbing.Hash
 
-	branchCommit, err := commitFromRepo(repo, branchRef.String())
-
-	log.Println("branchCommit ", branchCommit)
+	branchCommit, err := repo.CommitObject(branchHash)
 
 	if err != nil {
 		return nil, err
 	}
 
-	compareCommit, err := commitFromRepo(repo, compareRef.String())
-
-	log.Println("compareCommit ", compareCommit)
+	compareCommit, err := commitFromRepo(repo, compareBranch)
 
 	if err != nil {
 		return nil, err
@@ -43,7 +38,6 @@ func CommitsOnBranch(
 	diffCommits, mergeBaseErr := branchCommit.MergeBase(compareCommit)
 
 	if mergeBaseErr != nil {
-		log.Print(mergeBaseErr)
 		return nil, mergeBaseErr
 	}
 

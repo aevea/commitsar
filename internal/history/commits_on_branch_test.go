@@ -42,9 +42,7 @@ func TestCommitsOnBranch(t *testing.T) {
 
 	headRef, _ := repo.Head()
 
-	masterRef := plumbing.NewBranchReferenceName("master")
-
-	commits, err := CommitsOnBranch(repo, headRef.Name(), masterRef)
+	commits, err := CommitsOnBranch(repo, headRef.Hash(), "master")
 
 	assert.Equal(t, 3, len(commits))
 
