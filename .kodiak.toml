@@ -3,7 +3,7 @@ version = 1
 
 [merge]
 
-require_automerge_label = false
+require_automerge_label = true
 
 # if this title regex matches, Kodiak will not merge the PR. this is useful
 # to prevent merging work in progress PRs
