@@ -6,6 +6,8 @@ steps:
     image: docker:git
     commands:
       - git fetch --tags
+    when:
+      event: [pull_request, tag]
 
   - name: test
     image: golang
