@@ -44,9 +44,7 @@ func runRoot(cmd *cobra.Command, args []string) error {
 		return currentBranchErr
 	}
 
-	masterRef := plumbing.ReferenceName("master")
-
-	commits, commitsErr := history.CommitsOnBranch(repo, currentBranch.Name(), masterRef)
+	commits, commitsErr := history.CommitsOnBranch(repo, currentBranch.Hash(), "origin/master")
 
 	if len(commits) == 0 {
 		return errors.New("No commits found, please check you are on a branch outside of main")
