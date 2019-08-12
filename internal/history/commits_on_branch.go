@@ -26,11 +26,15 @@ func CommitsOnBranch(
 
 	branchCommit, err := commitFromRepo(repo, branchRef.String())
 
+	log.Println("branchCommit ", branchCommit)
+
 	if err != nil {
 		return nil, err
 	}
 
 	compareCommit, err := commitFromRepo(repo, compareRef.String())
+
+	log.Println("compareCommit ", compareCommit)
 
 	if err != nil {
 		return nil, err
