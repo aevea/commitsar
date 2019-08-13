@@ -15,6 +15,7 @@ steps:
       - name: deps
         path: /go
     commands:
+      - make setup-test
       - make ci
     when:
       event: [pull_request]

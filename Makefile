@@ -1,6 +1,9 @@
 install_deps:
 	go mod download
 
+setup-test:
+	./scripts/setup_commits_on_branch_test.sh
+
 # Standard go test
 test:
 	go test ./... -v -race

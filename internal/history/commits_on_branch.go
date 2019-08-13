@@ -44,7 +44,8 @@ func CommitsOnBranch(
 	commonHash = diffCommits[len(diffCommits)-1].Hash
 
 	commitIter, logErr := repo.Log(&git.LogOptions{
-		From: branchCommit.Hash,
+		Order: git.LogOrderCommitterTime,
+		From:  branchCommit.Hash,
 	})
 
 	if logErr != nil {

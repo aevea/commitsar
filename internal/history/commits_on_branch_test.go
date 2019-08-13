@@ -53,3 +53,23 @@ func TestCommitsOnBranch(t *testing.T) {
 	assert.Equal(t, err, nil)
 
 }
+
+func TestCommitsOnBranchWithMasterMerge(t *testing.T) {
+	repo, _ := git.PlainOpen("../../testdata/commits_on_branch_test")
+	headRef, _ := repo.Head()
+
+	commits, err := CommitsOnBranch(repo, headRef.Hash(), "master")
+
+	assert.Equal(t, 2, len(commits))
+
+	lastCommit, lastCommitErr := repo.CommitObject(commits[0])
+	assert.NoError(t, lastCommitErr)
+	assert.Equal(t, "Merge branch 'master' into behind-master\n", lastCommit.Message)
+
+	penultimateCommit, penultimateCommitErr := repo.CommitObject(commits[1])
+	assert.NoError(t, penultimateCommitErr)
+	assert.Equal(t, "first commit on behind-master branch\n", penultimateCommit.Message)
+
+	assert.Equal(t, err, nil)
+
+}
