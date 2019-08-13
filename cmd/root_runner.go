@@ -56,6 +56,8 @@ func runRoot(cmd *cobra.Command, args []string) error {
 
 	log.Printf("Found %v commit to check", len(commits))
 
+	faultyCommits := []plumbing.Hash{}
+
 	for _, commitHash := range commits {
 		commitObject, commitErr := repo.CommitObject(commitHash)
 
@@ -66,8 +68,18 @@ func runRoot(cmd *cobra.Command, args []string) error {
 		textErr := text.CheckMessageTitle(commitObject.Message)
 
 		if textErr != nil {
-			return textErr
+			faultyCommits = append(faultyCommits, commitHash)
 		}
+	}
+
+	if len(faultyCommits) != 0 {
+		for _, commitHash := range faultyCommits {
+			log.Printf("Commit %v is not conventional commit compliant", commitHash)
+		}
+
+		log.Printf("%v of %v commits are not conventional commit compliant", len(faultyCommits), len(commits))
+
+		return errors.New("Not all commits are conventiontal commits, please check the commits listed above")
 	}
 
 	log.Printf("All %v commits are conventional commit compliant", len(commits))
