@@ -28,10 +28,10 @@ validate-commits:
 
 ##### From binary
 
-Adjust for version and distribution. Please check [Releases](https://github.com/fallion/commitsar/releases).
+Adjust for version and distribution. Please check [Releases](https://github.com/commitsar-app/commitsar/releases).
 
 ```
-- curl -L -O https://github.com/fallion/commitsar/releases/download/v0.0.2/commitsar_v0.0.2_Linux_x86_64.tar.gz
+- curl -L -O https://github.com/commitsar-app/commitsar/releases/download/v0.0.2/commitsar_v0.0.2_Linux_x86_64.tar.gz
 - tar -xzf commitsar_v0.0.2_Linux_x86_64.tar.gz
 - ./commitsar
 ```
