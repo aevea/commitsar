@@ -55,6 +55,26 @@ steps:
       password:
         from_secret: docker_password
 
+  - name: publish-pages
+    image: commitsar/hugo
+    environment:
+      USERNAME:
+        from_secret: github_username
+      PASSWORD:
+        from_secret: github_token
+    commands:
+      - echo "machine github.com login $${USERNAME} password $${PASSWORD}" > ~/.netrc
+      - git fetch --all
+      - git config --global user.email "ci-build@commitsar.tech"
+      - git config --global user.name "Commitsar"
+      - cd www
+      - npm i
+      - hugo mod get
+      - sh ../scripts/publish_to_pages.sh
+    when:
+      event: push
+      branch: master
+
 volumes:
   - name: deps
     temp: {}

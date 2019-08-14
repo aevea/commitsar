@@ -1,0 +1,8 @@
+{
+  "name": "@commitsar/hugo-local",
+  "private": true,
+  "dependencies": {
+    "autoprefixer": "^9.6.1",
+    "postcss-cli": "^6.1.3"
+  }
+}
