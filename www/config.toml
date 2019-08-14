@@ -1,0 +1,4 @@
+baseURL = "https://commitsar.tech"
+languageCode = "en-us"
+title = "Commitsar documentation"
+theme = "github.com/bep/docuapi"
