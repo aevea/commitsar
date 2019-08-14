@@ -1,4 +1,4 @@
-module github.com/fallion/commitsar
+module github.com/commitsar-app/commitsar
 
 go 1.12
 
