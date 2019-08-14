@@ -1,6 +1,6 @@
 # Commitsar
 
-[![Build Status](https://cloud.drone.io/api/badges/fallion/commitsar/status.svg)](https://cloud.drone.io/fallion/commitsar)
+[![Build Status](https://cloud.drone.io/api/badges/commitsar-app/commitsar/status.svg)](https://cloud.drone.io/commitsar-app/commitsar)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
 Tool to make sure your commits are compliant with [conventional commits](https://www.conventionalcommits.org). It is aimed mainly at CIs to prevent branches with commits that don't comply. Usage as a pre-commit hook is also under consideration.

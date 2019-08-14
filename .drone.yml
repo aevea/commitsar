@@ -49,7 +49,7 @@ steps:
     image: plugins/docker
     settings:
       auto_tag: true
-      repo: fallion/commitsar
+      repo: commitsar/commitsar
       username:
         from_secret: docker_username
       password:
