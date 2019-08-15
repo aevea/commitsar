@@ -1,9 +1,11 @@
 ---
-title: "Usage"
-date: 2019-08-14T15:47:52+02:00
-draft: false
-weight: 2
+title: "Introduction"
+weight: 10
 ---
+
+# Introduction
+
+Tool to make sure your commits are compliant with [conventional commits](https://www.conventionalcommits.org). It is aimed mainly at CIs to prevent branches with commits that don't comply. Usage as a pre-commit hook is also under consideration.
 
 # Usage
 
