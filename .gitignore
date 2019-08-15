@@ -3,3 +3,4 @@ testdata/commits_on_branch_test
 www/**/_gen/**
 **/node_modules/**
 www/public
+tmp

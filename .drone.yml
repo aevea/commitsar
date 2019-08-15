@@ -65,8 +65,8 @@ steps:
     commands:
       - echo "machine github.com login $${USERNAME} password $${PASSWORD}" > ~/.netrc
       - git fetch --all
-      - git config --global user.email "ci-build@commitsar.tech"
-      - git config --global user.name "Commitsar"
+      - git config --global user.email "bot@commitsar.tch"
+      - git config --global user.name "Commitsar Bot"
       - cd www
       - npm i
       - hugo mod get

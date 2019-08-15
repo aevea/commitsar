@@ -7,6 +7,8 @@ then
 fi
 
 echo "Deleting old publication"
+mkdir tmp
+cp ../CNAME ./tmp/CNAME
 rm -rf public
 mkdir public
 git worktree prune
@@ -18,8 +20,10 @@ git worktree add -B gh-pages public origin/gh-pages
 echo "Removing existing files"
 rm -rf public/*
 
+
 echo "Generating site"
 hugo
+mv ./tmp/CNAME ./public/CNAME
 
 echo "Updating gh-pages branch"
 cd public && git add --all && git commit -m "Publishing to gh-pages (publish.sh)" || true
