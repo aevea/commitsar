@@ -26,7 +26,7 @@ hugo
 mv ./tmp/CNAME ./public/CNAME
 
 echo "Updating gh-pages branch"
-cd public && git add --all && git commit -m "Publishing to gh-pages (publish.sh)" || true
+cd public && git add --all && git commit -m "Publishing to gh-pages (publish.sh) [ci skip]" || true
 
 echo "Pushing to github"
 git push origin gh-pages
