@@ -8,8 +8,8 @@ if [ ! -d './testdata/commits_on_branch_test' ]; then
   cd testdata/commits_on_branch_test
 
   echo 'initialising test repository...'
-  git config --global user.email "nobody@nowhere.com"
-  git config --global user.name "Mr Nobody"
+  git config --global user.email "bot@commitsar.tch"
+  git config --global user.name "Commitsar Bot"
   git init
   touch first
   git add .
