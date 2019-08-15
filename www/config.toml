@@ -2,3 +2,15 @@ baseURL = "https://commitsar.tech"
 languageCode = "en-us"
 title = "Commitsar documentation"
 theme = "github.com/bep/docuapi"
+
+disableKinds = ["taxonomyTerm"]
+
+# Code higlighting settings
+pygmentsCodefences = true
+pygmentsCodeFencesGuesSsyntax = false
+pygmentsOptions = ""
+pygmentsStyle = "monokai"
+pygmentsUseClasses = false
+
+[params]
+search = true
