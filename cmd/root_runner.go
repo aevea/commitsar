@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"errors"
+	"fmt"
 	"log"
 
 	"github.com/commitsar-app/commitsar/pkg/history"
@@ -56,7 +57,7 @@ func runRoot(cmd *cobra.Command, args []string) error {
 
 	log.Printf("Found %v commit to check", len(commits))
 
-	faultyCommits := []plumbing.Hash{}
+	var faultyCommits []text.FailingCommit
 
 	for _, commitHash := range commits {
 		commitObject, commitErr := repo.CommitObject(commitHash)
@@ -70,14 +71,14 @@ func runRoot(cmd *cobra.Command, args []string) error {
 		textErr := text.CheckMessageTitle(messageTitle)
 
 		if textErr != nil {
-			faultyCommits = append(faultyCommits, commitHash)
+			faultyCommits = append(faultyCommits, text.FailingCommit{Hash: commitHash.String(), Message: messageTitle})
 		}
 	}
 
 	if len(faultyCommits) != 0 {
-		for _, commitHash := range faultyCommits {
-			log.Printf("Commit %v is not conventional commit compliant", commitHash)
-		}
+		failingCommitMessage := text.FormatFailingCommits(faultyCommits)
+
+		fmt.Print(failingCommitMessage)
 
 		log.Printf("%v of %v commits are not conventional commit compliant", len(faultyCommits), len(commits))
 
