@@ -3,10 +3,10 @@ package cmd
 import (
 	"errors"
 	"fmt"
-	"log"
 
 	"github.com/commitsar-app/commitsar/pkg/history"
 	"github.com/commitsar-app/commitsar/pkg/text"
+	"github.com/logrusorgru/aurora"
 	"github.com/spf13/cobra"
 	"gopkg.in/src-d/go-git.v4/plumbing"
 )
@@ -17,7 +17,7 @@ func runRoot(cmd *cobra.Command, args []string) error {
 		debug = true
 	}
 
-	log.Print("Starting analysis of commits on branch")
+	fmt.Print("Starting analysis of commits on branch\n")
 
 	repo, repoErr := history.Repo(".")
 
@@ -28,17 +28,20 @@ func runRoot(cmd *cobra.Command, args []string) error {
 	currentBranch, currentBranchErr := repo.Head()
 
 	if debug {
-		log.Printf("Current branch %v", currentBranch.Name().String())
+		fmt.Print("\n[DEBUG] debug mode is on \n")
+		fmt.Printf("Current branch %v\n", currentBranch.Name().String())
 		refIter, _ := repo.References()
 
 		refIterErr := refIter.ForEach(func(ref *plumbing.Reference) error {
-			log.Printf("[REF] %v", ref.Name().String())
+			fmt.Printf("[REF] %v\n", ref.Name().String())
 			return nil
 		})
 
 		if refIterErr != nil {
 			return refIterErr
 		}
+
+		fmt.Print("\n[DEBUG] End of debug block\n")
 	}
 
 	if currentBranchErr != nil {
@@ -48,14 +51,14 @@ func runRoot(cmd *cobra.Command, args []string) error {
 	commits, commitsErr := history.CommitsOnBranch(repo, currentBranch.Hash(), "origin/master")
 
 	if len(commits) == 0 {
-		return errors.New("No commits found, please check you are on a branch outside of main")
+		return errors.New(aurora.Red("No commits found, please check you are on a branch outside of main").String())
 	}
 
 	if commitsErr != nil {
 		return commitsErr
 	}
 
-	log.Printf("Found %v commit to check", len(commits))
+	fmt.Printf("Found %v commit to check\n", len(commits))
 
 	var faultyCommits []text.FailingCommit
 
@@ -80,12 +83,12 @@ func runRoot(cmd *cobra.Command, args []string) error {
 
 		fmt.Print(failingCommitMessage)
 
-		log.Printf("%v of %v commits are not conventional commit compliant", len(faultyCommits), len(commits))
+		fmt.Printf("%v of %v commits are not conventional commit compliant\n", aurora.Red(len(faultyCommits)), aurora.Red(len(commits)))
 
-		return errors.New("Not all commits are conventiontal commits, please check the commits listed above")
+		return errors.New(aurora.Red("Not all commits are conventiontal commits, please check the commits listed above").String())
 	}
 
-	log.Printf("All %v commits are conventional commit compliant", len(commits))
+	fmt.Print(aurora.Sprintf(aurora.Green("All %v commits are conventional commit compliant\n"), len(commits)))
 
 	return nil
 }
