@@ -50,10 +50,6 @@ func runRoot(cmd *cobra.Command, args []string) error {
 
 	commits, commitsErr := history.CommitsOnBranch(repo, currentBranch.Hash(), "origin/master")
 
-	if len(commits) == 0 {
-		return errors.New(aurora.Red("No commits found, please check you are on a branch outside of main").String())
-	}
-
 	if commitsErr != nil {
 		return commitsErr
 	}
@@ -73,6 +69,10 @@ func runRoot(cmd *cobra.Command, args []string) error {
 	}
 
 	fmt.Printf("Found %v commit to check\n", len(filteredCommits))
+
+	if len(filteredCommits) == 0 {
+		return errors.New(aurora.Red("No commits found, please check you are on a branch outside of main").String())
+	}
 
 	var faultyCommits []text.FailingCommit
 
