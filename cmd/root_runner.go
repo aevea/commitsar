@@ -58,11 +58,27 @@ func runRoot(cmd *cobra.Command, args []string) error {
 		return commitsErr
 	}
 
-	fmt.Printf("Found %v commit to check\n", len(commits))
+	var filteredCommits []plumbing.Hash
+
+	for _, commitHash := range commits {
+		commitObject, commitErr := repo.CommitObject(commitHash)
+
+		if commitErr != nil {
+			return commitErr
+		}
+
+		if text.IsMergeCommit(commitObject.Message) {
+			return nil
+		}
+
+		filteredCommits = append(filteredCommits, commitHash)
+	}
+
+	fmt.Printf("Found %v commit to check\n", len(filteredCommits))
 
 	var faultyCommits []text.FailingCommit
 
-	for _, commitHash := range commits {
+	for _, commitHash := range filteredCommits {
 		commitObject, commitErr := repo.CommitObject(commitHash)
 
 		if commitErr != nil {
