@@ -15,6 +15,9 @@ steps:
       - name: deps
         path: /go
     commands:
+      # git config is used for the test git repo creation
+      - git config --global user.email "bot@commitsar.tch"
+      - git config --global user.name "Commitsar Bot"
       - make setup-test
       - make ci
     when:
