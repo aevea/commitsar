@@ -41,7 +41,7 @@ func runRoot(cmd *cobra.Command, args []string) error {
 			return refIterErr
 		}
 
-		fmt.Print("\n[DEBUG] End of debug block\n")
+		fmt.Print("\n")
 	}
 
 	if currentBranchErr != nil {
@@ -59,6 +59,10 @@ func runRoot(cmd *cobra.Command, args []string) error {
 	for _, commitHash := range commits {
 		commitObject, commitErr := repo.CommitObject(commitHash)
 
+		if debug {
+			fmt.Printf("\n[DEBUG] Commit found: [hash] %v [message] %v \n", commitObject.Hash, text.MessageTitle(commitObject.Message))
+		}
+
 		if commitErr != nil {
 			return commitErr
 		}
@@ -68,7 +72,7 @@ func runRoot(cmd *cobra.Command, args []string) error {
 		}
 	}
 
-	fmt.Printf("Found %v commit to check\n", len(filteredCommits))
+	fmt.Printf("\nFound %v commit to check\n", len(filteredCommits))
 
 	if len(filteredCommits) == 0 {
 		return errors.New(aurora.Red("No commits found, please check you are on a branch outside of main").String())

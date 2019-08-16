@@ -13,6 +13,8 @@ COPY . /app/
 RUN make build/docker
 
 FROM alpine:3.10.1
+ENV FLAGS = "-v"
+
 RUN  apk add --no-cache --virtual=.run-deps ca-certificates git &&\
     mkdir /app
 
@@ -21,4 +23,4 @@ COPY --from=builder /app/build/commitsar ./commitsar
 
 RUN ln -s $PWD/commitsar /usr/local/bin
 
-ENTRYPOINT commitsar
+ENTRYPOINT commitsar $FLAGS
