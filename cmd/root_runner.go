@@ -4,8 +4,8 @@ import (
 	"errors"
 	"log"
 
-	"github.com/commitsar-app/commitsar/internal/history"
-	"github.com/commitsar-app/commitsar/internal/text"
+	"github.com/commitsar-app/commitsar/pkg/history"
+	"github.com/commitsar-app/commitsar/pkg/text"
 	"github.com/spf13/cobra"
 	"gopkg.in/src-d/go-git.v4/plumbing"
 )
