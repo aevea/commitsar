@@ -72,6 +72,7 @@ func runRoot(cmd *cobra.Command, args []string) error {
 		}
 	}
 
+	fmt.Printf("\n%v commits filtered out\n", len(commits)-len(filteredCommits))
 	fmt.Printf("\nFound %v commit to check\n", len(filteredCommits))
 
 	if len(filteredCommits) == 0 {
@@ -106,7 +107,7 @@ func runRoot(cmd *cobra.Command, args []string) error {
 		return errors.New(aurora.Red("Not all commits are conventiontal commits, please check the commits listed above").String())
 	}
 
-	fmt.Print(aurora.Sprintf(aurora.Green("All %v commits are conventional commit compliant\n"), len(commits)))
+	fmt.Print(aurora.Sprintf(aurora.Green("All %v commits are conventional commit compliant\n"), len(filteredCommits)))
 
 	return nil
 }
