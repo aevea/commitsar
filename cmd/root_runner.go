@@ -67,11 +67,9 @@ func runRoot(cmd *cobra.Command, args []string) error {
 			return commitErr
 		}
 
-		if text.IsMergeCommit(commitObject.Message) {
-			return nil
+		if !text.IsMergeCommit(commitObject.Message) {
+			filteredCommits = append(filteredCommits, commitHash)
 		}
-
-		filteredCommits = append(filteredCommits, commitHash)
 	}
 
 	fmt.Printf("Found %v commit to check\n", len(filteredCommits))
