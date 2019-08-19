@@ -1,5 +1,6 @@
 # Commitsar
 
+[![Go Report Card](https://goreportcard.com/badge/github.com/commitsar-app/commitsar)](https://goreportcard.com/report/github.com/commitsar-app/commitsar)
 [![Build Status](https://cloud.drone.io/api/badges/commitsar-app/commitsar/status.svg)](https://cloud.drone.io/commitsar-app/commitsar)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
 
