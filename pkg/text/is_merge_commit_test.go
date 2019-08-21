@@ -11,8 +11,10 @@ func TestIsMergeCommit(t *testing.T) {
 		"Merge commit '900a395d573f2b046d0b901be22808bf55319fc7'\n": true,
 		"Merge branch 'master' into three\n":                        true,
 		"Merge branch 'master' into feature/something-word":         true,
+		"Merge master into renovate/docker-alpine-3.x":              true,
 		"chore: something\n":                                        false,
 		"fix: test":                                                 false,
+		"fix: Kodiak style regex":                                   false,
 	}
 
 	for test, expected := range tests {
