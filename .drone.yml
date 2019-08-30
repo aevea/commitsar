@@ -72,7 +72,6 @@ steps:
       - git config --global user.name "Commitsar Bot"
       - cd www
       - npm i
-      - hugo mod get
       - sh ../scripts/publish_to_pages.sh
     when:
       event: push
