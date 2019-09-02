@@ -32,13 +32,17 @@ func createBranch(repo *git.Repository) {
 
 }
 
-func TestCommitsOnBranch(t *testing.T) {
-	repo := setupRepo()
+func createTestHistory(repo *git.Repository) {
 	createCommit(repo, "test commit on master")
 	createBranch(repo)
 	createCommit(repo, "commit on new branch")
 	createCommit(repo, "second commit on new branch")
 	createCommit(repo, "third commit on new branch")
+}
+
+func TestCommitsOnBranch(t *testing.T) {
+	repo := setupRepo()
+	createTestHistory(repo)
 
 	headRef, _ := repo.Head()
 
