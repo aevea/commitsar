@@ -25,6 +25,12 @@ func runRoot(cmd *cobra.Command, args []string) error {
 		return repoErr
 	}
 
+	gitRepo, err := history.OpenGit(".", true)
+
+	if err != nil {
+		return err
+	}
+
 	currentBranch, currentBranchErr := repo.Head()
 
 	if debug {
@@ -48,7 +54,7 @@ func runRoot(cmd *cobra.Command, args []string) error {
 		return currentBranchErr
 	}
 
-	commits, commitsErr := history.CommitsOnBranch(repo, currentBranch.Hash(), "origin/master")
+	commits, commitsErr := gitRepo.BranchDiffCommits(currentBranch.Name().String(), "origin/master")
 
 	if commitsErr != nil {
 		return commitsErr

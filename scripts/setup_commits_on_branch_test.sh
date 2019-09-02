@@ -16,11 +16,16 @@ if [ ! -d './testdata/commits_on_branch_test' ]; then
   git add .
   git commit -m "second commit on master"
   git checkout -b behind-master
-  git reset HEAD~1
-  git checkout -- .
   touch third
   git add .
-  git commit -m "first commit on behind-master branch"
+  git commit -m "first commit on branch"
+  git checkout master
+  # Because this script is so fast it will actual provide false positives without this sleep
+  sleep 1
+  touch four
+  git add .
+  git commit -m "third commit on master"
+  git checkout behind-master
   git merge master --no-edit
   echo 'done'
   
