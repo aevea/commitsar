@@ -32,19 +32,25 @@ func createBranch(repo *git.Repository) {
 
 }
 
-func TestCommitsOnBranch(t *testing.T) {
-	repo := setupRepo()
+func createTestHistory(repo *git.Repository) {
 	createCommit(repo, "test commit on master")
 	createBranch(repo)
 	createCommit(repo, "commit on new branch")
 	createCommit(repo, "second commit on new branch")
 	createCommit(repo, "third commit on new branch")
+}
 
-	headRef, _ := repo.Head()
+func TestCommitsOnBranch(t *testing.T) {
+	repo := setupRepo()
+	createTestHistory(repo)
 
-	commits, err := CommitsOnBranch(repo, headRef.Hash(), "master")
+	head, _ := repo.Head()
 
-	assert.Equal(t, 3, len(commits))
+	testGit := &Git{repo: repo}
+
+	commits, err := testGit.CommitsOnBranch(head.Hash())
+
+	assert.Equal(t, 4, len(commits))
 
 	commit, commitErr := repo.CommitObject(commits[0])
 
@@ -52,24 +58,7 @@ func TestCommitsOnBranch(t *testing.T) {
 	assert.Equal(t, "third commit on new branch", commit.Message)
 	assert.Equal(t, err, nil)
 
-}
+	lastCommit, _ := repo.CommitObject(commits[3])
 
-func TestCommitsOnBranchWithMasterMerge(t *testing.T) {
-	repo, _ := git.PlainOpen("../../testdata/commits_on_branch_test")
-	headRef, _ := repo.Head()
-
-	commits, err := CommitsOnBranch(repo, headRef.Hash(), "master")
-
-	assert.Equal(t, 2, len(commits))
-
-	lastCommit, lastCommitErr := repo.CommitObject(commits[0])
-	assert.NoError(t, lastCommitErr)
-	assert.Equal(t, "Merge branch 'master' into behind-master\n", lastCommit.Message)
-
-	penultimateCommit, penultimateCommitErr := repo.CommitObject(commits[1])
-	assert.NoError(t, penultimateCommitErr)
-	assert.Equal(t, "first commit on behind-master branch\n", penultimateCommit.Message)
-
-	assert.Equal(t, err, nil)
-
+	assert.Equal(t, "test commit on master", lastCommit.Message)
 }
