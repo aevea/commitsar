@@ -23,16 +23,16 @@ func TestBranchDiffCommits(t *testing.T) {
 }
 
 func TestBranchDiffCommitsWithMasterMerge(t *testing.T) {
-	repo, _ := git.PlainOpen("../../testdata/commits_on_branch_test")
+	repo, _ := git.PlainOpen("../../testdata/commits_on_branch")
 	testGit := &Git{repo: repo, Debug: true}
 
-	commits, err := testGit.BranchDiffCommits("behind-master", "master")
+	commits, err := testGit.BranchDiffCommits("behind-master", "origin/master")
 
 	assert.Equal(t, 2, len(commits))
 
 	commit, _ := repo.CommitObject(commits[1])
 
-	assert.Equal(t, "first commit on branch\n", commit.Message)
+	assert.Equal(t, "chore: commit on branch\n", commit.Message)
 
 	assert.Equal(t, err, nil)
 

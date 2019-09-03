@@ -1,5 +1,5 @@
 build
-testdata/commits_on_branch_test
+testdata/commits_on_branch
 www/**/_gen/**
 **/node_modules/**
 www/public
