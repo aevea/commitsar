@@ -14,7 +14,7 @@ func (g *Git) commitDate(commit plumbing.Hash) (time.Time, error) {
 		return time.Now(), err
 	}
 
-	when := commitObject.Author.When
+	when := commitObject.Committer.When
 
 	return when, nil
 }
