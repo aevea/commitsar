@@ -13,7 +13,7 @@ type Git struct {
 
 // OpenGit loads Repo on path and returns a new Git struct to work with.
 func OpenGit(path string, debug bool) (*Git, error) {
-	repo, repoErr := Repo(path)
+	repo, repoErr := git.PlainOpen(path)
 
 	if repoErr != nil {
 		return nil, repoErr
