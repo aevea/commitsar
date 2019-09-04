@@ -3,10 +3,14 @@ package history
 import (
 	"log"
 	"testing"
+	"time"
 
 	"github.com/stretchr/testify/assert"
+	"gopkg.in/src-d/go-billy.v4/memfs"
 	"gopkg.in/src-d/go-git.v4"
 	"gopkg.in/src-d/go-git.v4/plumbing"
+	"gopkg.in/src-d/go-git.v4/plumbing/object"
+	"gopkg.in/src-d/go-git.v4/storage/memory"
 )
 
 func createBranch(repo *git.Repository) {
@@ -30,6 +34,28 @@ func createBranch(repo *git.Repository) {
 		log.Println(checkoutErr)
 	}
 
+}
+
+func setupRepo() *git.Repository {
+	repo, _ := git.Init(memory.NewStorage(), memfs.New())
+
+	return repo
+}
+
+func createCommit(repo *git.Repository, message string) *object.Commit {
+	w, _ := repo.Worktree()
+
+	commit, _ := w.Commit(message, &git.CommitOptions{
+		Author: &object.Signature{
+			Name:  "John Doe",
+			Email: "john@doe.org",
+			When:  time.Now(),
+		},
+	})
+
+	obj, _ := repo.CommitObject(commit)
+
+	return obj
 }
 
 func createTestHistory(repo *git.Repository) {

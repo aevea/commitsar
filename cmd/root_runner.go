@@ -19,37 +19,13 @@ func runRoot(cmd *cobra.Command, args []string) error {
 
 	fmt.Print("Starting analysis of commits on branch\n")
 
-	repo, repoErr := history.Repo(".")
-
-	if repoErr != nil {
-		return repoErr
-	}
-
 	gitRepo, err := history.OpenGit(".", true)
 
 	if err != nil {
 		return err
 	}
 
-	currentBranch, currentBranchErr := repo.Head()
-
-	if debug {
-		fmt.Print("\n[DEBUG] debug mode is on \n")
-		fmt.Printf("Current branch %v\n", currentBranch.Name().String())
-		refIter, _ := repo.References()
-
-		refIterErr := refIter.ForEach(func(ref *plumbing.Reference) error {
-			fmt.Printf("[REF] %v\n", ref.Name().String())
-			return nil
-		})
-
-		if refIterErr != nil {
-			return refIterErr
-		}
-
-		fmt.Print("\n")
-	}
-
+	currentBranch, currentBranchErr := gitRepo.CurrentBranch()
 	if currentBranchErr != nil {
 		return currentBranchErr
 	}
@@ -63,7 +39,7 @@ func runRoot(cmd *cobra.Command, args []string) error {
 	var filteredCommits []plumbing.Hash
 
 	for _, commitHash := range commits {
-		commitObject, commitErr := repo.CommitObject(commitHash)
+		commitObject, commitErr := gitRepo.Commit(commitHash)
 
 		if debug {
 			fmt.Printf("\n[DEBUG] Commit found: [hash] %v [message] %v \n", commitObject.Hash, text.MessageTitle(commitObject.Message))
@@ -88,7 +64,7 @@ func runRoot(cmd *cobra.Command, args []string) error {
 	var faultyCommits []text.FailingCommit
 
 	for _, commitHash := range filteredCommits {
-		commitObject, commitErr := repo.CommitObject(commitHash)
+		commitObject, commitErr := gitRepo.Commit(commitHash)
 
 		if commitErr != nil {
 			return commitErr
