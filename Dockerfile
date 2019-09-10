@@ -29,7 +29,6 @@ RUN  apk add --no-cache --virtual=.run-deps ca-certificates git &&\
 
 WORKDIR /app
 COPY --from=builder /app/build/commitsar ./commitsar
-COPY --from=builder /app/action.yml ./action.yml
 
 RUN ln -s $PWD/commitsar /usr/local/bin
 

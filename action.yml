@@ -5,6 +5,9 @@ branding:
   icon: "code"
   color: "blue"
 inputs:
+  config:
+    description: "Path of the Commitsar config file"
+    required: false
 runs:
   using: "docker"
   image: "Dockerfile"
