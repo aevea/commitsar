@@ -1,0 +1,10 @@
+name: "Commiitsar Action"
+description: "Check commit message compliance with conventional commits"
+author: "Simon Prochazka"
+branding:
+  icon: "code"
+  color: "blue"
+inputs:
+runs:
+  using: "docker"
+  image: "Dockerfile"
