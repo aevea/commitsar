@@ -12,6 +12,7 @@ func TestIsMergeCommit(t *testing.T) {
 		"Merge branch 'master' into three\n":                        true,
 		"Merge branch 'master' into feature/something-word":         true,
 		"Merge master into renovate/docker-alpine-3.x":              true,
+		"Merge pull request #5 from D-Nice/feat/ci":                 true,
 		"chore: something\n":                                        false,
 		"fix: test":                                                 false,
 		"fix: Kodiak style regex":                                   false,
