@@ -1,4 +1,4 @@
-name: "Commiitsar Action"
+name: "Commitsar Action"
 description: "Check commit message compliance with conventional commits"
 author: "Simon Prochazka"
 branding:
