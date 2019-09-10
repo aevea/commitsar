@@ -6,3 +6,4 @@ renovate.json
 .goreleaser.yml
 .kodiak.toml
 CNAME
+.github
