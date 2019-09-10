@@ -1,0 +1,8 @@
+testdata
+www
+scripts
+renovate.json
+.drone.yml
+.goreleaser.yml
+.kodiak.toml
+CNAME
