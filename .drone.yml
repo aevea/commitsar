@@ -77,6 +77,15 @@ steps:
       event: push
       branch: master
 
+  - name: release-notes
+    image: commitsar-app/release-notary:0.1.0
+    environment:
+      GITHUB_TOKEN:
+        from_secret: github_token
+      GITHUB_REPOSITORY: commitsar-app/commitsar
+    when:
+      event: [tag]
+
 volumes:
   - name: deps
     temp: {}
