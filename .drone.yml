@@ -78,13 +78,14 @@ steps:
       branch: master
 
   - name: release-notes
-    image: commitsar-app/release-notary:0.1.0
+    image: commitsar/release-notary:0.1.0
     environment:
       GITHUB_TOKEN:
         from_secret: github_token
       GITHUB_REPOSITORY: commitsar-app/commitsar
     when:
       event: [tag]
+    depends_on: [fetch]
 
 volumes:
   - name: deps
