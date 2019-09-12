@@ -32,4 +32,4 @@ COPY --from=builder /app/build/commitsar ./commitsar
 
 RUN ln -s $PWD/commitsar /usr/local/bin
 
-ENTRYPOINT commitsar $FLAGS
+CMD ["commitsar"]
