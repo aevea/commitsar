@@ -83,6 +83,8 @@ steps:
       GITHUB_TOKEN:
         from_secret: github_token
       GITHUB_REPOSITORY: commitsar-app/commitsar
+    commands:
+      - release-notary publish
     when:
       event: [tag]
     depends_on: [fetch]
