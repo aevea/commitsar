@@ -7,19 +7,19 @@ import (
 )
 
 func TestCheckMessageTitle(t *testing.T) {
-	tests := map[string]error{
-		"chore: add something":               nil,
-		"chore(ci): added new CI stuff":      nil,
-		"feat: added a new feature":          nil,
-		"fix!: breaking change":              nil,
-		"fix(security)!: breaking":           nil,
-		"fix!!: breaking":                    errTitleNonConform,
-		"fix(security)(stuff): should break": errTitleNonConform,
-		"chore:really close":                 errTitleNonConform,
-		"perf(): nope":                       errTitleNonConform,
-		"chore(: bad":                        errTitleNonConform,
-		": nope":                             errTitleNonConform,
-		"fix tests":                          errTitleNonConform,
+	tests := map[Commit]error{
+		Commit{Category: "chore", Heading: "add something"}:                             nil,
+		Commit{Category: "chore", Scope: "ci", Heading: "added new CI stuff"}:           nil,
+		Commit{Category: "feat", Heading: "added a new feature"}:                        nil,
+		Commit{Category: "fix", Breaking: true, Heading: "breaking change"}:             nil,
+		Commit{Category: "fix", Scope: "security", Breaking: true, Heading: "breaking"}: nil,
+		Commit{Category: "fix!", Breaking: true, Heading: "breaking"}:                   errCategoryWrongFormat,
+		Commit{Category: "fix", Scope: "security(stuff)", Heading: "should break"}:      errScopeNonConform,
+		Commit{}: errCategoryMissing,
+		Commit{Category: "perf()", Heading: "nope"}: errCategoryWrongFormat,
+		Commit{Category: "chore(", Heading: "bad"}:  errCategoryWrongFormat,
+		Commit{Heading: "nope"}:                     errCategoryMissing,
+		Commit{Category: "test", Scope: "full", Heading: "a heading", Body: "body is here\nit can have multiple lines"}: nil,
 	}
 
 	for test, expected := range tests {
