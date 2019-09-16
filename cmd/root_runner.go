@@ -30,8 +30,6 @@ func runRoot(cmd *cobra.Command, args []string) error {
 		return currentBranchErr
 	}
 
-	fmt.Printf("\nCurrent branch %v\n", currentBranch.Name().String())
-
 	commits, commitsErr := gitRepo.BranchDiffCommits(currentBranch.Name().String(), "origin/master")
 
 	if commitsErr != nil {
