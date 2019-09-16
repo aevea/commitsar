@@ -77,7 +77,7 @@ func runRoot(cmd *cobra.Command, args []string) error {
 		textErr := text.CheckMessageTitle(parsedCommit)
 
 		if textErr != nil {
-			faultyCommits = append(faultyCommits, text.FailingCommit{Hash: commitHash.String(), Message: messageTitle})
+			faultyCommits = append(faultyCommits, text.FailingCommit{Hash: commitHash.String(), Message: messageTitle, Error: textErr})
 		}
 	}
 

@@ -8,6 +8,7 @@ import (
 type FailingCommit struct {
 	Hash    string
 	Message string
+	Error   error
 }
 
 // FormatFailingCommits takes in slice of commit hashes and messages and formats it for nice output
@@ -22,6 +23,8 @@ func FormatFailingCommits(commits []FailingCommit) string {
 		builder.WriteString(commit.Hash)
 		builder.WriteString("   ")
 		builder.WriteString(commit.Message)
+		builder.WriteString("   ")
+		builder.WriteString(commit.Error.Error())
 	}
 
 	builder.WriteString("\n\n")
