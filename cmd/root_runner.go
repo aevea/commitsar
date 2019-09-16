@@ -19,7 +19,7 @@ func runRoot(cmd *cobra.Command, args []string) error {
 
 	fmt.Print("Starting analysis of commits on branch\n")
 
-	gitRepo, err := history.OpenGit(".", true)
+	gitRepo, err := history.OpenGit(".", debug)
 
 	if err != nil {
 		return err
