@@ -1,6 +1,8 @@
 package history
 
 import (
+	"fmt"
+
 	"gopkg.in/src-d/go-git.v4/plumbing"
 )
 
@@ -9,25 +11,25 @@ func (g *Git) BranchDiffCommits(branchA string, branchB string) ([]plumbing.Hash
 	branchACommit, err := g.LatestCommitOnBranch(branchA)
 
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Failed getting latest commit for branch %v: %v", branchA, err)
 	}
 
 	branchBCommit, err := g.LatestCommitOnBranch(branchB)
 
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Failed getting latest commit for branch %v: %v", branchB, err)
 	}
 
 	branchACommits, err := g.CommitsOnBranch(branchACommit.Hash)
 
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Failed getting commits for branch %v: %v", branchA, err)
 	}
 
 	branchBCommits, err := g.CommitsOnBranch(branchBCommit.Hash)
 
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("Failed getting commits for branch %v: %v", branchB, err)
 	}
 
 	var diffCommits []plumbing.Hash
