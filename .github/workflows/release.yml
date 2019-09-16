@@ -1,0 +1,26 @@
+name: Release
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  release-notary:
+    name: Release Notary
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v1
+
+      - name: Release Notary Action
+        uses: commitsar-app/release-notary@v0.2.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: goreleaser
+        uses: docker://goreleaser/goreleaser
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          args: release
+        if: success()

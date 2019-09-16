@@ -9,45 +9,6 @@ steps:
     when:
       event: [pull_request, tag]
 
-  - name: test
-    image: golang
-    volumes:
-      - name: deps
-        path: /go
-    commands:
-      # git config is used for the test git repo creation
-      - git config --global user.email "bot@commitsar.tch"
-      - git config --global user.name "Commitsar Bot"
-      - make setup-test
-      - make ci
-    when:
-      event: [pull_request]
-    depends_on: [fetch]
-
-  - name: commitsar-check
-    image: golang
-    volumes:
-      - name: deps
-        path: /go
-    commands:
-      - go run main.go -v
-    when:
-      event: [pull_request]
-    depends_on: [fetch]
-
-  - name: release
-    image: golang
-    environment:
-      GITHUB_TOKEN:
-        from_secret: github_token
-    volumes:
-      - name: deps
-        path: /go
-    commands:
-      - curl -sL https://git.io/goreleaser | bash
-    when:
-      event: tag
-
   - name: docker
     image: plugins/docker
     settings:
@@ -76,18 +37,6 @@ steps:
     when:
       event: push
       branch: master
-
-  - name: release-notes
-    image: commitsar/release-notary:0.1.0
-    environment:
-      GITHUB_TOKEN:
-        from_secret: github_token
-      GITHUB_REPOSITORY: commitsar-app/commitsar
-    commands:
-      - release-notary publish
-    when:
-      event: [tag]
-    depends_on: [fetch]
 
 volumes:
   - name: deps
