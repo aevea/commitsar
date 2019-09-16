@@ -2,6 +2,7 @@ package history
 
 import (
 	"errors"
+	"log"
 
 	"gopkg.in/src-d/go-git.v4"
 	"gopkg.in/src-d/go-git.v4/plumbing"
@@ -32,7 +33,9 @@ func (g *Git) CommitsOnBranch(
 	})
 
 	if branchIterErr != nil {
-		return nil, branchIterErr
+		if g.Debug {
+			log.Printf("Stopped getting commits on branch: %v", branchIterErr)
+		}
 	}
 
 	return branchCommits, nil
