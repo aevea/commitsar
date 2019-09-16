@@ -5,8 +5,8 @@ on:
       - master
 
 jobs:
-  build:
-    name: Build
+  Test:
+    name: Test
     runs-on: ubuntu-latest
     steps:
       - name: Set up Go 1.13
