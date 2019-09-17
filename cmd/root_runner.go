@@ -88,6 +88,9 @@ func runRoot(cmd *cobra.Command, args []string) error {
 
 		fmt.Printf("%v of %v commits are not conventional commit compliant\n", aurora.Red(len(faultyCommits)), aurora.Red(len(commits)))
 
+		fmt.Print("\nExpected format is for example:      chore(ci): this is a test\n")
+		fmt.Print("Please see https://www.conventionalcommits.org for help on how to structure commits\n\n")
+
 		return errors.New(aurora.Red("Not all commits are conventiontal commits, please check the commits listed above").String())
 	}
 
