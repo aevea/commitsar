@@ -13,7 +13,6 @@ COPY . /app/
 RUN make build/docker
 
 FROM alpine:3.10.2
-ENV FLAGS
 
 LABEL repository="https://github.com/commitsar-app/commitsar"
 LABEL homepage="https://github.com/commitsar-app/commitsar"
