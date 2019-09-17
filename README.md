@@ -36,7 +36,7 @@ Run the Commitsar action
 ```
 validate-commits:
 	    docker:
-	      - image: fallion/commitsar
+	      - image: commitsar/commitsar
 	    steps:
 	      - checkout
 	      - run: commitsar
