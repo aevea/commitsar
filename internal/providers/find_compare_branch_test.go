@@ -13,7 +13,7 @@ func TestFindCompareBranch(t *testing.T) {
 
 	actionCompareBranch := FindCompareBranch()
 
-	assert.Equal(t, "github-develop", actionCompareBranch)
+	assert.Equal(t, "origin/github-develop", actionCompareBranch)
 
 	os.Setenv("GITHUB_BASE_REF", "")
 
@@ -22,7 +22,7 @@ func TestFindCompareBranch(t *testing.T) {
 
 	gitlabCompareBranch := FindCompareBranch()
 
-	assert.Equal(t, "gitlab-develop", gitlabCompareBranch)
+	assert.Equal(t, "origin/gitlab-develop", gitlabCompareBranch)
 
 	os.Setenv("CI_MERGE_REQUEST_TARGET_BRANCH_NAME", "")
 
