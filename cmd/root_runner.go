@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/commitsar-app/commitsar/internal/providers"
 	"github.com/commitsar-app/commitsar/pkg/text"
 	history "github.com/commitsar-app/git/pkg"
 	"github.com/logrusorgru/aurora"
@@ -30,7 +31,9 @@ func runRoot(cmd *cobra.Command, args []string) error {
 		return currentBranchErr
 	}
 
-	commits, commitsErr := gitRepo.BranchDiffCommits(currentBranch.Name().String(), "origin/master")
+	upstreamBranch := providers.FindCompareBranch()
+
+	commits, commitsErr := gitRepo.BranchDiffCommits(currentBranch.Name().String(), upstreamBranch)
 
 	if commitsErr != nil {
 		return commitsErr
