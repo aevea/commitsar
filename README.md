@@ -27,7 +27,7 @@ Checkout git in order to get commits and master branch
 Run the Commitsar action
 ```
 - name: Commitsar Action
-  uses: commitsar-app/commitsar@v0.6.3 (substitute for current version)
+  uses: docker://commitsar/commitsar:latest
 ```
 
 
