@@ -9,6 +9,28 @@ steps:
     when:
       event: [pull_request, tag]
 
+  - name: test
+    image: golang:1.13.3
+    volumes:
+      - name: deps
+        path: /go
+    commands:
+      - make ci
+    depends_on: [clone]
+    when:
+      event: [pull_request]
+
+  - name: validate commits
+    image: golang:1.13.3
+    volumes:
+      - name: deps
+        path: /go
+    commands:
+      - go run main.go
+    depends_on: [clone]
+    when:
+      event: [pull_request]
+
   - name: docker
     image: plugins/docker
     settings:
