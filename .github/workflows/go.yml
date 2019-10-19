@@ -21,8 +21,5 @@ jobs:
       - name: Commitsar
         run: go run main.go
 
-      - name: Set up test files
-        run: sh scripts/setup_test_repos.sh
-
       - name: Test
         run: make ci
