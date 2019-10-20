@@ -26,6 +26,15 @@ func TestFindCompareBranch(t *testing.T) {
 
 	os.Setenv("CI_MERGE_REQUEST_TARGET_BRANCH_NAME", "")
 
+	// Drone specific environment variable
+	os.Setenv("DRONE_TARGET_BRANCH", "drone-develop")
+
+	droneCompareBranch := FindCompareBranch()
+
+	assert.Equal(t, "origin/drone-develop", droneCompareBranch)
+
+	os.Setenv("DRONE_TARGET_BRANCH", "")
+
 	// Should default to master if no conditions are satisfied
 	defaultMaster := FindCompareBranch()
 
