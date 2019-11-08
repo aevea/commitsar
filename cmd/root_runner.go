@@ -26,7 +26,13 @@ func runCommitsar(pathToRepo, upstreamBranch string, debug, strict bool) error {
 
 	var commits []plumbing.Hash
 
-	if IdentifySameBranch(currentBranch.Name().String(), upstreamBranch) {
+	sameBranch, err := IdentifySameBranch(currentBranch.Name().String(), upstreamBranch, gitRepo)
+
+	if err != nil {
+		return err
+	}
+
+	if sameBranch {
 		commitsOnSameBranch, err := gitRepo.CommitsOnBranch(currentBranch.Hash())
 
 		if err != nil {
