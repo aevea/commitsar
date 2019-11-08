@@ -6,7 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCheckMessageTitle(t *testing.T) {
+func TestCheckMessageTitleNonStrict(t *testing.T) {
 	tests := map[Commit]error{
 		Commit{Category: "chore", Heading: "add something"}:                             nil,
 		Commit{Category: "chore", Scope: "ci", Heading: "added new CI stuff"}:           nil,
@@ -25,7 +25,22 @@ func TestCheckMessageTitle(t *testing.T) {
 	}
 
 	for test, expected := range tests {
-		err := CheckMessageTitle(test)
+		err := CheckMessageTitle(test, false)
+		assert.Equal(t, expected, err)
+	}
+}
+
+func TestCheckMessageTitleStrict(t *testing.T) {
+	tests := make(map[Commit]error)
+
+	for _, cat := range allowedCategories {
+		tests[Commit{Category: cat, Heading: "add something"}] = nil
+	}
+
+	tests[Commit{Category: "thisshouldneverbeacategory", Heading: "add something"}] = errNonStandardCategory
+
+	for test, expected := range tests {
+		err := CheckMessageTitle(test, true)
 		assert.Equal(t, expected, err)
 	}
 }
