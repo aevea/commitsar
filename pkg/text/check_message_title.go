@@ -20,8 +20,8 @@ var (
 	// Commits with breaking changes should contain text with BREAKING CHANGE: at start
 	bcRegex = regexp.MustCompile(`^BREAKING CHANGE: `)
 
-	// Types allowed by the Angular contributing guide
-	allowedCategories = []string{"build", "ci", "docs", "feat", "fix", "perf", "refactor", "style", "test"}
+	// Types allowed by the commitlint's conventional preset
+	allowedCategories = []string{"build", "ci", "chore", "docs", "feat", "fix", "perf", "refactor", "revert", "style", "test"}
 )
 
 func isAllowedCategory(category string) bool {
