@@ -4,28 +4,16 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/commitsar-app/commitsar/internal/providers"
 	"github.com/commitsar-app/commitsar/pkg/text"
 	history "github.com/commitsar-app/git/pkg"
 	"github.com/logrusorgru/aurora"
-	"github.com/spf13/cobra"
 	"gopkg.in/src-d/go-git.v4/plumbing"
 )
 
-func runRoot(cmd *cobra.Command, args []string) error {
-	debug := false
-	if cmd.Flag("verbose").Value.String() == "true" {
-		debug = true
-	}
-
-	strict := true
-	if cmd.Flag("strict").Value.String() == "false" {
-		strict = false
-	}
-
+func runCommitsar(pathToRepo, upstreamBranch string, debug, strict bool) error {
 	fmt.Print("Starting analysis of commits on branch\n")
 
-	gitRepo, err := history.OpenGit(".", debug)
+	gitRepo, err := history.OpenGit(pathToRepo, debug)
 
 	if err != nil {
 		return err
@@ -36,12 +24,25 @@ func runRoot(cmd *cobra.Command, args []string) error {
 		return currentBranchErr
 	}
 
-	upstreamBranch := providers.FindCompareBranch()
+	var commits []plumbing.Hash
 
-	commits, commitsErr := gitRepo.BranchDiffCommits(currentBranch.Name().String(), upstreamBranch)
+	if IdentifySameBranch(currentBranch.Name().String(), upstreamBranch) {
+		commitsOnSameBranch, err := gitRepo.CommitsOnBranch(currentBranch.Hash())
 
-	if commitsErr != nil {
-		return commitsErr
+		if err != nil {
+			return err
+		}
+
+		commits = append(commits, commitsOnSameBranch[0])
+
+	} else {
+		commitsOnBranch, err := gitRepo.BranchDiffCommits(currentBranch.Name().String(), upstreamBranch)
+
+		if err != nil {
+			return err
+		}
+
+		commits = commitsOnBranch
 	}
 
 	var filteredCommits []plumbing.Hash

@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/commitsar-app/commitsar/internal/providers"
 	"github.com/spf13/cobra"
 )
 
@@ -37,4 +38,20 @@ func Execute() {
 		fmt.Println(err)
 		os.Exit(1)
 	}
+}
+
+func runRoot(cmd *cobra.Command, args []string) error {
+	debug := false
+	if cmd.Flag("verbose").Value.String() == "true" {
+		debug = true
+	}
+
+	strict := true
+	if cmd.Flag("strict").Value.String() == "false" {
+		strict = false
+	}
+
+	upstreamBranch := providers.FindCompareBranch()
+
+	return runCommitsar(".", upstreamBranch, debug, strict)
 }
