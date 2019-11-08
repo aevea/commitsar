@@ -18,6 +18,11 @@ func runRoot(cmd *cobra.Command, args []string) error {
 		debug = true
 	}
 
+	strict := true
+	if cmd.Flag("strict").Value.String() == "false" {
+		strict = false
+	}
+
 	fmt.Print("Starting analysis of commits on branch\n")
 
 	gitRepo, err := history.OpenGit(".", debug)
@@ -77,7 +82,7 @@ func runRoot(cmd *cobra.Command, args []string) error {
 
 		parsedCommit := text.ParseCommit(commitObject.Message, commitHash)
 
-		textErr := text.CheckMessageTitle(parsedCommit)
+		textErr := text.CheckMessageTitle(parsedCommit, strict)
 
 		if textErr != nil {
 			faultyCommits = append(faultyCommits, text.FailingCommit{Hash: commitHash.String(), Message: messageTitle, Error: textErr})
