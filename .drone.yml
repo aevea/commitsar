@@ -10,7 +10,7 @@ steps:
       event: [pull_request, tag]
 
   - name: test
-    image: golang:1.13.3
+    image: golang:1.13.4
     volumes:
       - name: deps
         path: /go
@@ -21,7 +21,7 @@ steps:
       event: [pull_request]
 
   - name: validate commits
-    image: golang:1.13.3
+    image: golang:1.13.4
     volumes:
       - name: deps
         path: /go
