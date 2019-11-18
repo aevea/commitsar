@@ -2,7 +2,7 @@
   "name": "@commitsar/hugo-local",
   "private": true,
   "dependencies": {
-    "autoprefixer": "9.7.1",
+    "autoprefixer": "9.7.2",
     "postcss-cli": "6.1.3"
   }
 }
