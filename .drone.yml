@@ -31,11 +31,22 @@ steps:
     when:
       event: [pull_request]
 
-  - name: docker
+  # This is here for backwards compatibility for repos using old naming
+  - name: deprecated-docker
     image: plugins/docker
     settings:
       auto_tag: true
       repo: commitsar/commitsar
+      username:
+        from_secret: docker_username
+      password:
+        from_secret: docker_password
+
+  - name: docker
+    image: plugins/docker
+    settings:
+      auto_tag: true
+      repo: outillage/commitsar
       username:
         from_secret: docker_username
       password:
