@@ -1,6 +1,6 @@
 package main
 
-import "github.com/commitsar-app/commitsar/cmd"
+import "github.com/outillage/commitsar/cmd"
 
 func main() {
 	cmd.Execute()

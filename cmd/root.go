@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/commitsar-app/commitsar/internal/providers"
+	"github.com/outillage/commitsar/internal/providers"
 	"github.com/spf13/cobra"
 )
 

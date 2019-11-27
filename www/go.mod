@@ -1,4 +1,4 @@
-module github.com/commitsar-app/commitsar/www
+module github.com/outillage/commitsar/www
 
 go 1.12
 

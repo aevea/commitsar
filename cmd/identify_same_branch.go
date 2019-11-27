@@ -1,7 +1,7 @@
 package cmd
 
 import (
-	history "github.com/commitsar-app/git/pkg"
+	history "github.com/outillage/git/pkg"
 )
 
 // IdentifySameBranch breaks up the reference names and tries to identify if the branches are the same
