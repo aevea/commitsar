@@ -4,8 +4,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/commitsar-app/commitsar/pkg/text"
-	history "github.com/commitsar-app/git/pkg"
+	"github.com/outillage/commitsar/pkg/text"
+	history "github.com/outillage/git/pkg"
 	"github.com/logrusorgru/aurora"
 	"gopkg.in/src-d/go-git.v4/plumbing"
 )
