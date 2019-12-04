@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/outillage/commitsar/internal/providers"
+	"github.com/outillage/integrations"
 	"github.com/spf13/cobra"
 )
 
@@ -51,7 +51,7 @@ func runRoot(cmd *cobra.Command, args []string) error {
 		strict = false
 	}
 
-	upstreamBranch := providers.FindCompareBranch()
+	upstreamBranch := integrations.FindCompareBranch()
 
 	return runCommitsar(".", upstreamBranch, debug, strict)
 }
