@@ -4,9 +4,10 @@ import (
 	"errors"
 	"fmt"
 
+	"github.com/logrusorgru/aurora"
 	"github.com/outillage/commitsar/pkg/text"
 	history "github.com/outillage/git/pkg"
-	"github.com/logrusorgru/aurora"
+	"github.com/outillage/quoad"
 	"gopkg.in/src-d/go-git.v4/plumbing"
 )
 
@@ -87,7 +88,7 @@ func runCommitsar(pathToRepo, upstreamBranch string, debug, strict bool) error {
 
 		messageTitle := text.MessageTitle(commitObject.Message)
 
-		parsedCommit := text.ParseCommit(commitObject.Message, commitHash)
+		parsedCommit := quoad.ParseCommitMessage(commitObject.Message)
 
 		textErr := text.CheckMessageTitle(parsedCommit, strict)
 

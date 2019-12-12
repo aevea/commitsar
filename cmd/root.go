@@ -12,7 +12,7 @@ var rootCmd = &cobra.Command{
 	Use:           "commitsar",
 	Short:         "Checks if commits comply",
 	Long:          "Checks if commits comply with conventional commits",
-	RunE:          (runRoot),
+	RunE:          runRoot,
 	SilenceUsage:  true,
 	SilenceErrors: true,
 }

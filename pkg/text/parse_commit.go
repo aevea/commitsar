@@ -1,6 +1,7 @@
 package text
 
 import (
+	"github.com/outillage/quoad"
 	"regexp"
 	"strings"
 )
@@ -10,11 +11,11 @@ var (
 )
 
 // ParseCommit takes a commits message and parses it into usable blocks
-func ParseCommit(message string, hash [20]byte) Commit {
+func ParseCommit(message string, hash [20]byte) quoad.Commit {
 	match := expectedFormatRegex.FindStringSubmatch(message)
 
 	if len(match) == 0 {
-		return Commit{}
+		return quoad.Commit{}
 	}
 
 	result := make(map[string]string)
@@ -32,13 +33,12 @@ func ParseCommit(message string, hash [20]byte) Commit {
 		scope = strings.Replace(scope, ")", "", 1)
 	}
 
-	return Commit{
+	return quoad.Commit{
 		Category: result["category"],
 		Scope:    scope,
 		Breaking: result["breaking"] == "!",
 		Heading:  result["heading"],
 		Body:     result["body"],
-		Footer:   "",
 		Hash:     hash,
 	}
 }
