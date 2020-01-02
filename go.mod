@@ -3,7 +3,7 @@ module github.com/outillage/commitsar
 go 1.13
 
 require (
-	github.com/logrusorgru/aurora v0.0.0-20191116043053-66b7ad493a23
+	github.com/logrusorgru/aurora v0.0.0-20200102142835-e9ef32dff381
 	github.com/outillage/git v1.2.6
 	github.com/outillage/integrations v0.1.0
 	github.com/outillage/quoad v0.2.0
