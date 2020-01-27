@@ -45,8 +45,8 @@ github.com/mitchellh/go-homedir v1.1.0/go.mod h1:SfyaCUpYCn1Vlf4IUYiD9fPX4A5wJrk
 github.com/mitchellh/mapstructure v1.1.2/go.mod h1:FVVH3fgwuzCH5S8UJGiWEs2h04kUh9fWfEaFds41c1Y=
 github.com/outillage/git v1.2.6 h1:mWCPxhxkuSLKd4dvnV3GXsDU2Oon10BgD6qOM+ljkZA=
 github.com/outillage/git v1.2.6/go.mod h1:5gcZpe6CD8GesH9UAeYYAEPn3987FeSSeZwkxFNeePA=
-github.com/outillage/integrations v0.1.0 h1:3dENr3MFln0nrvgsOrSL2B7iG40+5u6tOiQUkRPx/DE=
-github.com/outillage/integrations v0.1.0/go.mod h1:8TUKHOdlQoUYul8EhwTiBR8b1q94HCtY1pGHWH505Gg=
+github.com/outillage/integrations v0.2.0 h1:uI/7nO4FZP6+/L8eSdBaJwSe+hNDVbY+lxpw9vMmQlM=
+github.com/outillage/integrations v0.2.0/go.mod h1:8TUKHOdlQoUYul8EhwTiBR8b1q94HCtY1pGHWH505Gg=
 github.com/outillage/quoad v0.2.0 h1:jAFYegH3ASd3YEQCVuviHMiWDFxQAOfl7ox4BSBPriY=
 github.com/outillage/quoad v0.2.0/go.mod h1:VdBGieQx7EtZDWn10L2fyW6ZT3uDstIhlTbPwDNL25o=
 github.com/pelletier/go-buffruneio v0.2.0/go.mod h1:JkE26KsDizTr40EUHkXVtNPvgGtbSNq5BcowyYOWdKo=
