@@ -11,7 +11,7 @@ import (
 	"gopkg.in/src-d/go-git.v4/plumbing"
 )
 
-func runCommitsar(pathToRepo, upstreamBranch string, debug, strict bool) error {
+func runCommitsar(pathToRepo, upstreamBranch string, debug, strict bool, args ...string) error {
 	fmt.Print("Starting analysis of commits on branch\n")
 
 	gitRepo, err := history.OpenGit(pathToRepo, debug)
@@ -20,36 +20,24 @@ func runCommitsar(pathToRepo, upstreamBranch string, debug, strict bool) error {
 		return err
 	}
 
-	currentBranch, currentBranchErr := gitRepo.CurrentBranch()
-	if currentBranchErr != nil {
-		return currentBranchErr
-	}
-
 	var commits []plumbing.Hash
 
-	sameBranch, err := IdentifySameBranch(currentBranch.Name().String(), upstreamBranch, gitRepo)
-
-	if err != nil {
-		return err
-	}
-
-	if sameBranch {
-		commitsOnSameBranch, err := gitRepo.CommitsOnBranch(currentBranch.Hash())
+	if len(args) == 0 {
+		commitsBetweenBranches, err := commitsBetweenBranches(gitRepo, upstreamBranch)
 
 		if err != nil {
 			return err
 		}
 
-		commits = append(commits, commitsOnSameBranch[0])
-
+		commits = commitsBetweenBranches
 	} else {
-		commitsOnBranch, err := gitRepo.BranchDiffCommits(currentBranch.Name().String(), upstreamBranch)
+		commitsBetweenHashes, err := commitsBetweenHashes(gitRepo, args)
 
 		if err != nil {
 			return err
 		}
 
-		commits = commitsOnBranch
+		commits = commitsBetweenHashes
 	}
 
 	var filteredCommits []plumbing.Hash
