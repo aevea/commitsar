@@ -9,7 +9,7 @@ import (
 )
 
 var rootCmd = &cobra.Command{
-	Use:           "commitsar",
+	Use:           "commitsar <from?>...<to>",
 	Short:         "Checks if commits comply",
 	Long:          "Checks if commits comply with conventional commits",
 	RunE:          runRoot,
@@ -53,5 +53,5 @@ func runRoot(cmd *cobra.Command, args []string) error {
 
 	upstreamBranch := integrations.FindCompareBranch()
 
-	return runCommitsar(".", upstreamBranch, debug, strict)
+	return runCommitsar(".", upstreamBranch, debug, strict, args...)
 }

@@ -10,6 +10,7 @@ Tool to make sure your commits are compliant with [conventional commits](https:/
 ## Table of contents
 
 1. [Usage](#usage)
+2. [Flags](#flags)
 
 ## Usage
 
@@ -53,3 +54,20 @@ Adjust for version and distribution. Please check [Releases](https://github.com/
 - tar -xzf commitsar_v0.0.2_Linux_x86_64.tar.gz
 - ./commitsar
 ```
+
+# Flags
+
+Commitsar allows the following flags:
+
+| Name    | Flag | Required | Default |
+| ------- | ---- | -------- | ------- |
+| Verbose | --v  | false    | false   |
+| Strict  | --s  | false    | true    |
+
+On top of that a single argument is allowed:
+
+`commitsar <from commit>...<to commit>`
+
+e.g. `commitsar 7dbf3e7db93ae2e02902cae9d2f1de1b1e5c8c92...d0240d3ed34685d0a5329b185e120d3e8c205be4`
+
+If only one commit hash is used then commitsar will assume it to be the TO commit.
