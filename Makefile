@@ -17,4 +17,4 @@ go-mod-tidy:
 ci: setup-tests test go-mod-tidy
 
 build/docker: 
-	CGO_ENABLED=0 go build -a -tags "osusergo netgo" --ldflags "-linkmode external -extldflags '-static'" -o build/commitsar .
+	CGO_ENABLED=0 go build -a -tags "osusergo netgo" --ldflags "-linkmode external -extldflags '-static'" -o build/commitsar ./cmd/cli/main.go
