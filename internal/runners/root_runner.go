@@ -1,4 +1,4 @@
-package cmd
+package runners
 
 import (
 	"errors"
@@ -11,7 +11,8 @@ import (
 	"gopkg.in/src-d/go-git.v4/plumbing"
 )
 
-func runCommitsar(pathToRepo, upstreamBranch string, debug, strict bool, args ...string) error {
+// RunCommitsar executes the base command for Commitsar
+func RunCommitsar(pathToRepo, upstreamBranch string, debug, strict bool, args ...string) error {
 	fmt.Print("Starting analysis of commits on branch\n")
 
 	gitRepo, err := history.OpenGit(pathToRepo, debug)

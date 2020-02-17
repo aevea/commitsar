@@ -1,4 +1,4 @@
-package cmd
+package runners
 
 import (
 	history "github.com/outillage/git/pkg"

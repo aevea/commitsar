@@ -1,4 +1,4 @@
-package cmd
+package runners
 
 import (
 	"testing"
@@ -8,7 +8,7 @@ import (
 )
 
 func TestCommitsBetweenHashes(t *testing.T) {
-	gitRepo, err := history.OpenGit("../testdata/commits-on-different-branches", false)
+	gitRepo, err := history.OpenGit("../../testdata/commits-on-different-branches", false)
 
 	assert.NoError(t, err)
 
@@ -20,7 +20,7 @@ func TestCommitsBetweenHashes(t *testing.T) {
 }
 
 func TestCommitsBetweenHashesOnlyTo(t *testing.T) {
-	gitRepo, err := history.OpenGit("../testdata/commits-on-different-branches", false)
+	gitRepo, err := history.OpenGit("../../testdata/commits-on-different-branches", false)
 
 	assert.NoError(t, err)
 
