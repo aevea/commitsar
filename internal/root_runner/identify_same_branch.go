@@ -1,4 +1,4 @@
-package runners
+package root_runner
 
 import (
 	history "github.com/outillage/git/pkg"
