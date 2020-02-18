@@ -29,8 +29,8 @@ func commitsBetweenHashes(gitRepo *history.Git, args []string) ([]plumbing.Hash,
 	}
 
 	if len(splitArgs) == 2 {
-		fromCommit = plumbing.NewHash(splitArgs[0])
-		toCommit = plumbing.NewHash(splitArgs[1])
+		fromCommit = plumbing.NewHash(splitArgs[1])
+		toCommit = plumbing.NewHash(splitArgs[0])
 	}
 
 	logCommits, err := gitRepo.CommitsBetween(fromCommit, toCommit)
