@@ -5,3 +5,4 @@ www/**/_gen/**
 **/node_modules/**
 www/public
 tmp
+.idea
