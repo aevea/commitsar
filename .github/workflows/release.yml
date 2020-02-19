@@ -6,14 +6,14 @@ on:
 
 jobs:
   release-notary:
-    name: Release Notary
+    name: Release
     runs-on: ubuntu-latest
     steps:
       - name: Check out code
         uses: actions/checkout@v1
 
       - name: Release Notary Action
-        uses: commitsar-app/release-notary@v0.2.0
+        uses: docker://outillage/release-notary
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
