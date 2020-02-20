@@ -20,14 +20,14 @@ var Strict bool
 // Dir is the location of repo to check
 var Dir string
 
-// Version is a global variable passed during build time
-var Version string
+// version is a global variable passed during build time
+var version string
 
-// Commit is a global variable passed during build time. Should be used if version is not available.
-var Commit string
+// commit is a global variable passed during build time. Should be used if version is not available.
+var commit string
 
-// BuildTime is a global variable passed during build time
-var BuildTime string
+// date is a global variable passed during build time
+var date string
 
 func runRoot(cmd *cobra.Command, args []string) error {
 	debug := false
@@ -59,17 +59,15 @@ func main() {
 	rootCmd.PersistentFlags().BoolVarP(&Strict, "strict", "s", true, "strict mode")
 	rootCmd.PersistentFlags().StringVarP(&Dir, "path", "d", ".", "dir points to the path of the repository")
 
-	version := Version
-
 	// Version returns undefined if not on a tag. This needs to reset it.
-	if Version == "undefined" {
+	if version == "undefined" {
 		version = ""
 	}
 
-	if Version == "" && Commit != "" {
-		version = Commit
+	if version == "" && commit != "" {
+		version = commit
 	}
-	if Version == "" && Commit == "" {
+	if version == "" && commit == "" {
 		version = "development"
 	}
 
@@ -83,7 +81,7 @@ func main() {
 			err := version_runner.Run(
 				version_runner.VersionInfo{
 					Version: version,
-					Date: BuildTime,
+					Date: date,
 				},
 				logger,
 				)
