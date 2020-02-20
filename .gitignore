@@ -6,3 +6,4 @@ www/**/_gen/**
 www/public
 tmp
 .idea
+dist
