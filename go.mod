@@ -7,7 +7,7 @@ require (
 	github.com/outillage/git v1.2.6
 	github.com/outillage/integrations v0.2.0
 	github.com/outillage/quoad v0.2.0
-	github.com/spf13/cobra v0.0.5
+	github.com/spf13/cobra v0.0.6
 	github.com/stretchr/testify v1.5.1
 	gopkg.in/src-d/go-git.v4 v4.13.1
 )
