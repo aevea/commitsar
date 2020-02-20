@@ -2,7 +2,7 @@ package root_runner
 
 import (
 	"errors"
-	"fmt"
+	"log"
 
 	"github.com/logrusorgru/aurora"
 	"github.com/outillage/commitsar/pkg/text"
@@ -11,11 +11,19 @@ import (
 	"gopkg.in/src-d/go-git.v4/plumbing"
 )
 
-// RunCommitsar executes the base command for Commitsar
-func RunCommitsar(pathToRepo, upstreamBranch string, debug, strict bool, args ...string) error {
-	fmt.Print("Starting analysis of commits on branch\n")
+type Runner struct{
+	DebugLogger *log.Logger
+	Logger *log.Logger
+	Strict bool
+	// Debug is a deprecated flag. Will be replaced as all repos accept the debugLogger
+	Debug bool
+}
 
-	gitRepo, err := history.OpenGit(pathToRepo, debug)
+// Run executes the base command for Commitsar
+func (runner *Runner) Run(pathToRepo, upstreamBranch string, args ...string) error {
+	runner.Logger.Print("Starting analysis of commits on branch\n")
+
+	gitRepo, err := history.OpenGit(pathToRepo, runner.Debug)
 
 	if err != nil {
 		return err
@@ -46,9 +54,7 @@ func RunCommitsar(pathToRepo, upstreamBranch string, debug, strict bool, args ..
 	for _, commitHash := range commits {
 		commitObject, commitErr := gitRepo.Commit(commitHash)
 
-		if debug {
-			fmt.Printf("\n[DEBUG] Commit found: [hash] %v [message] %v \n", commitObject.Hash, text.MessageTitle(commitObject.Message))
-		}
+		runner.DebugLogger.Printf("Commit found: [hash] %v [message] %v \n", commitObject.Hash, text.MessageTitle(commitObject.Message))
 
 		if commitErr != nil {
 			return commitErr
@@ -59,8 +65,8 @@ func RunCommitsar(pathToRepo, upstreamBranch string, debug, strict bool, args ..
 		}
 	}
 
-	fmt.Printf("\n%v commits filtered out\n", len(commits)-len(filteredCommits))
-	fmt.Printf("\nFound %v commit to check\n", len(filteredCommits))
+	runner.Logger.Printf("\n%v commits filtered out\n", len(commits)-len(filteredCommits))
+	runner.Logger.Printf("\nFound %v commit to check\n", len(filteredCommits))
 
 	if len(filteredCommits) == 0 {
 		return errors.New(aurora.Red("No commits found, please check you are on a branch outside of main").String())
@@ -79,7 +85,7 @@ func RunCommitsar(pathToRepo, upstreamBranch string, debug, strict bool, args ..
 
 		parsedCommit := quoad.ParseCommitMessage(commitObject.Message)
 
-		textErr := text.CheckMessageTitle(parsedCommit, strict)
+		textErr := text.CheckMessageTitle(parsedCommit, runner.Strict)
 
 		if textErr != nil {
 			faultyCommits = append(faultyCommits, text.FailingCommit{Hash: commitHash.String(), Message: messageTitle, Error: textErr})
@@ -89,17 +95,17 @@ func RunCommitsar(pathToRepo, upstreamBranch string, debug, strict bool, args ..
 	if len(faultyCommits) != 0 {
 		failingCommitMessage := text.FormatFailingCommits(faultyCommits)
 
-		fmt.Print(failingCommitMessage)
+		runner.Logger.Print(failingCommitMessage)
 
-		fmt.Printf("%v of %v commits are not conventional commit compliant\n", aurora.Red(len(faultyCommits)), aurora.Red(len(commits)))
+		runner.Logger.Printf("%v of %v commits are not conventional commit compliant\n", aurora.Red(len(faultyCommits)), aurora.Red(len(commits)))
 
-		fmt.Print("\nExpected format is for example:      chore(ci): this is a test\n")
-		fmt.Print("Please see https://www.conventionalcommits.org for help on how to structure commits\n\n")
+		runner.Logger.Print("\nExpected format is for example:      chore(ci): this is a test\n")
+		runner.Logger.Print("Please see https://www.conventionalcommits.org for help on how to structure commits\n\n")
 
 		return errors.New(aurora.Red("Not all commits are conventiontal commits, please check the commits listed above").String())
 	}
 
-	fmt.Print(aurora.Sprintf(aurora.Green("All %v commits are conventional commit compliant\n"), len(filteredCommits)))
+	runner.Logger.Print(aurora.Sprintf(aurora.Green("All %v commits are conventional commit compliant\n"), len(filteredCommits)))
 
 	return nil
 }

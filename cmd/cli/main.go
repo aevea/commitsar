@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"github.com/outillage/commitsar/internal/version_runner"
+	"io/ioutil"
 	"log"
 	"os"
 
@@ -42,7 +43,23 @@ func runRoot(cmd *cobra.Command, args []string) error {
 
 	upstreamBranch := integrations.FindCompareBranch()
 
-	return root_runner.RunCommitsar(".", upstreamBranch, debug, strict, args...)
+	debugLogger := log.Logger{}
+	debugLogger.SetPrefix("[DEBUG] ")
+	debugLogger.SetOutput(os.Stdout)
+
+	if !debug {
+		debugLogger.SetOutput(ioutil.Discard)
+		debugLogger.SetPrefix("")
+	}
+	
+	runner := root_runner.Runner{
+		DebugLogger: &debugLogger,
+		Logger:      log.New(os.Stdout, "", 0),
+		Strict:      strict,
+		Debug:       debug,
+	}
+
+	return runner.Run(".", upstreamBranch, args...)
 }
 
 func main() {
