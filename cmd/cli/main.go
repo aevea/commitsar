@@ -53,6 +53,7 @@ func main() {
 		RunE:          runRoot,
 		SilenceUsage:  true,
 		SilenceErrors: true,
+		Args: cobra.MinimumNArgs(0),
 	}
 
 	rootCmd.PersistentFlags().BoolVarP(&Verbose, "verbose", "v", false, "verbose output")
