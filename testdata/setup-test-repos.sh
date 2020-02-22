@@ -1,10 +1,11 @@
 #!/bin/bash
 
-rm -rf testdata/commits-on-master
-rm -rf testdata/commits-on-different-branches
+cd $(dirname $0)
 
-cd testdata
-
-git clone commits-on-master.bundle
-
-git clone commits-on-different-branches.bundle
+for bundle in *.bundle; do
+  repo="${bundle%.*}"
+  rm -rf ./$repo;
+  echo "testdata/$repo directory does not exist at the root; creating...";
+  git clone $bundle;
+  echo "done";
+done
