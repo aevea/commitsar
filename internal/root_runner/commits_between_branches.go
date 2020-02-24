@@ -5,7 +5,7 @@ import (
 	"gopkg.in/src-d/go-git.v4/plumbing"
 )
 
-func commitsBetweenBranches(gitRepo *history.Git, upstreamBranch string) ([]plumbing.Hash, error) {
+func commitsBetweenBranches(gitRepo *history.Git, options RunnerOptions) ([]plumbing.Hash, error) {
 	var commits []plumbing.Hash
 
 	currentBranch, currentBranchErr := gitRepo.CurrentBranch()
@@ -13,7 +13,7 @@ func commitsBetweenBranches(gitRepo *history.Git, upstreamBranch string) ([]plum
 		return nil, currentBranchErr
 	}
 
-	sameBranch, err := IdentifySameBranch(currentBranch.Name().String(), upstreamBranch, gitRepo)
+	sameBranch, err := IdentifySameBranch(currentBranch.Name().String(), options.UpstreamBranch, gitRepo)
 
 	if err != nil {
 		return nil, err
@@ -26,17 +26,37 @@ func commitsBetweenBranches(gitRepo *history.Git, upstreamBranch string) ([]plum
 			return nil, err
 		}
 
-		commits = append(commits, commitsOnSameBranch[0])
-
-	} else {
-		commitsOnBranch, err := gitRepo.BranchDiffCommits(currentBranch.Name().String(), upstreamBranch)
-
-		if err != nil {
-			return nil, err
+		if options.AllCommits {
+			return commitsOnSameBranch, nil
 		}
 
-		commits = commitsOnBranch
+		// If no limit is set then check just the last commits. This is to prevent breaking repositories that did not check commits before.
+		if options.Limit == 0 {
+			commits = append(commits, commitsOnSameBranch[0])
+			return commits, nil
+		}
+
+		limit := options.Limit
+
+		// The limit cannot be longer than the amount of commits found
+		if limit > len(commitsOnSameBranch) {
+			limit = len(commitsOnSameBranch)
+		}
+
+		for index := 0; index < limit; index++ {
+			commits = append(commits, commitsOnSameBranch[index])
+		}
+
+		return commits, nil
 	}
+
+	commitsOnBranch, err := gitRepo.BranchDiffCommits(currentBranch.Name().String(), options.UpstreamBranch)
+
+	if err != nil {
+		return nil, err
+	}
+
+	commits = commitsOnBranch
 
 	return commits, nil
 }

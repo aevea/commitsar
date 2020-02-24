@@ -59,10 +59,11 @@ Adjust for version and distribution. Please check [Releases](https://github.com/
 
 Commitsar allows the following flags:
 
-| Name    | Flag | Required | Default |
-| ------- | ---- | -------- | ------- |
-| Verbose | --v  | false    | false   |
-| Strict  | --s  | false    | true    |
+| Name    | Flag  | Required | Default | Description                                                                        |
+| ------- | ----- | -------- | ------- | ---------------------------------------------------------------------------------- |
+| Verbose | --v   | false    | false   | Debug output into console                                                          |
+| Strict  | --s   | false    | true    | Strict check of category types                                                     |
+| All     | --all | false    | false   | Whether to check all commits on given branch. **Takes precedence over LIMIT flag** |
 
 On top of that a single argument is allowed:
 

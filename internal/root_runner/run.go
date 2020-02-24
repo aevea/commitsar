@@ -23,7 +23,7 @@ func (runner *Runner) Run(options RunnerOptions, args ...string) error {
 	var commits []plumbing.Hash
 
 	if len(args) == 0 {
-		commitsBetweenBranches, err := commitsBetweenBranches(gitRepo, options.UpstreamBranch)
+		commitsBetweenBranches, err := commitsBetweenBranches(gitRepo, options)
 
 		if err != nil {
 			return err
