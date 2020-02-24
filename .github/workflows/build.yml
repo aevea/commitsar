@@ -19,3 +19,4 @@ jobs:
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
           cache: true
           cache_registry: outillage/cache
+          strip_tag_prefix: v
