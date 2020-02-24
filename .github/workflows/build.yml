@@ -1,0 +1,21 @@
+name: Docker build
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - "v*"
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@master
+      - name: Kaniko build
+        uses: outillage/kaniko-action@master
+        with:
+          image: outillage/commitsar
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          cache: true
+          cache_registry: outillage/cache
