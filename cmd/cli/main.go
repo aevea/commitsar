@@ -34,30 +34,20 @@ var commit string
 var date string
 
 func runRoot(cmd *cobra.Command, args []string) error {
-	debug := false
-	if cmd.Flag("verbose").Value.String() == "true" {
-		debug = true
-	}
-
-	strict := true
-	if cmd.Flag("strict").Value.String() == "false" {
-		strict = false
-	}
-
 	upstreamBranch := integrations.FindCompareBranch()
 
 	debugLogger := log.Logger{}
 	debugLogger.SetPrefix("[DEBUG] ")
 	debugLogger.SetOutput(os.Stdout)
 
-	if !debug {
+	if !Verbose {
 		debugLogger.SetOutput(ioutil.Discard)
 		debugLogger.SetPrefix("")
 	}
 
 	logger := log.New(os.Stdout, "", 0)
 
-	runner := root_runner.New(logger, &debugLogger, strict)
+	runner := root_runner.New(logger, &debugLogger, Strict)
 
 	options := root_runner.RunnerOptions{
 		Path:           ".",
