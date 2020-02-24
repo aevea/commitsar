@@ -60,7 +60,7 @@ func (runner *Runner) Run(pathToRepo, upstreamBranch string, args ...string) err
 			return commitErr
 		}
 
-		if !text.IsMergeCommit(commitObject.Message) {
+		if !text.IsMergeCommit(commitObject.Message) && !text.IsInitialCommit(commitObject.Message) {
 			filteredCommits = append(filteredCommits, commitHash)
 		}
 	}
