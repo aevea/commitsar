@@ -21,6 +21,9 @@ var Strict bool
 // Dir is the location of repo to check
 var Dir string
 
+// AllCommits will iterate through all the commits on a branch
+var AllCommits bool
+
 // version is a global variable passed during build time
 var version string
 
@@ -51,15 +54,19 @@ func runRoot(cmd *cobra.Command, args []string) error {
 		debugLogger.SetOutput(ioutil.Discard)
 		debugLogger.SetPrefix("")
 	}
-	
-	runner := root_runner.Runner{
-		DebugLogger: &debugLogger,
-		Logger:      log.New(os.Stdout, "", 0),
-		Strict:      strict,
-		Debug:       debug,
+
+	logger := log.New(os.Stdout, "", 0)
+
+	runner := root_runner.New(logger, &debugLogger, strict)
+
+	options := root_runner.RunnerOptions{
+		Path:           ".",
+		UpstreamBranch: upstreamBranch,
+		Limit:          0,
+		AllCommits:     AllCommits,
 	}
 
-	return runner.Run(".", upstreamBranch, args...)
+	return runner.Run(options, args...)
 }
 
 func main() {
@@ -76,6 +83,7 @@ func main() {
 	rootCmd.PersistentFlags().BoolVarP(&Verbose, "verbose", "v", false, "verbose output")
 	rootCmd.PersistentFlags().BoolVarP(&Strict, "strict", "s", true, "strict mode")
 	rootCmd.PersistentFlags().StringVarP(&Dir, "path", "d", ".", "dir points to the path of the repository")
+	rootCmd.PersistentFlags().BoolVarP(&AllCommits, "all", "a", false, "iterate through all the commits on the branch")
 
 	// Version returns undefined if not on a tag. This needs to reset it.
 	if version == "undefined" {
