@@ -1,2 +1,3 @@
-commits-on-master
-commits-on-different-branches
+*
+!*.bundle
+!setup-test-repos.sh
