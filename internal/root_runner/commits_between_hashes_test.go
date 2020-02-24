@@ -3,12 +3,12 @@ package root_runner
 import (
 	"testing"
 
-	history "github.com/outillage/git/pkg"
+	history "github.com/outillage/git/v2"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestCommitsBetweenHashes(t *testing.T) {
-	gitRepo, err := history.OpenGit("../../testdata/commits-on-different-branches", false)
+	gitRepo, err := history.OpenGit("../../testdata/commits-on-different-branches", nil)
 
 	assert.NoError(t, err)
 
@@ -25,7 +25,7 @@ func TestCommitsBetweenHashes(t *testing.T) {
 }
 
 func TestCommitsBetweenHashesOnlyTo(t *testing.T) {
-	gitRepo, err := history.OpenGit("../../testdata/commits-on-different-branches", false)
+	gitRepo, err := history.OpenGit("../../testdata/commits-on-different-branches", nil)
 
 	assert.NoError(t, err)
 

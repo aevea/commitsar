@@ -6,15 +6,15 @@ import (
 
 	"github.com/logrusorgru/aurora"
 	"github.com/outillage/commitsar/pkg/text"
-	history "github.com/outillage/git/pkg"
+	history "github.com/outillage/git/v2"
 	"github.com/outillage/quoad"
 	"gopkg.in/src-d/go-git.v4/plumbing"
 )
 
-type Runner struct{
+type Runner struct {
 	DebugLogger *log.Logger
-	Logger *log.Logger
-	Strict bool
+	Logger      *log.Logger
+	Strict      bool
 	// Debug is a deprecated flag. Will be replaced as all repos accept the debugLogger
 	Debug bool
 }
@@ -23,7 +23,7 @@ type Runner struct{
 func (runner *Runner) Run(pathToRepo, upstreamBranch string, args ...string) error {
 	runner.Logger.Print("Starting analysis of commits on branch\n")
 
-	gitRepo, err := history.OpenGit(pathToRepo, runner.Debug)
+	gitRepo, err := history.OpenGit(pathToRepo, runner.DebugLogger)
 
 	if err != nil {
 		return err

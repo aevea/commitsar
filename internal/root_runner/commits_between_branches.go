@@ -1,7 +1,7 @@
 package root_runner
 
 import (
-	history "github.com/outillage/git/pkg"
+	history "github.com/outillage/git/v2"
 	"gopkg.in/src-d/go-git.v4/plumbing"
 )
 
