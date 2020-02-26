@@ -12,9 +12,13 @@ import (
 
 // Run executes the base command for Commitsar
 func (runner *Runner) Run(options RunnerOptions, args ...string) error {
-	runner.Logger.Print("Starting analysis of commits on branch\n")
-
 	gitRepo, err := history.OpenGit(options.Path, runner.DebugLogger)
+
+	if err != nil {
+		return err
+	}
+
+	err = runner.logBranch(gitRepo)
 
 	if err != nil {
 		return err
