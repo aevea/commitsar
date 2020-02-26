@@ -45,11 +45,13 @@ func (runner *Runner) Run(options RunnerOptions, args ...string) error {
 	for _, commitHash := range commits {
 		commitObject, commitErr := gitRepo.Commit(commitHash)
 
-		runner.DebugLogger.Printf("Commit found: [hash] %v [message] %v \n", commitObject.Hash, text.MessageTitle(commitObject.Message))
-
 		if commitErr != nil {
 			return commitErr
 		}
+
+		parsedCommit := quoad.ParseCommitMessage(commitObject.Message)
+
+		runner.DebugLogger.Printf("Commit found: [hash] %v [message] %v \n", parsedCommit.Hash.String(), parsedCommit.Heading)
 
 		if !text.IsMergeCommit(commitObject.Message) && !text.IsInitialCommit(commitObject.Message) {
 			filteredCommits = append(filteredCommits, commitHash)
@@ -72,14 +74,12 @@ func (runner *Runner) Run(options RunnerOptions, args ...string) error {
 			return commitErr
 		}
 
-		messageTitle := text.MessageTitle(commitObject.Message)
-
 		parsedCommit := quoad.ParseCommitMessage(commitObject.Message)
 
 		textErr := text.CheckMessageTitle(parsedCommit, runner.Strict)
 
 		if textErr != nil {
-			faultyCommits = append(faultyCommits, text.FailingCommit{Hash: commitHash.String(), Message: messageTitle, Error: textErr})
+			faultyCommits = append(faultyCommits, text.FailingCommit{Hash: commitHash.String(), Message: parsedCommit.Heading, Error: textErr})
 		}
 	}
 

@@ -25,8 +25,8 @@ type RunnerOptions struct {
 	AllCommits bool
 }
 
-// New returns a new instance of a RootRunner with fallbacks for logging
-func New(logger *log.Logger, debugLogger *log.Logger, strict bool) *Runner{
+// New returns a new instance of a RootRunner with fallback for logging
+func New(logger *log.Logger, debugLogger *log.Logger, strict bool) *Runner {
 	if logger == nil {
 		logger = log.New(os.Stdout, "", 0)
 	}
@@ -35,8 +35,8 @@ func New(logger *log.Logger, debugLogger *log.Logger, strict bool) *Runner{
 	}
 
 	return &Runner{
-		Logger:logger,
-		DebugLogger:debugLogger,
-		Strict:strict,
+		Logger:      logger,
+		DebugLogger: debugLogger,
+		Strict:      strict,
 	}
 }
