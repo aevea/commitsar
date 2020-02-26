@@ -2,9 +2,10 @@ package text
 
 import (
 	"errors"
-	"github.com/outillage/quoad"
 	"regexp"
 	"strings"
+
+	"github.com/outillage/quoad"
 )
 
 var (
@@ -36,7 +37,7 @@ func isAllowedCategory(category string) bool {
 }
 
 // CheckMessageTitle verifies that the message title conforms to
-// conventional commmit standard https://www.conventionalcommits.org/en/v1.0.0-beta.4/#summary
+// conventional commit standard https://www.conventionalcommits.org/en/v1.0.0-beta.4/#summary
 func CheckMessageTitle(commit quoad.Commit, strict bool) error {
 	if commit.Category == "" {
 		return errCategoryMissing
