@@ -28,7 +28,7 @@ Run the Commitsar action
 
 ```
 - name: Commitsar Action
-  uses: commitsar-app/commitsar@v0.6.3 (substitute for current version)
+  uses: outillage/commitsar@v0.6.3 (substitute for current version)
 ```
 
 ## Example for CircleCI
@@ -38,7 +38,7 @@ Run the Commitsar action
 ```yaml
 validate-commits:
 	    docker:
-	      - image: commitsar/commitsar
+	      - image: outillage/commitsar
 	    steps:
 	      - checkout
 	      - run: commitsar

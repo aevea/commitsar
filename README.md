@@ -31,7 +31,7 @@ Run the Commitsar action
 
 ```
 - name: Commitsar Action
-  uses: docker://commitsar/commitsar:latest
+  uses: docker://outillage/commitsar
 ```
 
 ##### Example for CircleCI:
@@ -39,7 +39,7 @@ Run the Commitsar action
 ```
 validate-commits:
 	    docker:
-	      - image: commitsar/commitsar
+	      - image: outillage/commitsar
 	    steps:
 	      - checkout
 	      - run: commitsar
