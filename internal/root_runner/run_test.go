@@ -32,7 +32,7 @@ func TestCommitsOnMaster(t *testing.T) {
 	err := runner.Run(options)
 
 	assert.NoError(t, err)
-	assert.Equal(t, "Starting analysis of commits on branch\n\n0 commits filtered out\n\nFound 1 commit to check\n\x1b[32mAll 1 commits are conventional commit compliant\n\x1b[0m\n", testString.String())
+	assert.Equal(t, "Starting analysis of commits on branch refs/heads/master\n\n0 commits filtered out\n\nFound 1 commit to check\n\x1b[32mAll 1 commits are conventional commit compliant\n\x1b[0m\n", testString.String())
 }
 
 func TestCommitsOnBranch(t *testing.T) {
