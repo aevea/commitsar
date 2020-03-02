@@ -20,3 +20,14 @@ jobs:
           cache: true
           cache_registry: outillage/cache
           strip_tag_prefix: v
+
+      # Deprecated build for backwards compatibility
+      - name: Deprecated build
+        uses: outillage/kaniko-action@master
+        with:
+          image: commitsar/commitsar
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          cache: true
+          cache_registry: outillage/cache
+          strip_tag_prefix: v
