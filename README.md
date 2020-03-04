@@ -16,7 +16,7 @@ Tool to make sure your commits are compliant with [conventional commits](https:/
 
 ## Usage
 
-Commitsar is shipped as a Dockerfile. This is the easiest way to add it to your CI.
+Please check [Documentation](https://commitsar.tech).
 
 **Important: Commitsar currently needs to be run in the same folder as the git repository you want checked, currently no override is provided for setting path to git repo see https://github.com/outillage/commitsar/issues/93**
 
