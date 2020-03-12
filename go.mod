@@ -6,7 +6,7 @@ require (
 	github.com/logrusorgru/aurora v0.0.0-20200102142835-e9ef32dff381
 	github.com/outillage/git/v2 v2.0.1
 	github.com/outillage/integrations v0.3.0
-	github.com/outillage/quoad v0.2.0
+	github.com/outillage/quoad v0.3.0
 	github.com/sergi/go-diff v1.1.0 // indirect
 	github.com/spf13/cobra v0.0.6
 	github.com/stretchr/testify v1.5.1
