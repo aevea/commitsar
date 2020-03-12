@@ -86,8 +86,8 @@ github.com/outillage/git/v2 v2.0.1 h1:spc5mZmSvB05Yjz119tpiDCFMQKlglEHDcSqzBA2Lo
 github.com/outillage/git/v2 v2.0.1/go.mod h1:c6L0qnmoC0TYDt9Cer+HziO77yzvrfNlPAEXBAH+HRM=
 github.com/outillage/integrations v0.3.0 h1:HlYQpsuLEOfOZUCxUmR1Z3/N5GeeaLaNeLFasMrTHEI=
 github.com/outillage/integrations v0.3.0/go.mod h1:8TUKHOdlQoUYul8EhwTiBR8b1q94HCtY1pGHWH505Gg=
-github.com/outillage/quoad v0.2.0 h1:jAFYegH3ASd3YEQCVuviHMiWDFxQAOfl7ox4BSBPriY=
-github.com/outillage/quoad v0.2.0/go.mod h1:VdBGieQx7EtZDWn10L2fyW6ZT3uDstIhlTbPwDNL25o=
+github.com/outillage/quoad v0.3.0 h1:cQWS5WDVSobdMBnpWj/tLZW/yUDLYBp+3n2dqHs8J08=
+github.com/outillage/quoad v0.3.0/go.mod h1:3PTQ+I2ShA+uuay0L1roOyrxmA8I28MLrXdgQcwBLXM=
 github.com/pelletier/go-buffruneio v0.2.0/go.mod h1:JkE26KsDizTr40EUHkXVtNPvgGtbSNq5BcowyYOWdKo=
 github.com/pelletier/go-toml v1.2.0/go.mod h1:5z9KED0ma1S8pY6P1sdut58dfprrGBbd/94hg7ilaic=
 github.com/pkg/errors v0.8.0/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
