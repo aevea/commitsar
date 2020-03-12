@@ -17,7 +17,8 @@ var (
 	errBCMissingText       = errors.New("breaking change commit body must start with BREAKING CHANGE: ")
 
 	// Fields such as category and chore should contain only word characters
-	fieldRegex = regexp.MustCompile(`^\w+$`)
+	categoryRegex = regexp.MustCompile(`^\w+$`)
+	scopeRegex = regexp.MustCompile(`^\w+( \w+)*$`)
 
 	// Commits with breaking changes should contain text with BREAKING CHANGE: at start
 	bcRegex = regexp.MustCompile(`^BREAKING CHANGE: `)
@@ -42,7 +43,7 @@ func CheckMessageTitle(commit quoad.Commit, strict bool) error {
 	if commit.Category == "" {
 		return errCategoryMissing
 	}
-	categoryMatch := fieldRegex.FindStringSubmatch(commit.Category)
+	categoryMatch := categoryRegex.FindStringSubmatch(commit.Category)
 
 	if categoryMatch == nil {
 		return errCategoryWrongFormat
@@ -52,7 +53,7 @@ func CheckMessageTitle(commit quoad.Commit, strict bool) error {
 		return errNonStandardCategory
 	}
 
-	scopeMatch := fieldRegex.FindStringSubmatch(commit.Scope)
+	scopeMatch := scopeRegex.FindStringSubmatch(commit.Scope)
 	if commit.Scope != "" && scopeMatch == nil {
 		return errScopeNonConform
 	}
