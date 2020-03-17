@@ -18,7 +18,7 @@ var (
 
 	// Fields such as category and chore should contain only word characters
 	categoryRegex = regexp.MustCompile(`^\w+$`)
-	scopeRegex = regexp.MustCompile(`^\w+( \w+)*$`)
+	scopeRegex    = regexp.MustCompile(`^\w+( \w+)*$`)
 
 	// Commits with breaking changes should contain text with BREAKING CHANGE: at start
 	bcRegex = regexp.MustCompile(`^BREAKING CHANGE: `)
@@ -56,16 +56,6 @@ func CheckMessageTitle(commit quoad.Commit, strict bool) error {
 	scopeMatch := scopeRegex.FindStringSubmatch(commit.Scope)
 	if commit.Scope != "" && scopeMatch == nil {
 		return errScopeNonConform
-	}
-
-	if commit.Breaking {
-		if commit.Body == "" {
-			return errMissingBCBody
-		}
-		bcMatch := bcRegex.FindStringSubmatch(commit.Body)
-		if bcMatch == nil {
-			return errBCMissingText
-		}
 	}
 
 	return nil
