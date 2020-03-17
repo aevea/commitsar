@@ -16,13 +16,9 @@ func TestCheckMessageTitleNonStrict(t *testing.T) {
 			quoad.Commit{Category: "test", Scope: "full", Heading: "a heading", Body: "body is here\nit can have multiple lines"},
 			quoad.Commit{Category: "test", Heading: "a heading", Body: "BREAKING CHANGE: this happened", Breaking: true},
 			quoad.Commit{Category: "chore", Scope: "new integration", Heading: "added new integration"},
-		},
-		errBCMissingText: []quoad.Commit{
-			quoad.Commit{Category: "test", Heading: "a heading", Body: "body is here", Breaking: true},
-		},
-		errMissingBCBody: []quoad.Commit{
 			quoad.Commit{Category: "fix", Breaking: true, Heading: "breaking change"},
 			quoad.Commit{Category: "fix", Scope: "security", Breaking: true, Heading: "breaking"},
+			quoad.Commit{Category: "test", Heading: "a heading", Body: "body is here", Breaking: true},
 		},
 		errCategoryWrongFormat: []quoad.Commit{
 			quoad.Commit{Category: "fix!", Breaking: true, Heading: "breaking"},
@@ -55,7 +51,7 @@ func TestCheckMessageTitleStrict(t *testing.T) {
 		tests[nil] = quoad.Commit{Category: cat, Heading: "add something"}
 	}
 
-	tests[errNonStandardCategory] =  quoad.Commit{Category: "thisshouldneverbeacategory", Heading: "add something"}
+	tests[errNonStandardCategory] = quoad.Commit{Category: "thisshouldneverbeacategory", Heading: "add something"}
 
 	for expected, test := range tests {
 		err := CheckMessageTitle(test, true)
