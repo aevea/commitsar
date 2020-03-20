@@ -2,6 +2,7 @@ package root_runner
 
 import (
 	"errors"
+	"os"
 
 	"github.com/logrusorgru/aurora"
 	"github.com/outillage/commitsar/pkg/text"
@@ -88,9 +89,9 @@ func (runner *Runner) Run(options RunnerOptions, args ...string) error {
 	}
 
 	if len(faultyCommits) != 0 {
-		failingCommitMessage := text.FormatFailingCommits(faultyCommits)
-
-		runner.Logger.Print(failingCommitMessage)
+		failingCommitTable := text.FormatFailingCommits(faultyCommits)
+		failingCommitTable.SetOutputMirror(os.Stdout)
+		failingCommitTable.Render()
 
 		runner.Logger.Printf("%v of %v commits are not conventional commit compliant\n", aurora.Red(len(faultyCommits)), aurora.Red(len(commits)))
 

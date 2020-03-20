@@ -2,6 +2,8 @@ package text
 
 import (
 	"strings"
+
+	"github.com/jedib0t/go-pretty/table"
 )
 
 // FailingCommit is just a formatted commit struct
@@ -12,21 +14,17 @@ type FailingCommit struct {
 }
 
 // FormatFailingCommits takes in slice of commit hashes and messages and formats it for nice output
-func FormatFailingCommits(commits []FailingCommit) string {
+func FormatFailingCommits(commits []FailingCommit) table.Writer {
+	t := table.NewWriter()
+	t.AppendHeader(table.Row{"hash", "failure", "text"})
+
 	builder := strings.Builder{}
 	// Extra spacing to make it nicer
 	builder.WriteString("\nFollowing commits failed the check: \n")
 
 	for _, commit := range commits {
-		builder.WriteString("\n")
-		builder.WriteString("FAIL   ")
-		builder.WriteString(commit.Hash)
-		builder.WriteString("   ")
-		builder.WriteString(commit.Message)
-		builder.WriteString("   ")
-		builder.WriteString(commit.Error.Error())
+		t.AppendRow(table.Row{commit.Hash, commit.Error.Error(), commit.Message})
 	}
 
-	builder.WriteString("\n\n")
-	return builder.String()
+	return t
 }
