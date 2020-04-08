@@ -18,7 +18,7 @@ var (
 
 	// Fields such as category and chore should contain only word characters
 	categoryRegex = regexp.MustCompile(`^\w+$`)
-	scopeRegex    = regexp.MustCompile(`^\w+( \w+)*$`)
+	scopeRegex    = regexp.MustCompile(`^\w+(-\w+|_\w+| \w+)*$`)
 
 	// Commits with breaking changes should contain text with BREAKING CHANGE: at start
 	bcRegex = regexp.MustCompile(`^BREAKING CHANGE: `)

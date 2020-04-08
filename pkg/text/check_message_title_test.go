@@ -19,12 +19,17 @@ func TestCheckMessageTitleNonStrict(t *testing.T) {
 			quoad.Commit{Category: "fix", Breaking: true, Heading: "breaking change"},
 			quoad.Commit{Category: "fix", Scope: "security", Breaking: true, Heading: "breaking"},
 			quoad.Commit{Category: "test", Heading: "a heading", Body: "body is here", Breaking: true},
+			quoad.Commit{Category: "test", Scope: "dashed-scope", Heading: "a heading", Body: "body is here", Breaking: true},
+			quoad.Commit{Category: "test", Scope: "undescore_scope", Heading: "a heading", Body: "body is here", Breaking: true},
 		},
 		errCategoryWrongFormat: []quoad.Commit{
 			quoad.Commit{Category: "fix!", Breaking: true, Heading: "breaking"},
 		},
 		errScopeNonConform: []quoad.Commit{
 			quoad.Commit{Category: "fix", Scope: "security(stuff)", Heading: "should break"},
+			quoad.Commit{Category: "fix", Scope: "dashed-", Heading: "should break"},
+			quoad.Commit{Category: "fix", Scope: "underscore-", Heading: "should break"},
+			quoad.Commit{Category: "fix", Scope: "spaced ", Heading: "should break"},
 		},
 		errCategoryMissing: []quoad.Commit{
 			quoad.Commit{},
