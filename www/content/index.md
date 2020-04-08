@@ -37,11 +37,11 @@ Run the Commitsar action
 
 ```yaml
 validate-commits:
-	    docker:
-	      - image: outillage/commitsar
-	    steps:
-	      - checkout
-	      - run: commitsar
+    docker:
+	    - image: outillage/commitsar
+    steps:
+	    - checkout
+	    - run: commitsar
 ```
 
 ## From binary
