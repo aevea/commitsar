@@ -44,6 +44,17 @@ validate-commits:
 	    - run: commitsar
 ```
 
+## Example for GitLab CI
+
+> GitLab CI
+
+```yaml
+validate-commits:
+    image: outillage/commitsar
+    script:
+        - commitsar
+```
+
 ## From binary
 
 > Binary
