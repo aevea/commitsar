@@ -11,7 +11,7 @@ require (
 	github.com/outillage/integrations v0.3.0
 	github.com/outillage/quoad v0.3.0
 	github.com/sergi/go-diff v1.1.0 // indirect
-	github.com/spf13/cobra v0.0.7
+	github.com/spf13/cobra v1.0.0
 	github.com/stretchr/testify v1.5.1
 	golang.org/x/crypto v0.0.0-20200221231518-2aa609cf4a9d // indirect
 	golang.org/x/net v0.0.0-20200222125558-5a598a2470a0 // indirect
