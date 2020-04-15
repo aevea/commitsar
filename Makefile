@@ -24,8 +24,8 @@ endef
 
 build/docker:
 	$(call prepare_build_vars)
-	CGO_ENABLED=0 go build -a -tags "osusergo netgo" --ldflags "${DATE_FLAG} ${VERSION_FLAG} ${COMMIT_FLAG} -linkmode external -extldflags '-static'" -o build/commitsar ./cmd/cli/main.go
+	CGO_ENABLED=0 go build -a -tags "osusergo netgo" --ldflags "${DATE_FLAG} ${VERSION_FLAG} ${COMMIT_FLAG} -linkmode external -extldflags '-static'" -o build/commitsar ./main.go
 
 build/local:
 	$(call prepare_build_vars)
-	go build -a --ldflags "${DATE_FLAG} ${VERSION_FLAG} ${COMMIT_FLAG}" -o build/commitsar ./cmd/cli/main.go
+	go build -a --ldflags "${DATE_FLAG} ${VERSION_FLAG} ${COMMIT_FLAG}" -o build/commitsar ./main.go

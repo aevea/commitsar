@@ -5,10 +5,9 @@ before:
     # you may remove this if you don't use vgo
     - go mod download
 builds:
-  -
-    env:
+  - env:
       - CGO_ENABLED=0
-    main: ./cmd/cli/main.go
+    main: ./main.go
 archives:
   - replacements:
       darwin: Darwin

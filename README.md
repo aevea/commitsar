@@ -20,6 +20,18 @@ Please check [Documentation](https://commitsar.tech).
 
 **Important: Commitsar currently needs to be run in the same folder as the git repository you want checked, currently no override is provided for setting path to git repo see https://github.com/outillage/commitsar/issues/93**
 
+#### Running using https://gobinaries.com/
+
+```sh
+curl -sf https://gobinaries.com/outillage/commitsar | sh
+```
+
+Or a specific version:
+```sh
+curl -sf https://gobinaries.com/outillage/commitsar[@VERSION] | sh
+```
+
+
 #### Github action
 
 Checkout git in order to get commits and master branch
