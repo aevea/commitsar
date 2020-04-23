@@ -12,7 +12,7 @@ RUN make install_deps
 COPY . /app/
 RUN make build/docker
 
-FROM alpine:3.11.5
+FROM alpine:3.11.6
 
 LABEL repository="https://github.com/outillage/commitsar"
 LABEL homepage="https://github.com/outillage/commitsar"
