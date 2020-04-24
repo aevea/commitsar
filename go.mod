@@ -7,7 +7,7 @@ require (
 	github.com/jedib0t/go-pretty v4.3.0+incompatible
 	github.com/logrusorgru/aurora v0.0.0-20200102142835-e9ef32dff381
 	github.com/mattn/go-runewidth v0.0.9 // indirect
-	github.com/outillage/git/v2 v2.0.1
+	github.com/outillage/git/v2 v2.2.0
 	github.com/outillage/integrations v0.3.0
 	github.com/outillage/quoad v0.3.0
 	github.com/sergi/go-diff v1.1.0 // indirect
