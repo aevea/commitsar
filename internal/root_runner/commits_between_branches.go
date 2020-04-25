@@ -1,8 +1,8 @@
 package root_runner
 
 import (
-	history "github.com/outillage/git/v2"
-	"gopkg.in/src-d/go-git.v4/plumbing"
+	history "github.com/aevea/git/v2"
+	"github.com/go-git/go-git/v5/plumbing"
 )
 
 func commitsBetweenBranches(gitRepo *history.Git, options RunnerOptions) ([]plumbing.Hash, error) {

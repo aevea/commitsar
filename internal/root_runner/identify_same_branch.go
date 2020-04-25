@@ -1,7 +1,7 @@
 package root_runner
 
 import (
-	history "github.com/outillage/git/v2"
+	history "github.com/aevea/git/v2"
 )
 
 // IdentifySameBranch breaks up the reference names and tries to identify if the branches are the same

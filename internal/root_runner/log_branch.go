@@ -1,6 +1,6 @@
 package root_runner
 
-import history "github.com/outillage/git/v2"
+import history "github.com/aevea/git/v2"
 
 // logBranch outputs the branch which is being checked into the console
 func (runner *Runner) logBranch(gitRepo *history.Git) error {

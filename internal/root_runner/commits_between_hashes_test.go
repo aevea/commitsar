@@ -3,7 +3,7 @@ package root_runner
 import (
 	"testing"
 
-	history "github.com/outillage/git/v2"
+	history "github.com/aevea/git/v2"
 	"github.com/stretchr/testify/assert"
 )
 

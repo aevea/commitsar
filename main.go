@@ -2,13 +2,14 @@ package main
 
 import (
 	"fmt"
-	"github.com/outillage/commitsar/internal/version_runner"
 	"io/ioutil"
 	"log"
 	"os"
 
-	"github.com/outillage/commitsar/internal/root_runner"
-	"github.com/outillage/integrations"
+	"github.com/aevea/commitsar/internal/version_runner"
+
+	"github.com/aevea/commitsar/internal/root_runner"
+	"github.com/aevea/integrations"
 	"github.com/spf13/cobra"
 )
 
@@ -67,7 +68,7 @@ func main() {
 		RunE:          runRoot,
 		SilenceUsage:  true,
 		SilenceErrors: true,
-		Args: cobra.MinimumNArgs(0),
+		Args:          cobra.MinimumNArgs(0),
 	}
 
 	rootCmd.PersistentFlags().BoolVarP(&Verbose, "verbose", "v", false, "verbose output")
@@ -97,10 +98,10 @@ func main() {
 			err := version_runner.Run(
 				version_runner.VersionInfo{
 					Version: version,
-					Date: date,
+					Date:    date,
 				},
 				logger,
-				)
+			)
 			return err
 		},
 	}

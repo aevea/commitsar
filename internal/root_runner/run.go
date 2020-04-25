@@ -4,11 +4,11 @@ import (
 	"errors"
 	"os"
 
+	"github.com/aevea/commitsar/pkg/text"
+	history "github.com/aevea/git/v2"
+	"github.com/aevea/quoad"
+	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/logrusorgru/aurora"
-	"github.com/outillage/commitsar/pkg/text"
-	history "github.com/outillage/git/v2"
-	"github.com/outillage/quoad"
-	"gopkg.in/src-d/go-git.v4/plumbing"
 )
 
 // Run executes the base command for Commitsar
