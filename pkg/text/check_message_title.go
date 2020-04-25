@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/outillage/quoad"
+	"github.com/aevea/quoad"
 )
 
 var (

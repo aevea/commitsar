@@ -1,11 +1,11 @@
 # Commitsar
 
-[![Go Report Card](https://goreportcard.com/badge/github.com/outillage/commitsar)](https://goreportcard.com/report/github.com/outillage/commitsar)
-![Test](https://github.com/outillage/commitsar/workflows/Test/badge.svg)
-![GitHub release (latest by date)](https://img.shields.io/github/v/release/outillage/commitsar?style=flat-square)
-![GitHub commits since latest release](https://img.shields.io/github/commits-since/outillage/commitsar/latest?style=flat-square)
+[![Go Report Card](https://goreportcard.com/badge/github.com/aevea/commitsar)](https://goreportcard.com/report/github.com/aevea/commitsar)
+![Test](https://github.com/aevea/commitsar/workflows/Test/badge.svg)
+![GitHub release (latest by date)](https://img.shields.io/github/v/release/aevea/commitsar?style=flat-square)
+![GitHub commits since latest release](https://img.shields.io/github/commits-since/aevea/commitsar/latest?style=flat-square)
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg)](https://conventionalcommits.org)
-[![Run on Repl.it](https://repl.it/badge/github/outillage/commitsar)](https://repl.it/github/outillage/commitsar)
+[![Run on Repl.it](https://repl.it/badge/github/aevea/commitsar)](https://repl.it/github/aevea/commitsar)
 
 Tool to make sure your commits are compliant with [conventional commits](https://www.conventionalcommits.org). It is aimed mainly at CIs to prevent branches with commits that don't comply. Usage as a pre-commit hook is also under consideration.
 
@@ -18,17 +18,17 @@ Tool to make sure your commits are compliant with [conventional commits](https:/
 
 Please check [Documentation](https://commitsar.tech).
 
-**Important: Commitsar currently needs to be run in the same folder as the git repository you want checked, currently no override is provided for setting path to git repo see https://github.com/outillage/commitsar/issues/93**
+**Important: Commitsar currently needs to be run in the same folder as the git repository you want checked, currently no override is provided for setting path to git repo see https://github.com/aevea/commitsar/issues/93**
 
 #### Running using https://gobinaries.com/
 
 ```sh
-curl -sf https://gobinaries.com/outillage/commitsar | sh
+curl -sf https://gobinaries.com/aevea/commitsar | sh
 ```
 
 Or a specific version:
 ```sh
-curl -sf https://gobinaries.com/outillage/commitsar[@VERSION] | sh
+curl -sf https://gobinaries.com/aevea/commitsar[@VERSION] | sh
 ```
 
 
@@ -45,7 +45,7 @@ Run the Commitsar action
 
 ```
 - name: Commitsar Action
-  uses: docker://outillage/commitsar
+  uses: docker://aevea/commitsar
 ```
 
 ##### Example for CircleCI:
@@ -53,7 +53,7 @@ Run the Commitsar action
 ```
 validate-commits:
 	    docker:
-	      - image: outillage/commitsar
+	      - image: aevea/commitsar
 	    steps:
 	      - checkout
 	      - run: commitsar
@@ -61,10 +61,10 @@ validate-commits:
 
 ##### From binary
 
-Adjust for version and distribution. Please check [Releases](https://github.com/outillage/commitsar/releases).
+Adjust for version and distribution. Please check [Releases](https://github.com/aevea/commitsar/releases).
 
 ```
-- curl -L -O https://github.com/outillage/commitsar/releases/download/v0.0.2/commitsar_v0.0.2_Linux_x86_64.tar.gz
+- curl -L -O https://github.com/aevea/commitsar/releases/download/v0.0.2/commitsar_v0.0.2_Linux_x86_64.tar.gz
 - tar -xzf commitsar_v0.0.2_Linux_x86_64.tar.gz
 - ./commitsar
 ```

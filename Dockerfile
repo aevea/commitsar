@@ -14,8 +14,8 @@ RUN make build/docker
 
 FROM alpine:3.11.6
 
-LABEL repository="https://github.com/outillage/commitsar"
-LABEL homepage="https://github.com/outillage/commitsar"
+LABEL repository="https://github.com/aevea/commitsar"
+LABEL homepage="https://github.com/aevea/commitsar"
 LABEL maintainer="Simon Prochazka <simon@fallion.net>"
 
 LABEL com.github.actions.name="Commitsar Action"

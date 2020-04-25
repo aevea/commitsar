@@ -11,7 +11,7 @@ Tool to make sure your commits are compliant with [conventional commits](https:/
 
 Commitsar is shipped as a Dockerfile. This is the easiest way to add it to your CI.
 
-**Important: Commitsar currently needs to be run in the same folder as the git repository you want checked, currently no override is provided for setting path to git repo see https://github.com/outillage/commitsar/issues/93**
+**Important: Commitsar currently needs to be run in the same folder as the git repository you want checked, currently no override is provided for setting path to git repo see https://github.com/aevea/commitsar/issues/93**
 
 #### Github action
 
@@ -28,7 +28,7 @@ Run the Commitsar action
 
 ```
 - name: Commitsar Action
-  uses: outillage/commitsar@v0.6.3 (substitute for current version)
+  uses: aevea/commitsar@v0.6.3 (substitute for current version)
 ```
 
 ## Example for CircleCI
@@ -38,7 +38,7 @@ Run the Commitsar action
 ```yaml
 validate-commits:
     docker:
-	    - image: outillage/commitsar
+	    - image: aevea/commitsar
     steps:
 	    - checkout
 	    - run: commitsar
@@ -50,7 +50,7 @@ validate-commits:
 
 ```yaml
 validate-commits:
-    image: outillage/commitsar
+    image: aevea/commitsar
     script:
         - commitsar
 ```
@@ -60,7 +60,7 @@ validate-commits:
 > Binary
 
 ```shell
-- curl -L -O https://github.com/outillage/commitsar/releases/download/v0.0.2/commitsar_v0.0.2_Linux_x86_64.tar.gz
+- curl -L -O https://github.com/aevea/commitsar/releases/download/v0.0.2/commitsar_v0.0.2_Linux_x86_64.tar.gz
 - tar -xzf commitsar_v0.0.2_Linux_x86_64.tar.gz
 - ./commitsar
 ```

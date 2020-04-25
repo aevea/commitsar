@@ -3,8 +3,8 @@ package root_runner
 import (
 	"strings"
 
-	history "github.com/outillage/git/v2"
-	"gopkg.in/src-d/go-git.v4/plumbing"
+	history "github.com/aevea/git/v2"
+	"github.com/go-git/go-git/v5/plumbing"
 )
 
 func commitsBetweenHashes(gitRepo *history.Git, args []string) ([]plumbing.Hash, error) {
