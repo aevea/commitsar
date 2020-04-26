@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@master
       - name: Kaniko build
-        uses: aevea/kaniko-action@master
+        uses: aevea/action-kaniko@master
         with:
           image: aevea/commitsar
           username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -22,7 +22,7 @@ jobs:
           strip_tag_prefix: v
 
       - name: Deprecated outillage build
-        uses: aevea/kaniko-action@master
+        uses: aevea/action-kaniko@master
         with:
           image: outillage/commitsar
           username: ${{ secrets.DOCKERHUB_USERNAME }}
@@ -33,7 +33,7 @@ jobs:
 
       # Deprecated build for backwards compatibility
       - name: Deprecated build
-        uses: aevea/kaniko-action@master
+        uses: aevea/action-kaniko@master
         with:
           image: commitsar/commitsar
           username: ${{ secrets.DOCKERHUB_USERNAME }}
