@@ -1,9 +1,7 @@
 ---
-title: "Introduction"
-weight: 10
+id: intro
+title: Introduction
 ---
-
-# Introduction
 
 Tool to make sure your commits are compliant with [conventional commits](https://www.conventionalcommits.org). It is aimed mainly at CIs to prevent branches with commits that don't comply. Usage as a pre-commit hook is also under consideration.
 
