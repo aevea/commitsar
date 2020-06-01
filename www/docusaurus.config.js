@@ -49,6 +49,10 @@ module.exports = {
         new Date().getFullYear()
       } My Project, Inc. Built with Docusaurus.`,
     },
+    algolia: {
+      apiKey: process.env.ALGOLIA_KEY || "",
+      indexName: "commitsar",
+    },
   },
   presets: [
     [
