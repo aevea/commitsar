@@ -9,32 +9,33 @@ import styles from "./styles.module.css";
 
 const features = [
   {
-    title: <>Easy to Use</>,
+    title: <>Purpose</>,
+    imageUrl: "img/conventional-commits.png",
+    description: (
+      <>
+        Tool to make sure your commits are compliant with conventional commits.
+      </>
+    ),
+  },
+  {
+    title: <>Language agnostic</>,
     imageUrl: "img/undraw_docusaurus_mountain.svg",
     description: (
       <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
+        We aim for ease of use across repositories that use different languages.
+        This means we ship a Docker image or a binary. For added security you
+        can compile from source code.
       </>
     ),
   },
   {
-    title: <>Focus on What Matters</>,
-    imageUrl: "img/undraw_docusaurus_tree.svg",
+    title: <>Powered by Go</>,
+    imageUrl: "img/gopher.svg",
     description: (
       <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
-      </>
-    ),
-  },
-  {
-    title: <>Powered by React</>,
-    imageUrl: "img/undraw_docusaurus_react.svg",
-    description: (
-      <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
+        This project is powered by the Go language. It allows us to
+        cross-compile for many different environments and also ship a small
+        binary/Docker image that cuts down on bootstrapping and network time.
       </>
     ),
   },

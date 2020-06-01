@@ -59,12 +59,12 @@ module.exports = {
           homePageId: "intro",
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
-          editUrl: "https://github.com/aevea/commitsar/edit/master/www/docs",
+          editUrl: "https://github.com/aevea/commitsar/edit/master/www/",
         },
         blog: {
           showReadingTime: true,
           // Please change this to your repo.
-          editUrl: "https://github.com/aevea/commitsar/edit/master/www/blog/",
+          editUrl: "https://github.com/aevea/commitsar/edit/master/www/",
         },
         theme: {
           customCss: require.resolve("./src/css/custom.css"),
