@@ -18,8 +18,8 @@ func TestCommitsOnMaster(t *testing.T) {
 	runner := Runner{
 		DebugLogger: log.New(ioutil.Discard, "", 0),
 		Logger:      &testLogger,
-		Strict:      false,
-		Debug:       false,
+
+		Debug: false,
 	}
 
 	options := RunnerOptions{
@@ -27,6 +27,7 @@ func TestCommitsOnMaster(t *testing.T) {
 		UpstreamBranch: "master",
 		Limit:          0,
 		AllCommits:     false,
+		Strict:         false,
 	}
 
 	err := runner.Run(options)
@@ -44,8 +45,8 @@ func TestCommitsOnBranch(t *testing.T) {
 	runner := Runner{
 		DebugLogger: log.New(ioutil.Discard, "", 0),
 		Logger:      &testLogger,
-		Strict:      false,
-		Debug:       false,
+
+		Debug: false,
 	}
 
 	options := RunnerOptions{
@@ -53,6 +54,7 @@ func TestCommitsOnBranch(t *testing.T) {
 		UpstreamBranch: "master",
 		Limit:          0,
 		AllCommits:     false,
+		Strict:         false,
 	}
 
 	err := runner.Run(options, "master")
@@ -69,8 +71,8 @@ func TestFromToCommits(t *testing.T) {
 	runner := Runner{
 		DebugLogger: log.New(ioutil.Discard, "", 0),
 		Logger:      &testLogger,
-		Strict:      false,
-		Debug:       false,
+
+		Debug: false,
 	}
 
 	options := RunnerOptions{
@@ -78,6 +80,7 @@ func TestFromToCommits(t *testing.T) {
 		UpstreamBranch: "master",
 		Limit:          0,
 		AllCommits:     false,
+		Strict:         false,
 	}
 
 	err := runner.Run(options, "7dbf3e7db93ae2e02902cae9d2f1de1b1e5c8c92...d0240d3ed34685d0a5329b185e120d3e8c205be4")

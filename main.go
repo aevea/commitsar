@@ -48,13 +48,14 @@ func runRoot(cmd *cobra.Command, args []string) error {
 
 	logger := log.New(os.Stdout, "", 0)
 
-	runner := root_runner.New(logger, &debugLogger, Strict)
+	runner := root_runner.New(logger, &debugLogger)
 
 	options := root_runner.RunnerOptions{
 		Path:           ".",
 		UpstreamBranch: upstreamBranch,
 		Limit:          0,
 		AllCommits:     AllCommits,
+		Strict:         Strict,
 	}
 
 	return runner.Run(options, args...)

@@ -9,7 +9,6 @@ import (
 type Runner struct {
 	DebugLogger *log.Logger
 	Logger      *log.Logger
-	Strict      bool
 	// Debug is a deprecated flag. Will be replaced as all repos accept the debugLogger
 	Debug bool
 }
@@ -23,10 +22,11 @@ type RunnerOptions struct {
 	Limit int
 	// AllCommits will check all the commits on the upstream branch. Regardless of Limit setting.
 	AllCommits bool
+	Strict     bool
 }
 
 // New returns a new instance of a RootRunner with fallback for logging
-func New(logger *log.Logger, debugLogger *log.Logger, strict bool) *Runner {
+func New(logger *log.Logger, debugLogger *log.Logger) *Runner {
 	if logger == nil {
 		logger = log.New(os.Stdout, "", 0)
 	}
@@ -37,6 +37,5 @@ func New(logger *log.Logger, debugLogger *log.Logger, strict bool) *Runner {
 	return &Runner{
 		Logger:      logger,
 		DebugLogger: debugLogger,
-		Strict:      strict,
 	}
 }

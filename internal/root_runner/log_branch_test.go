@@ -19,7 +19,6 @@ func TestLogBranch(t *testing.T) {
 	runner := Runner{
 		DebugLogger: log.New(ioutil.Discard, "", 0),
 		Logger:      &testLogger,
-		Strict:      false,
 		Debug:       false,
 	}
 
