@@ -1,0 +1,45 @@
+---
+id: config-file
+title: Configuration File
+---
+
+**The configuration file is still under development and is subject to changes**
+
+**Name:** `.commitsar.yml`
+
+In order to make configuration easier than through flags we provide configuration file support. Most up to date examples can be found in <https://github.com/aevea/commitsar/tree/master/config/testdata>.
+
+By default the current working directory is used to scan for the file. However this can be overriden by specifying `COMMITSAR_CONFIG_PATH` environment variable. Accepts relative or absolute paths.
+
+Example: `COMMITSAR_CONFIG_PATH=./testdata` will scan for `.commitsar.yaml` in the `testdata` folder.
+
+## Global configuration
+
+These are settings that get used across all runs of commitsar.
+
+```yaml
+version: 1
+verbose: false
+```
+
+| Name    | Default Value | Description                                                                         |
+| ------- | ------------- | ----------------------------------------------------------------------------------- |
+| version | 1             | Currently not in use. Might be used in the future in case of incompatible upgrades. |
+| verbose | false         | Turns on debug logging of commitsar. Useful if you want to submit an issue.         |
+
+## Commit style settings
+
+```yaml
+commits:
+  disabled: false
+  strict: true
+  limit: 0
+  all: false
+```
+
+| Name     | Default Value | Description                                                                                   |
+| -------- | ------------- | --------------------------------------------------------------------------------------------- |
+| disabled | false         | Disables checking commmits. Useful if you want to use commitsar only for PR titles.           |
+| strict   | true          | Enforces strict category enforcement.                                                         |
+| limit    | none          | Makes commitsar check only the last x commits. Useful if you want to run commitsar on master. |
+| all      | false         | Makes commitsar check all the commits in history. **Overrides the `limit` flag**              |
