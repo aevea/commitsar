@@ -81,7 +81,7 @@ func (runner *Runner) Run(options RunnerOptions, args ...string) error {
 
 		parsedCommit := quoad.ParseCommitMessage(commitObject.Message)
 
-		textErr := text.CheckMessageTitle(parsedCommit, runner.Strict)
+		textErr := text.CheckMessageTitle(parsedCommit, options.Strict)
 
 		if textErr != nil {
 			faultyCommits = append(faultyCommits, text.FailingCommit{Hash: commitHash.String(), Message: parsedCommit.Heading, Error: textErr})
