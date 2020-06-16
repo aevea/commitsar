@@ -7,3 +7,4 @@ renovate.json
 .kodiak.toml
 CNAME
 .github
+.commitsar.yaml

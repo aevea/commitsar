@@ -6,24 +6,14 @@ import (
 	"log"
 	"os"
 
+	"github.com/aevea/commitsar/config"
 	"github.com/aevea/commitsar/internal/version_runner"
 
 	"github.com/aevea/commitsar/internal/root_runner"
 	"github.com/aevea/integrations"
 	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
-
-// Verbose is used to allow verbose/debug output for any given command
-var Verbose bool
-
-// Strict is used to enforce only standard categories
-var Strict bool
-
-// Dir is the location of repo to check
-var Dir string
-
-// AllCommits will iterate through all the commits on a branch
-var AllCommits bool
 
 // version is a global variable passed during build time
 var version string
@@ -41,7 +31,8 @@ func runRoot(cmd *cobra.Command, args []string) error {
 	debugLogger.SetPrefix("[DEBUG] ")
 	debugLogger.SetOutput(os.Stdout)
 
-	if !Verbose {
+	if !viper.GetBool("verbose") {
+		log.Println("this works")
 		debugLogger.SetOutput(ioutil.Discard)
 		debugLogger.SetPrefix("")
 	}
@@ -50,18 +41,47 @@ func runRoot(cmd *cobra.Command, args []string) error {
 
 	runner := root_runner.New(logger, &debugLogger)
 
-	options := root_runner.RunnerOptions{
-		Path:           ".",
-		UpstreamBranch: upstreamBranch,
-		Limit:          0,
-		AllCommits:     AllCommits,
-		Strict:         Strict,
+	commitConfig := config.CommitConfig()
+
+	commitConfig.UpstreamBranch = upstreamBranch
+
+	commitConfig.Path = "."
+
+	return runner.Run(commitConfig, args...)
+}
+
+func bindRootFlags(rootCmd *cobra.Command) error {
+	rootCmd.Flags().BoolP("verbose", "v", false, "verbose output")
+	err := viper.BindPFlag("verbose", rootCmd.Flags().Lookup("verbose"))
+	if err != nil {
+		return err
+	}
+	rootCmd.Flags().BoolP("strict", "s", true, "strict mode")
+	err = viper.BindPFlag("commits.strict", rootCmd.Flags().Lookup("strict"))
+	if err != nil {
+		return err
+	}
+	rootCmd.Flags().BoolP("all", "a", false, "iterate through all the commits on the branch")
+	err = viper.BindPFlag("commits.all", rootCmd.Flags().Lookup("all"))
+	if err != nil {
+		return err
 	}
 
-	return runner.Run(options, args...)
+	// Not used. TODO: Documentation
+	rootCmd.Flags().StringP("path", "d", ".", "dir points to the path of the repository")
+	err = viper.BindPFlag("path", rootCmd.Flags().Lookup("path"))
+	if err != nil {
+		return err
+	}
+	return nil
 }
 
 func main() {
+	if err := config.LoadConfig(); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+
 	var rootCmd = &cobra.Command{
 		Use:           "commitsar <from?>...<to>",
 		Short:         "Checks if commits comply",
@@ -72,10 +92,10 @@ func main() {
 		Args:          cobra.MinimumNArgs(0),
 	}
 
-	rootCmd.PersistentFlags().BoolVarP(&Verbose, "verbose", "v", false, "verbose output")
-	rootCmd.PersistentFlags().BoolVarP(&Strict, "strict", "s", true, "strict mode")
-	rootCmd.PersistentFlags().StringVarP(&Dir, "path", "d", ".", "dir points to the path of the repository")
-	rootCmd.PersistentFlags().BoolVarP(&AllCommits, "all", "a", false, "iterate through all the commits on the branch")
+	if err := bindRootFlags(rootCmd); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 
 	// Version returns undefined if not on a tag. This needs to reset it.
 	if version == "undefined" {

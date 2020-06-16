@@ -12,6 +12,7 @@ module.exports = {
     ],
     Configuration: [
       "configuration/flags",
+      "configuration/config-file",
     ],
   },
 };
