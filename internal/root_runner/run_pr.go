@@ -5,6 +5,7 @@ import (
 	"errors"
 	"io/ioutil"
 	"log"
+	"strings"
 
 	"golang.org/x/oauth2"
 
@@ -17,6 +18,12 @@ import (
 // RunPullRequest starts the runner for the PullRequest pipeline
 func (runner *Runner) RunPullRequest(jiraKeys []string) ([]string, error) {
 	ghToken := viper.GetString("GITHUB_TOKEN")
+
+	if !viper.IsSet("GITHUB_REPOSITORY") {
+		return nil, errors.New("missing GITHUB_REPOSITORY env variable. Please provide one in owner/repository format")
+	}
+
+	split := strings.Split(viper.GetString("GITHUB_REPOSITORY"), "/")
 
 	gitRepo, err := history.OpenGit(".", log.New(ioutil.Discard, "", 0))
 
@@ -39,7 +46,7 @@ func (runner *Runner) RunPullRequest(jiraKeys []string) ([]string, error) {
 		return nil, err
 	}
 
-	prs, response, err := client.PullRequests.ListPullRequestsWithCommit(ctx, "aevea", "commitsar", currentCommit.Hash.String(), nil)
+	prs, response, err := client.PullRequests.ListPullRequestsWithCommit(ctx, split[0], split[1], currentCommit.Hash.String(), nil)
 
 	if err != nil {
 		return nil, err

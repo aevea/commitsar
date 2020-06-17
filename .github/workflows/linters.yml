@@ -18,8 +18,6 @@ jobs:
       - run: go mod download
       - name: Run Commitsar
         run: go run main.go
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   golangci-lint:
     name: runner / golangci-lint
