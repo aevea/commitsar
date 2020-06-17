@@ -11,10 +11,16 @@ jobs:
         with:
           go-version: 1.13
       - name: Check out code into the Go module directory
-        uses: actions/checkout@v1
-
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+      - run: go mod download
       - name: Run Commitsar
         run: go run main.go
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   golangci-lint:
     name: runner / golangci-lint
     runs-on: ubuntu-latest

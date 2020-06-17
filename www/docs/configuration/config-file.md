@@ -43,3 +43,22 @@ commits:
 | strict   | true          | Enforces strict category enforcement.                                                         |
 | limit    | none          | Makes commitsar check only the last x commits. Useful if you want to run commitsar on master. |
 | all      | false         | Makes commitsar check all the commits in history. **Overrides the `limit` flag**              |
+
+## Pull Request style settings
+
+**Pull Request pipeline is still in early stages. Please report any bugs**
+
+```yaml
+pull_request:
+  jira_title: true
+  jira_keys:
+    - TEST
+    - TSLA
+```
+
+Setting `jira_title` to true will enable the pipeline. By default commitsar will use a basic regex to check for any JIRA-like references. Further scoping can be done using the `jira_keys` setting.
+
+| Name       | Default Value | Description                                                           |
+| ---------- | ------------- | --------------------------------------------------------------------- |
+| jira_title | false         | Turns on the pipeline and will check for JIRA issues in the PR title. |
+| jira_keys  | none          | Array of string project keys from JIRA.                               |
