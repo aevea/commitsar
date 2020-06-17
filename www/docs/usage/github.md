@@ -6,6 +6,7 @@ title: Github Actions
 ## Using the Github Action
 
 A minimal example:
+
 ```yaml
 name: Linters
 

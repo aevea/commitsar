@@ -4,7 +4,8 @@ title: Docker
 ---
 
 For running in docker just use the following command:
-```
+
+```sh
 docker run --rm --name="commitsar" -w /src -v "$(pwd)":/src aevea/commitsar
 ```
 
