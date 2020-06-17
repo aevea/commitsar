@@ -7,9 +7,9 @@ Minimal usage example:
 
 ```yaml
 validate-commits:
-    docker:
-	    - image: aevea/commitsar
-    steps:
-	    - checkout
-	    - run: commitsar
+  docker:
+    - image: aevea/commitsar
+  steps:
+    - checkout
+    - run: commitsar
 ```
