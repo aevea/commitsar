@@ -72,4 +72,6 @@ validate-commits:
         ref: ${{ github.event.pull_request.head.sha }}
     - name: Commitsar check
       uses: docker://aevea/commitsar
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
