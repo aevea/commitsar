@@ -28,7 +28,7 @@ func (runner *Runner) Run(options RunnerOptions, args ...string) error {
 		}
 
 		if len(references) == 0 {
-			return errors.New("no references found in Pull Request title")
+			return errors.New("No JIRA references found in Pull Request title")
 		}
 
 		successMessage := aurora.Sprintf(aurora.Green("Success! Found the following JIRA issue references: %v \n"), references)

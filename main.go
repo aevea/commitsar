@@ -8,6 +8,7 @@ import (
 
 	"github.com/aevea/commitsar/config"
 	"github.com/aevea/commitsar/internal/version_runner"
+	"github.com/logrusorgru/aurora"
 
 	"github.com/aevea/commitsar/internal/root_runner"
 	"github.com/aevea/integrations"
@@ -130,7 +131,7 @@ func main() {
 	rootCmd.AddCommand(versionCmd)
 
 	if err := rootCmd.Execute(); err != nil {
-		fmt.Println(err)
+		fmt.Println(aurora.Red(err))
 		os.Exit(1)
 	}
 }
