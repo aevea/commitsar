@@ -42,6 +42,11 @@ func TestFindReferences(t *testing.T) {
 			keys:     nil,
 			message:  "REST-1: added a tes feature TEST-2",
 		},
+		{
+			expected: []string{"QA-336"},
+			keys:     nil,
+			message:  "QA-336 test: add workaround for test until issue fixed",
+		},
 	}
 
 	for _, test := range tests {

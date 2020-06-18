@@ -33,7 +33,6 @@ func runRoot(cmd *cobra.Command, args []string) error {
 	debugLogger.SetOutput(os.Stdout)
 
 	if !viper.GetBool("verbose") {
-		log.Println("this works")
 		debugLogger.SetOutput(ioutil.Discard)
 		debugLogger.SetPrefix("")
 	}
