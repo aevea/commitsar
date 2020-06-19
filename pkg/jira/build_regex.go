@@ -2,10 +2,13 @@ package jira
 
 import "strings"
 
+const (
+	defaultJiraRegex = `([A-Z][A-Z0-9]{1,10}-[0-9]+)`
+)
+
 func buildRegex(keys []string) string {
-	// This is the default regex for JIRA tickets. Please see https://community.atlassian.com/t5/Bitbucket-questions/Regex-pattern-to-match-JIRA-issue-key/qaq-p/233319 for reference
 	if len(keys) == 0 {
-		return `([A-Z]+-[\d]+)`
+		return defaultJiraRegex
 	}
 
 	result := strings.Builder{}

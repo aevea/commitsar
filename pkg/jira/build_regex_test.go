@@ -8,7 +8,7 @@ import (
 
 func TestBuildRegex(t *testing.T) {
 	tests := map[string][]string{
-		`([A-Z]+-[\d]+)`:          {},
+		defaultJiraRegex:          {},
 		`(TEST|PROJ|FEOP)-[0-9]+`: {"TEST", "PROJ", "FEOP"},
 	}
 
