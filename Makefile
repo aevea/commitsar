@@ -1,21 +1,3 @@
-install_deps:
-	go mod download
-
-# Standard go test
-test:
-	go test ./... -v -race
-
-setup-tests:
-	- sh ./testdata/setup-test-repos.sh
-
-# Make sure no unnecessary dependecies are present
-go-mod-tidy:
-	go mod tidy -v
-	git diff-index --quiet HEAD
-
-# Run all tests & linters in CI
-ci: setup-tests test go-mod-tidy
-
 define prepare_build_vars
 	$(eval DATE_FLAG := -X 'main.date=$(shell date)')
     $(eval VERSION_FLAG=-X 'main.version=$(shell git name-rev --tags --name-only $(shell git rev-parse HEAD))')
