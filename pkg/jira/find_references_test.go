@@ -47,6 +47,21 @@ func TestFindReferences(t *testing.T) {
 			keys:     nil,
 			message:  "QA-336 test: add workaround for test until issue fixed",
 		},
+		{
+			expected: []string{"L11-336"},
+			keys:     nil,
+			message:  "L11-336 test: add workaround for test until issue fixed",
+		},
+		{
+			expected: []string{"L11-336"},
+			keys:     []string{"L11"},
+			message:  "L11-336 test: add workaround for test until issue fixed",
+		},
+		{
+			expected: nil,
+			keys:     nil,
+			message:  "l11-336 test: add workaround for test until issue fixed 4l4-234",
+		},
 	}
 
 	for _, test := range tests {
