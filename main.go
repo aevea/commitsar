@@ -7,6 +7,8 @@ import (
 	"os"
 
 	"github.com/aevea/commitsar/config"
+	"github.com/aevea/commitsar/internal/dispatcher"
+	commitpipeline "github.com/aevea/commitsar/internal/pipelines/commit_pipeline"
 	"github.com/aevea/commitsar/internal/version_runner"
 	"github.com/logrusorgru/aurora"
 
@@ -128,6 +130,31 @@ func main() {
 	}
 
 	rootCmd.AddCommand(versionCmd)
+
+	var experimentalCmd = &cobra.Command{
+		Use:   "experimental",
+		Short: "Print the version number of Commitsar",
+		Long:  `All software has versions. This is Commitsars.`,
+		RunE: func(cmd *cobra.Command, args []string) error {
+			debugLogger := log.New(os.Stdout, "[DEBUG]", 0)
+
+			var pipelines []dispatcher.Pipeliner
+
+			runner := dispatcher.New(debugLogger)
+
+			pipeline := commitpipeline.New(debugLogger)
+
+			pipelines = append(pipelines, pipeline)
+
+			results := runner.RunPipelines(pipelines)
+
+			log.Println(results)
+
+			return nil
+		},
+	}
+
+	rootCmd.AddCommand(experimentalCmd)
 
 	if err := rootCmd.Execute(); err != nil {
 		fmt.Println(aurora.Red(err))
