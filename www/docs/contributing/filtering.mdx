@@ -1,0 +1,28 @@
+---
+id: filtering
+title: How commit filtering works
+---
+
+import Mermaid from "@theme/Mermaid";
+
+<Mermaid
+  chart={`
+	graph TD
+  A(First commit on master) --> B(merge branch feat/docs into master)
+  B-->C(Third commit on master)
+  B-->|branch| D(first commit on branch)
+  D-->E(second commit on branch)
+  E-->F(merge master into branch)
+  C-->F
+`}
+/>
+
+### Branch diff
+
+By default commitsar will run git log on the base branch and the branch which is going to get merged and gets a diff of the commit objects.
+This allows us to get commits only on the branch iregardless of what was merged from master.
+
+### Filtering by type
+
+In the above example when running commitsar on master or the branch the commit `merge branch feat/docs into master` and `merge master into branch` will get filtered out.
+This is to prevent commitsar checking the default merge commits which are not going to be conventional commit compliant.

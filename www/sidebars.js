@@ -1,7 +1,7 @@
 module.exports = {
   someSidebar: {
     Introduction: ["intro"],
-    "Usage": [
+    Usage: [
       "usage/gobinaries",
       "usage/docker",
       "usage/github",
@@ -10,9 +10,11 @@ module.exports = {
       "usage/binary",
       "usage/source",
     ],
-    Configuration: [
-      "configuration/flags",
-      "configuration/config-file",
+    Configuration: ["configuration/flags", "configuration/config-file"],
+    Contributing: [
+      "contributing/get_started",
+      "contributing/filtering",
+      "contributing/pipelines",
     ],
   },
 };
