@@ -5,7 +5,7 @@ title: Introduction
 
 Tool to make sure your commits are compliant with [conventional commits](https://www.conventionalcommits.org). It is aimed mainly at CIs to prevent branches with commits that don't comply. Usage as a pre-commit hook is also under consideration.
 
-# Usage
+## Usage
 
 Commitsar is shipped as a Dockerfile. This is the easiest way to add it to your CI.
 

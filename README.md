@@ -9,10 +9,14 @@
 
 Tool to make sure your commits are compliant with [conventional commits](https://www.conventionalcommits.org). It is aimed mainly at CIs to prevent branches with commits that don't comply. Usage as a pre-commit hook is also under consideration.
 
-## Table of contents
-
-1. [Usage](#usage)
-
 ## Usage
 
 Please check [Documentation](https://commitsar.tech).
+
+## Contributing
+
+Contributions are most welcome. Please check the [CONTRIBUTING](https://commitsar.tech/docs/contributing/get_started) section of documentation.
+
+## Sponsoring
+
+If you feel like showing even more support for this project you can sponsor it using the Sponsor button on Github. A little help goes a long way when it comes with OSS and it'll help support this project.
