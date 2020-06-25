@@ -22,12 +22,33 @@ func (pipeline *CommitPipeline) Run(errChannel chan dispatcher.PipelineError) *d
 
 	commits, err := pipeline.getCommits(gitRepo)
 
+	// fallback to just getting the last max 20 commits on the current branch
 	if err != nil {
-		errChannel <- dispatcher.PipelineError{
-			PipelineName: "commit",
-			Error:        err,
+		currentCommit, err := gitRepo.CurrentCommit()
+
+		if err != nil {
+			errChannel <- dispatcher.PipelineError{
+				PipelineName: pipeline.Name(),
+				Error:        err,
+			}
+
+			return nil
 		}
-		return nil
+
+		currentBranchCommits, err := gitRepo.CommitsOnBranchSimple(currentCommit.Hash)
+
+		pipeline.debugLogger.Printf("current branch length %d", len(currentBranchCommits))
+
+		if err != nil {
+			errChannel <- dispatcher.PipelineError{
+				PipelineName: pipeline.Name(),
+				Error:        err,
+			}
+
+			return nil
+		}
+
+		commits = currentBranchCommits
 	}
 
 	for _, commit := range commits {

@@ -35,3 +35,24 @@ jobs:
         uses: docker://reviewdog/action-golangci-lint
         with:
           github_token: ${{ secrets.github_token }}
+
+  validate-commits-experimental:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Go 1.13
+        uses: actions/setup-go@v1
+        with:
+          go-version: 1.13
+      - name: Check out code into the Go module directory
+        uses: actions/checkout@v1
+        # with:
+        #   fetch-depth: 20
+      - uses: actions/cache@v2
+        with:
+          path: ~/go/pkg/mod
+          key: ${{ runner.os }}-go-${{ hashFiles('**/go.sum') }}
+          restore-keys: |
+            ${{ runner.os }}-go-
+      - run: go mod download
+      - name: Run Commitsar
+        run: go run main.go experimental

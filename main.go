@@ -136,7 +136,7 @@ func main() {
 		Short: "Print the version number of Commitsar",
 		Long:  `All software has versions. This is Commitsars.`,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			debugLogger := log.New(os.Stdout, "[DEBUG]", 0)
+			debugLogger := log.New(os.Stdout, "[DEBUG] ", 0)
 
 			var pipelines []dispatcher.Pipeliner
 
