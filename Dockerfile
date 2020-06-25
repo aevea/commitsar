@@ -7,7 +7,7 @@ RUN apk add --no-cache make git gcc musl-dev
 # This step is done separately than `COPY . /app/` in order to
 # cache dependencies.
 COPY go.mod go.sum Makefile /app/
-RUN make install_deps
+RUN go mod download
 
 COPY . /app/
 RUN make build/docker
