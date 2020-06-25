@@ -1,0 +1,22 @@
+---
+id: pipelines
+title: Worker pipelines
+---
+
+Commitsar uses pipelines in order to use as much CPU power as possible. These are based on number of CPU \* 2 (assuming 1 physical and 1 logical core available). In order to add a new pipeline
+you just need to build a pipeline that adheres to the types provided here: https://github.com/aevea/commitsar/blob/master/internal/dispatcher/pipeline.go and register it in the root_runner.
+Each pipeline returns either a success type or pushes errors into the error channel.
+
+At the end all of this is collected and the results are presented to the user.
+
+This will also be used to introduce an easy plugin system in the future.
+
+import Mermaid from "@theme/Mermaid";
+
+<Mermaid
+  chart={`
+	graph TD
+  A(Dispatcher)-->B(Commit pipeline)
+  A-->C(PR title pipeline)
+`}
+/>
