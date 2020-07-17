@@ -12,7 +12,7 @@ require (
 	github.com/google/go-github/v32 v32.0.0
 	github.com/jedib0t/go-pretty v4.3.0+incompatible
 	github.com/logrusorgru/aurora v0.0.0-20200102142835-e9ef32dff381
-	github.com/magefile/mage v1.9.0
+	github.com/magefile/mage v1.10.0
 	github.com/mattn/go-runewidth v0.0.9 // indirect
 	github.com/spf13/cobra v1.0.0
 	github.com/spf13/viper v1.7.0
