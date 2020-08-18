@@ -13,12 +13,12 @@ jobs:
         uses: actions/checkout@v1
 
       - name: Release Notary Action
-        uses: docker://outillage/release-notary
+        uses: docker://outillage/release-notary@sha256:a7f3c24e5b24caa8d25e259837add805ba9868f913bb8c678cd787a2ed5ebc9a
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: goreleaser
-        uses: docker://goreleaser/goreleaser
+        uses: docker://goreleaser/goreleaser@sha256:8a60f1ed0e14dc957cdda41d59a6816f3313e338b688a967b64f5938a1b745c4
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
