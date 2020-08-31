@@ -13,7 +13,7 @@ module.exports = {
         alt: "My Site Logo",
         src: "img/logo.svg",
       },
-      links: [
+      items: [
         {
           to: "docs/",
           activeBasePath: "docs",
@@ -50,7 +50,7 @@ module.exports = {
       } My Project, Inc. Built with Docusaurus.`,
     },
     algolia: {
-      apiKey: process.env.ALGOLIA_KEY || "",
+      apiKey: process.env.ALGOLIA_KEY || "none",
       indexName: "commitsar",
     },
   },
@@ -59,8 +59,6 @@ module.exports = {
       "@docusaurus/preset-classic",
       {
         docs: {
-          // It is recommended to set document id as docs home page (`docs/` path).
-          homePageId: "intro",
           sidebarPath: require.resolve("./sidebars.js"),
           // Please change this to your repo.
           editUrl: "https://github.com/aevea/commitsar/edit/master/www/",
@@ -81,7 +79,7 @@ module.exports = {
       src: "https://plausible.io/js/plausible.js",
       async: true,
       defer: true,
-      "data-domain": "commitsar.tech",
+      // "data-domain": "commitsar.tech",
     },
   ],
 };

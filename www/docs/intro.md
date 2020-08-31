@@ -1,6 +1,7 @@
 ---
 id: intro
 title: Introduction
+slug: /
 ---
 
 Tool to make sure your commits are compliant with [conventional commits](https://www.conventionalcommits.org). It is aimed mainly at CIs to prevent branches with commits that don't comply. Usage as a pre-commit hook is also under consideration.
