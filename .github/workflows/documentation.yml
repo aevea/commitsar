@@ -6,7 +6,7 @@ on:
       - "master"
     paths:
       - "www/**"
-      - ".github/workflows/docuemntation.yml"
+      - ".github/workflows/documentation.yml"
 
 jobs:
   documentation:
