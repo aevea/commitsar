@@ -5,7 +5,8 @@ on:
     branches:
       - "master"
     paths:
-      - "docs/**"
+      - "www/**"
+      - ".github/workflows/docuemntation.yml"
 
 jobs:
   documentation:
