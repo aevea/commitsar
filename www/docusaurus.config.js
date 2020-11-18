@@ -47,7 +47,7 @@ module.exports = {
       ],
       copyright: `Copyright © ${
         new Date().getFullYear()
-      } My Project, Inc. Built with Docusaurus.`,
+      } aevea OU, Built with Docusaurus.`,
     },
     algolia: {
       apiKey: process.env.ALGOLIA_KEY || "none",
@@ -79,7 +79,7 @@ module.exports = {
       src: "https://plausible.io/js/plausible.js",
       async: true,
       defer: true,
-      // "data-domain": "commitsar.tech",
+      "data-domain": "commitsar.tech",
     },
   ],
 };
