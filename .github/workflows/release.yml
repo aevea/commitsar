@@ -18,7 +18,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: goreleaser
-        uses: docker://goreleaser/goreleaser@sha256:25b7740437bd8a8231754b2b56a35f2e4852d316148e54939d02ddae54ac297d
+        uses: docker://goreleaser/goreleaser@sha256:2f3904dacf4beb1ede085c8142be8ce353f466db0d292bb8c985b0141488c79b
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
