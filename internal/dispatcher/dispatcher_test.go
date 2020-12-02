@@ -28,26 +28,25 @@ func TestDispatcher(t *testing.T) {
 
 type TestPipeline struct {
 	TestName string
-	TestFn   func(chan PipelineError) *PipelineSuccess
+	TestFn   func() (*PipelineSuccess, error)
 }
 
 func (p TestPipeline) Name() string {
 	return p.TestName
 }
 
-func (p TestPipeline) Run(errChannel chan PipelineError) *PipelineSuccess {
-	return p.TestFn(errChannel)
+func (p TestPipeline) Run() (*PipelineSuccess, error) {
+	return p.TestFn()
 }
 
-func successPipeline(chan PipelineError) *PipelineSuccess {
+func successPipeline() (*PipelineSuccess, error) {
 	return &PipelineSuccess{
 		PipelineName: "pipeline1",
 		Message:      "It succeeded",
-	}
+	}, nil
 }
 
-func failPipeline(errChan chan PipelineError) *PipelineSuccess {
-	errChan <- PipelineError{PipelineName: "pipeline2", Data: []FailureData{{Name: "test", Value: "test2"}}, Error: errors.New("some error")}
+func failPipeline() (*PipelineSuccess, error) {
 
-	return nil
+	return nil, errors.New("some error")
 }

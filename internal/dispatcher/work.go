@@ -17,7 +17,14 @@ func (dispatch *Dispatcher) work(
 
 		if more {
 			dispatch.debugLogger.Printf("Starting pipeline: %s", pipeline.Name())
-			success := pipeline.Run(errorChannel)
+			success, err := pipeline.Run()
+
+			if err != nil {
+				errorChannel <- PipelineError{
+					Error:        err,
+					PipelineName: pipeline.Name(),
+				}
+			}
 
 			if success != nil {
 				successChan <- *success

@@ -1,4 +1,4 @@
-package root_runner
+package commitpipeline
 
 import (
 	history "github.com/aevea/git/v2"

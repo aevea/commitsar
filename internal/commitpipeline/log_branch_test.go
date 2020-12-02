@@ -1,8 +1,7 @@
-package root_runner
+package commitpipeline
 
 import (
 	"bytes"
-	"io/ioutil"
 	"log"
 	"testing"
 
@@ -16,11 +15,9 @@ func TestLogBranch(t *testing.T) {
 	testLogger := log.Logger{}
 	testLogger.SetOutput(&testString)
 
-	runner := Runner{
-		DebugLogger: log.New(ioutil.Discard, "", 0),
-		Logger:      &testLogger,
-		Debug:       false,
-	}
+	runner, err := New(&testLogger, nil, nil)
+
+	assert.NoError(t, err)
 
 	gitRepo, err := history.OpenGit("../../testdata/commits-on-master", nil)
 
