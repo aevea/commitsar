@@ -1,4 +1,4 @@
-package root_runner
+package commitpipeline
 
 import (
 	"testing"
@@ -12,14 +12,18 @@ func TestAllCommits(t *testing.T) {
 
 	assert.NoError(t, err)
 
-	options := RunnerOptions{
+	options := Options{
 		Path:           "",
 		UpstreamBranch: "master",
 		Limit:          0,
 		AllCommits:     true,
 	}
 
-	commits, err := commitsBetweenBranches(gitRepo, options)
+	pipeline, err := New(nil, nil, &options)
+
+	assert.NoError(t, err)
+
+	commits, err := pipeline.commitsBetweenBranches(gitRepo)
 
 	assert.NoError(t, err)
 	assert.Len(t, commits, 102)
@@ -40,14 +44,18 @@ func TestLimitCommits(t *testing.T) {
 
 	assert.NoError(t, err)
 
-	options := RunnerOptions{
+	options := Options{
 		Path:           "",
 		UpstreamBranch: "master",
 		Limit:          50,
 		AllCommits:     false,
 	}
 
-	commits, err := commitsBetweenBranches(gitRepo, options)
+	pipeline, err := New(nil, nil, &options)
+
+	assert.NoError(t, err)
+
+	commits, err := pipeline.commitsBetweenBranches(gitRepo)
 
 	assert.NoError(t, err)
 	assert.Len(t, commits, 50)

@@ -1,4 +1,4 @@
-package root_runner
+package commitpipeline
 
 import (
 	"strings"

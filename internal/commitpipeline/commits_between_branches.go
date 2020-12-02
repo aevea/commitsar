@@ -1,11 +1,11 @@
-package root_runner
+package commitpipeline
 
 import (
 	history "github.com/aevea/git/v2"
 	"github.com/go-git/go-git/v5/plumbing"
 )
 
-func commitsBetweenBranches(gitRepo *history.Git, options RunnerOptions) ([]plumbing.Hash, error) {
+func (pipeline *Pipeline) commitsBetweenBranches(gitRepo *history.Git) ([]plumbing.Hash, error) {
 	var commits []plumbing.Hash
 
 	currentBranch, currentBranchErr := gitRepo.CurrentBranch()
@@ -13,7 +13,7 @@ func commitsBetweenBranches(gitRepo *history.Git, options RunnerOptions) ([]plum
 		return nil, currentBranchErr
 	}
 
-	sameBranch, err := IdentifySameBranch(currentBranch.Name().String(), options.UpstreamBranch, gitRepo)
+	sameBranch, err := IdentifySameBranch(currentBranch.Name().String(), pipeline.options.UpstreamBranch, gitRepo)
 
 	if err != nil {
 		return nil, err
@@ -26,17 +26,17 @@ func commitsBetweenBranches(gitRepo *history.Git, options RunnerOptions) ([]plum
 			return nil, err
 		}
 
-		if options.AllCommits {
+		if pipeline.options.AllCommits {
 			return commitsOnSameBranch, nil
 		}
 
 		// If no limit is set then check just the last commits. This is to prevent breaking repositories that did not check commits before.
-		if options.Limit == 0 {
+		if pipeline.options.Limit == 0 {
 			commits = append(commits, commitsOnSameBranch[0])
 			return commits, nil
 		}
 
-		limit := options.Limit
+		limit := pipeline.options.Limit
 
 		// The limit cannot be longer than the amount of commits found
 		if limit > len(commitsOnSameBranch) {
@@ -50,7 +50,7 @@ func commitsBetweenBranches(gitRepo *history.Git, options RunnerOptions) ([]plum
 		return commits, nil
 	}
 
-	commitsOnBranch, err := gitRepo.BranchDiffCommits(currentBranch.Name().String(), options.UpstreamBranch)
+	commitsOnBranch, err := gitRepo.BranchDiffCommits(currentBranch.Name().String(), pipeline.options.UpstreamBranch)
 
 	if err != nil {
 		return nil, err

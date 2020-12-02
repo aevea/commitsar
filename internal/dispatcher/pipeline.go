@@ -3,7 +3,7 @@ package dispatcher
 // Pipeliner interface describes the requirements for pipelines the dispatcher can run
 type Pipeliner interface {
 	Name() string
-	Run(chan PipelineError) *PipelineSuccess
+	Run() (*PipelineSuccess, error)
 }
 
 // FailureData is used to build the table output
