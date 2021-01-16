@@ -14,6 +14,7 @@ blocks:
             - export GO111MODULE=on
             - export GOPATH=~/go
             - 'export PATH=/home/semaphore/go/bin:$PATH'
+            - 'export PATH=${PATH}:`go env GOPATH`/bin'
             - checkout
             - go mod download
             - go install github.com/magefile/mage
