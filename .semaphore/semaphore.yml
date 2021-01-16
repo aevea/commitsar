@@ -1,0 +1,28 @@
+version: v1.0
+name: Go
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu1804
+blocks:
+  - name: Dependencies
+    task:
+      jobs:
+        - name: go test
+          commands:
+            - sem-version go 1.11
+            - export GO111MODULE=on
+            - export GOPATH=~/go
+            - 'export PATH=/home/semaphore/go/bin:$PATH'
+            - checkout
+            - go mod download
+            - go install github.com/magefile/mage
+  - name: Checks
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - mage test
+        - name: 'Job #2'
+          commands:
+            - mage gomodtidy
