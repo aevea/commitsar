@@ -8,9 +8,9 @@ blocks:
   - name: Dependencies
     task:
       jobs:
-        - name: go test
+        - name: download
           commands:
-            - sem-version go 1.11
+            - sem-version go 1.15
             - export GO111MODULE=on
             - export GOPATH=~/go
             - 'export PATH=/home/semaphore/go/bin:$PATH'
@@ -20,9 +20,9 @@ blocks:
   - name: Checks
     task:
       jobs:
-        - name: 'Job #1'
+        - name: test
           commands:
             - mage test
-        - name: 'Job #2'
+        - name: lint
           commands:
             - mage gomodtidy
