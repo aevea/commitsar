@@ -36,3 +36,4 @@ blocks:
           - 'export PATH=/home/semaphore/go/bin:$PATH'
           - 'export PATH=${PATH}:`go env GOPATH`/bin'
           - cache restore
+          - go install github.com/magefile/mage
