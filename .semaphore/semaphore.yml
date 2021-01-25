@@ -25,9 +25,11 @@ blocks:
       jobs:
         - name: test
           commands:
+            - go install github.com/magefile/mage
             - mage test
         - name: lint
           commands:
+            - go install github.com/magefile/mage
             - mage gomodtidy
       prologue:
         commands:
@@ -38,4 +40,3 @@ blocks:
           - 'export PATH=/home/semaphore/go/bin:$PATH'
           - 'export PATH=${PATH}:`go env GOPATH`/bin'
           - cache restore
-          - go install github.com/magefile/mage
