@@ -34,6 +34,7 @@ blocks:
           - sem-version go 1.15
           - export GO111MODULE=on
           - export GOPATH=~/go
+          - export GOBIN=$GOPATH/bin
           - 'export PATH=/home/semaphore/go/bin:$PATH'
           - 'export PATH=${PATH}:`go env GOPATH`/bin'
           - cache restore
