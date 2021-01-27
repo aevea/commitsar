@@ -71,6 +71,7 @@ func (pipeline *Pipeline) Run() (*dispatcher.PipelineSuccess, error) {
 	}
 
 	var faultyCommits []text.FailingCommit
+	requiredScopeChecker := text.RequiredScopeChecker(pipeline.options.RequiredScopes)
 
 	for _, commitHash := range filteredCommits {
 		commitObject, commitErr := gitRepo.Commit(commitHash)
@@ -85,7 +86,15 @@ func (pipeline *Pipeline) Run() (*dispatcher.PipelineSuccess, error) {
 
 		if textErr != nil {
 			faultyCommits = append(faultyCommits, text.FailingCommit{Hash: commitHash.String(), Message: parsedCommit.Heading, Error: textErr})
+			continue
 		}
+
+		scopeErr := requiredScopeChecker(parsedCommit.Scope)
+
+		if scopeErr != nil {
+			faultyCommits = append(faultyCommits, text.FailingCommit{Hash: commitHash.String(), Message: parsedCommit.Heading, Error: scopeErr})
+		}
+
 	}
 
 	if len(faultyCommits) != 0 {

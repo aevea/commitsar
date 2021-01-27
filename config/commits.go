@@ -11,6 +11,7 @@ func CommitConfig() root_runner.RunnerOptions {
 	strict := true
 	limit := 0
 	all := false
+	requiredScopes := []string{}
 
 	if viper.IsSet("commits.strict") {
 		strict = viper.GetBool("commits.strict")
@@ -24,9 +25,14 @@ func CommitConfig() root_runner.RunnerOptions {
 		all = viper.GetBool("commits.all")
 	}
 
+	if viper.IsSet("commits.required-scopes") {
+		requiredScopes = viper.GetStringSlice("commits.required-scopes")
+	}
+
 	return root_runner.RunnerOptions{
-		Strict:     strict,
-		Limit:      limit,
-		AllCommits: all,
+		Strict:         strict,
+		Limit:          limit,
+		AllCommits:     all,
+		RequiredScopes: requiredScopes,
 	}
 }

@@ -23,6 +23,8 @@ type Options struct {
 	// AllCommits will check all the commits on the upstream branch. Regardless of Limit setting.
 	AllCommits bool
 	Strict     bool
+	// RequiredScopes will check scope in commit message against list of required ones
+	RequiredScopes []string
 }
 
 func New(logger, debugLogger *log.Logger, options *Options, args ...string) (*Pipeline, error) {
