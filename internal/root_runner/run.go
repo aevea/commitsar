@@ -22,6 +22,7 @@ func (runner *Runner) Run(options RunnerOptions, args ...string) error {
 			Path:           options.Path,
 			Strict:         options.Strict,
 			UpstreamBranch: options.UpstreamBranch,
+			RequiredScopes: options.RequiredScopes,
 		}
 
 		commitPipe, err := commitpipeline.New(runner.Logger, runner.DebugLogger, &commitOptions, args...)

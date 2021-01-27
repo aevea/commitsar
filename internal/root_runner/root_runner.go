@@ -23,6 +23,8 @@ type RunnerOptions struct {
 	// AllCommits will check all the commits on the upstream branch. Regardless of Limit setting.
 	AllCommits bool
 	Strict     bool
+	// RequiredScopes will check scope in commit message against list of required ones
+	RequiredScopes []string
 }
 
 // New returns a new instance of a RootRunner with fallback for logging
