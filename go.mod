@@ -14,7 +14,7 @@ require (
 	github.com/logrusorgru/aurora v0.0.0-20200102142835-e9ef32dff381
 	github.com/magefile/mage v1.11.0
 	github.com/mattn/go-runewidth v0.0.9 // indirect
-	github.com/spf13/cobra v1.1.1
+	github.com/spf13/cobra v1.1.3
 	github.com/spf13/viper v1.7.1
 	github.com/stretchr/testify v1.7.0
 	golang.org/x/oauth2 v0.0.0-20210210192628-66670185b0cd
