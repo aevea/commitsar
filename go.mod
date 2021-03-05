@@ -17,5 +17,5 @@ require (
 	github.com/spf13/cobra v1.1.3
 	github.com/spf13/viper v1.7.1
 	github.com/stretchr/testify v1.7.0
-	golang.org/x/oauth2 v0.0.0-20210210192628-66670185b0cd
+	golang.org/x/oauth2 v0.0.0-20210220000619-9bb904979d93
 )
