@@ -1,6 +1,10 @@
 package dispatcher
 
-import "sync"
+import (
+	"sync"
+
+	"github.com/apex/log"
+)
 
 func (dispatch *Dispatcher) handleSuccess(
 	wg *sync.WaitGroup,
@@ -10,7 +14,7 @@ func (dispatch *Dispatcher) handleSuccess(
 	defer wg.Done()
 
 	for message := range channel {
-		dispatch.debugLogger.Printf("[%s] %s", message.PipelineName, message.Message)
+		log.Debugf("[%s] %s", message.PipelineName, message.Message)
 
 		results.SuccessfulPipelines = append(results.SuccessfulPipelines, message)
 	}

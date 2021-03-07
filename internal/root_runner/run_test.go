@@ -1,26 +1,19 @@
 package root_runner
 
 import (
-	"bytes"
-	"io/ioutil"
-	"log"
 	"testing"
 
+	"github.com/apex/log"
+	"github.com/apex/log/handlers/memory"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestCommitsOnMaster(t *testing.T) {
-	var testString bytes.Buffer
+	handler := memory.New()
 
-	testLogger := log.Logger{}
-	testLogger.SetOutput(&testString)
+	log.SetHandler(handler)
 
-	runner := Runner{
-		DebugLogger: log.New(ioutil.Discard, "", 0),
-		Logger:      &testLogger,
-
-		Debug: false,
-	}
+	runner := Runner{}
 
 	options := RunnerOptions{
 		Path:           "../../testdata/commits-on-master",
@@ -33,21 +26,20 @@ func TestCommitsOnMaster(t *testing.T) {
 	err := runner.Run(options)
 
 	assert.NoError(t, err)
-	assert.Equal(t, "Starting analysis of commits on branch refs/heads/master\n\n0 commits filtered out\n\nFound 1 commit to check\n\x1b[32mAll 1 commits are conventional commit compliant\n\x1b[0m\n", testString.String())
+	assert.Equal(t, 5, len(handler.Entries))
+	assert.Equal(t, "Starting pipeline: commit-pipeline", handler.Entries[0].Message)
+	assert.Equal(t, "Starting analysis of commits on branch refs/heads/master", handler.Entries[1].Message)
+	assert.Equal(t, "0 commits filtered out", handler.Entries[2].Message)
+	assert.Equal(t, "Found 1 commit to check", handler.Entries[3].Message)
+	assert.Equal(t, "\x1b[32mAll 1 commits are conventional commit compliant\x1b[0m", handler.Entries[4].Message)
 }
 
 func TestCommitsOnBranch(t *testing.T) {
-	var testString bytes.Buffer
+	handler := memory.New()
 
-	testLogger := log.Logger{}
-	testLogger.SetOutput(&testString)
+	log.SetHandler(handler)
 
-	runner := Runner{
-		DebugLogger: log.New(ioutil.Discard, "", 0),
-		Logger:      &testLogger,
-
-		Debug: false,
-	}
+	runner := Runner{}
 
 	options := RunnerOptions{
 		Path:           "../../testdata/commits-on-different-branches",
@@ -63,17 +55,11 @@ func TestCommitsOnBranch(t *testing.T) {
 }
 
 func TestFromToCommits(t *testing.T) {
-	var testString bytes.Buffer
+	handler := memory.New()
 
-	testLogger := log.Logger{}
-	testLogger.SetOutput(&testString)
+	log.SetHandler(handler)
 
-	runner := Runner{
-		DebugLogger: log.New(ioutil.Discard, "", 0),
-		Logger:      &testLogger,
-
-		Debug: false,
-	}
+	runner := Runner{}
 
 	options := RunnerOptions{
 		Path:           "../../testdata/commits-on-different-branches",

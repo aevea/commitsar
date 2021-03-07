@@ -2,8 +2,6 @@ package main
 
 import (
 	"fmt"
-	"io/ioutil"
-	"log"
 	"os"
 
 	"github.com/aevea/commitsar/config"
@@ -14,6 +12,9 @@ import (
 	"github.com/aevea/integrations"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+
+	"github.com/apex/log"
+	"github.com/apex/log/handlers/cli"
 )
 
 // version is a global variable passed during build time
@@ -27,19 +28,11 @@ var date string
 
 func runRoot(cmd *cobra.Command, args []string) error {
 	upstreamBranch := integrations.FindCompareBranch()
-
-	debugLogger := log.Logger{}
-	debugLogger.SetPrefix("[DEBUG] ")
-	debugLogger.SetOutput(os.Stdout)
-
-	if !viper.GetBool("verbose") {
-		debugLogger.SetOutput(ioutil.Discard)
-		debugLogger.SetPrefix("")
+	if viper.GetBool("verbose") {
+		log.SetLevel(log.DebugLevel)
 	}
 
-	logger := log.New(os.Stdout, "", 0)
-
-	runner := root_runner.New(logger, &debugLogger)
+	runner := root_runner.New()
 
 	commitConfig := config.CommitConfig()
 
@@ -82,6 +75,8 @@ func bindRootFlags(rootCmd *cobra.Command) error {
 }
 
 func main() {
+	log.SetHandler(cli.Default)
+
 	if err := config.LoadConfig(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
@@ -119,14 +114,12 @@ func main() {
 		Short: "Print the version number of Commitsar",
 		Long:  `All software has versions. This is Commitsars.`,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			logger := log.New(os.Stdout, "", 0)
 
 			err := version_runner.Run(
 				version_runner.VersionInfo{
 					Version: version,
 					Date:    date,
 				},
-				logger,
 			)
 			return err
 		},

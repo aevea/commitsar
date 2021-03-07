@@ -6,14 +6,15 @@ import (
 
 	"github.com/aevea/commitsar/internal/dispatcher"
 	"github.com/aevea/commitsar/pkg/text"
-	history "github.com/aevea/git/v2"
+	history "github.com/aevea/git/v3"
 	"github.com/aevea/quoad"
+	"github.com/apex/log"
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/logrusorgru/aurora"
 )
 
 func (pipeline *Pipeline) Run() (*dispatcher.PipelineSuccess, error) {
-	gitRepo, err := history.OpenGit(pipeline.options.Path, pipeline.DebugLogger)
+	gitRepo, err := history.OpenGit(pipeline.options.Path)
 
 	if err != nil {
 		return nil, err
@@ -56,15 +57,15 @@ func (pipeline *Pipeline) Run() (*dispatcher.PipelineSuccess, error) {
 
 		parsedCommit := quoad.ParseCommitMessage(commitObject.Message)
 
-		pipeline.DebugLogger.Printf("Commit found: [hash] %v [message] %v \n", parsedCommit.Hash.String(), parsedCommit.Heading)
+		log.Debugf("Commit found: [hash] %v [message] %v", parsedCommit.Hash.String(), parsedCommit.Heading)
 
 		if !text.IsMergeCommit(commitObject.Message) && !text.IsInitialCommit(commitObject.Message) {
 			filteredCommits = append(filteredCommits, commitHash)
 		}
 	}
 
-	pipeline.Logger.Printf("\n%v commits filtered out\n", len(commits)-len(filteredCommits))
-	pipeline.Logger.Printf("\nFound %v commit to check\n", len(filteredCommits))
+	log.Infof("%v commits filtered out", len(commits)-len(filteredCommits))
+	log.Infof("Found %v commit to check", len(filteredCommits))
 
 	if len(filteredCommits) == 0 {
 		return nil, errors.New(aurora.Red("No commits found, please check you are on a branch outside of main").String())
@@ -102,16 +103,16 @@ func (pipeline *Pipeline) Run() (*dispatcher.PipelineSuccess, error) {
 		failingCommitTable.SetOutputMirror(os.Stdout)
 		failingCommitTable.Render()
 
-		pipeline.Logger.Printf("%v of %v commits are not conventional commit compliant\n", aurora.Red(len(faultyCommits)), aurora.Red(len(commits)))
+		log.Infof("%v of %v commits are not conventional commit compliant", aurora.Red(len(faultyCommits)), aurora.Red(len(commits)))
 
-		pipeline.Logger.Print("\nExpected format is for example:      chore(ci): this is a test\n")
-		pipeline.Logger.Print("Please see https://www.conventionalcommits.org for help on how to structure commits\n\n")
+		log.Info("Expected format is for example:      chore(ci): this is a test")
+		log.Info("Please see https://www.conventionalcommits.org for help on how to structure commits")
 
 		return nil, errors.New(aurora.Red("Not all commits are conventional commits, please check the commits listed above").String())
 	}
 
 	return &dispatcher.PipelineSuccess{
-		Message:      aurora.Sprintf(aurora.Green("All %v commits are conventional commit compliant\n"), len(filteredCommits)),
+		Message:      aurora.Sprintf(aurora.Green("All %v commits are conventional commit compliant"), len(filteredCommits)),
 		PipelineName: pipeline.Name(),
 	}, nil
 }

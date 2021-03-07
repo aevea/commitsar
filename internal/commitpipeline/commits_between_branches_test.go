@@ -3,12 +3,12 @@ package commitpipeline
 import (
 	"testing"
 
-	history "github.com/aevea/git/v2"
+	history "github.com/aevea/git/v3"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestAllCommits(t *testing.T) {
-	gitRepo, err := history.OpenGit("../../testdata/long-history", nil)
+	gitRepo, err := history.OpenGit("../../testdata/long-history")
 
 	assert.NoError(t, err)
 
@@ -19,7 +19,7 @@ func TestAllCommits(t *testing.T) {
 		AllCommits:     true,
 	}
 
-	pipeline, err := New(nil, nil, &options)
+	pipeline, err := New(&options)
 
 	assert.NoError(t, err)
 
@@ -40,7 +40,7 @@ func TestAllCommits(t *testing.T) {
 }
 
 func TestLimitCommits(t *testing.T) {
-	gitRepo, err := history.OpenGit("../../testdata/long-history", nil)
+	gitRepo, err := history.OpenGit("../../testdata/long-history")
 
 	assert.NoError(t, err)
 
@@ -51,7 +51,7 @@ func TestLimitCommits(t *testing.T) {
 		AllCommits:     false,
 	}
 
-	pipeline, err := New(nil, nil, &options)
+	pipeline, err := New(&options)
 
 	assert.NoError(t, err)
 

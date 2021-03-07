@@ -1,16 +1,6 @@
 package root_runner
 
-import (
-	"io/ioutil"
-	"log"
-	"os"
-)
-
 type Runner struct {
-	DebugLogger *log.Logger
-	Logger      *log.Logger
-	// Debug is a deprecated flag. Will be replaced as all repos accept the debugLogger
-	Debug bool
 }
 
 type RunnerOptions struct {
@@ -28,16 +18,7 @@ type RunnerOptions struct {
 }
 
 // New returns a new instance of a RootRunner with fallback for logging
-func New(logger *log.Logger, debugLogger *log.Logger) *Runner {
-	if logger == nil {
-		logger = log.New(os.Stdout, "", 0)
-	}
-	if debugLogger == nil {
-		debugLogger = log.New(ioutil.Discard, "[DEBUG] ", 0)
-	}
+func New() *Runner {
 
-	return &Runner{
-		Logger:      logger,
-		DebugLogger: debugLogger,
-	}
+	return &Runner{}
 }

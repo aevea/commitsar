@@ -3,12 +3,12 @@ package commitpipeline
 import (
 	"testing"
 
-	history "github.com/aevea/git/v2"
+	history "github.com/aevea/git/v3"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestCommitsBetweenHashes(t *testing.T) {
-	gitRepo, err := history.OpenGit("../../testdata/commits-on-different-branches", nil)
+	gitRepo, err := history.OpenGit("../../testdata/commits-on-different-branches")
 
 	assert.NoError(t, err)
 
@@ -25,7 +25,7 @@ func TestCommitsBetweenHashes(t *testing.T) {
 }
 
 func TestCommitsBetweenHashesOnlyTo(t *testing.T) {
-	gitRepo, err := history.OpenGit("../../testdata/commits-on-different-branches", nil)
+	gitRepo, err := history.OpenGit("../../testdata/commits-on-different-branches")
 
 	assert.NoError(t, err)
 

@@ -1,25 +1,24 @@
 package version_runner
 
 import (
-	"bytes"
-	"github.com/stretchr/testify/assert"
-	"log"
 	"testing"
+
+	"github.com/apex/log"
+	"github.com/apex/log/handlers/memory"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestVersionRun(t *testing.T) {
-	var testString bytes.Buffer
+	handler := memory.New()
 
-	testLogger := log.Logger{}
-	testLogger.SetOutput(&testString)
-	
+	log.SetHandler(handler)
+
 	err := Run(VersionInfo{
-			Version: "development",
-			Date:    "2012-1-1",
-		},
-		&testLogger,
+		Version: "development",
+		Date:    "2012-1-1",
+	},
 	)
 
 	assert.NoError(t, err)
-	assert.Equal(t, "Commitsar version: development\t Built on: 2012-1-1\n", testString.String())
+	assert.Equal(t, "Commitsar version: development\t Built on: 2012-1-1", handler.Entries[0].Message)
 }
