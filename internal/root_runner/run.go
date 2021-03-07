@@ -5,13 +5,14 @@ import (
 
 	"github.com/aevea/commitsar/internal/commitpipeline"
 	"github.com/aevea/commitsar/internal/dispatcher"
+	"github.com/apex/log"
 	"github.com/logrusorgru/aurora"
 	"github.com/spf13/viper"
 )
 
 // Run executes the base command for Commitsar
 func (runner *Runner) Run(options RunnerOptions, args ...string) error {
-	dispatch := dispatcher.New(runner.DebugLogger)
+	dispatch := dispatcher.New()
 
 	var pipelines []dispatcher.Pipeliner
 
@@ -25,7 +26,7 @@ func (runner *Runner) Run(options RunnerOptions, args ...string) error {
 			RequiredScopes: options.RequiredScopes,
 		}
 
-		commitPipe, err := commitpipeline.New(runner.Logger, runner.DebugLogger, &commitOptions, args...)
+		commitPipe, err := commitpipeline.New(&commitOptions, args...)
 
 		if err != nil {
 			return err
@@ -33,7 +34,7 @@ func (runner *Runner) Run(options RunnerOptions, args ...string) error {
 
 		pipelines = append(pipelines, commitPipe)
 	} else {
-		runner.Logger.Println("Commit section skipped due to commits.disabled set to true in .commitsar.yaml")
+		log.Info("Commit section skipped due to commits.disabled set to true in .commitsar.yaml")
 	}
 
 	if viper.GetBool("pull_request.jira_title") {
@@ -48,9 +49,9 @@ func (runner *Runner) Run(options RunnerOptions, args ...string) error {
 			return errors.New("No JIRA references found in Pull Request title")
 		}
 
-		successMessage := aurora.Sprintf(aurora.Green("Success! Found the following JIRA issue references: %v \n"), references)
+		successMessage := aurora.Sprintf(aurora.Green("Success! Found the following JIRA issue references: %v"), references)
 
-		runner.Logger.Print(successMessage)
+		log.Info(successMessage)
 	}
 
 	result := dispatch.RunPipelines(pipelines)
@@ -60,7 +61,7 @@ func (runner *Runner) Run(options RunnerOptions, args ...string) error {
 	}
 
 	for _, successMessage := range result.SuccessfulPipelines {
-		runner.Logger.Print(successMessage.Message)
+		log.Info(successMessage.Message)
 	}
 
 	return nil

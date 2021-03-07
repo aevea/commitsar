@@ -3,14 +3,13 @@ package root_runner
 import (
 	"context"
 	"errors"
-	"io/ioutil"
-	"log"
 	"strings"
 
 	"golang.org/x/oauth2"
 
 	"github.com/aevea/commitsar/pkg/jira"
-	history "github.com/aevea/git/v2"
+	history "github.com/aevea/git/v3"
+	"github.com/apex/log"
 	"github.com/google/go-github/v32/github"
 	"github.com/spf13/viper"
 )
@@ -25,7 +24,7 @@ func (runner *Runner) RunPullRequest(jiraKeys []string) ([]string, error) {
 
 	split := strings.Split(viper.GetString("GITHUB_REPOSITORY"), "/")
 
-	gitRepo, err := history.OpenGit(".", log.New(ioutil.Discard, "", 0))
+	gitRepo, err := history.OpenGit(".")
 
 	if err != nil {
 		return nil, err
@@ -53,8 +52,8 @@ func (runner *Runner) RunPullRequest(jiraKeys []string) ([]string, error) {
 	}
 
 	if len(prs) == 0 {
-		runner.DebugLogger.Printf("current commit %s", currentCommit.Hash.String())
-		runner.DebugLogger.Print(response)
+		log.Debugf("current commit %s", currentCommit.Hash.String())
+		log.Debugf("%s", response)
 
 		return nil, errors.New("No linked PullRequests found")
 	}

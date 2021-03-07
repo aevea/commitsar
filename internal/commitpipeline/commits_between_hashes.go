@@ -3,7 +3,7 @@ package commitpipeline
 import (
 	"strings"
 
-	history "github.com/aevea/git/v2"
+	history "github.com/aevea/git/v3"
 	"github.com/go-git/go-git/v5/plumbing"
 )
 

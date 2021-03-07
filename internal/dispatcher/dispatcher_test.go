@@ -8,7 +8,7 @@ import (
 )
 
 func TestDispatcher(t *testing.T) {
-	dispatcher := New(nil)
+	dispatcher := New()
 	dispatcher.maxWorkers = 1
 
 	pipelines := []Pipeliner{TestPipeline{TestName: "pipeline1", TestFn: successPipeline}}

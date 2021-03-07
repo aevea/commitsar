@@ -1,6 +1,10 @@
 package dispatcher
 
-import "sync"
+import (
+	"sync"
+
+	"github.com/apex/log"
+)
 
 func (dispatch *Dispatcher) work(
 	wg *sync.WaitGroup,
@@ -16,7 +20,7 @@ func (dispatch *Dispatcher) work(
 		pipeline, more := <-pipelineChannel
 
 		if more {
-			dispatch.debugLogger.Printf("Starting pipeline: %s", pipeline.Name())
+			log.Infof("Starting pipeline: %s", pipeline.Name())
 			success, err := pipeline.Run()
 
 			if err != nil {
@@ -30,7 +34,7 @@ func (dispatch *Dispatcher) work(
 				successChan <- *success
 			}
 		} else {
-			dispatch.debugLogger.Print("All pipelines complete")
+			log.Debug("All pipelines complete")
 			return
 		}
 	}

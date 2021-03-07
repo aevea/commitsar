@@ -1,6 +1,9 @@
 package commitpipeline
 
-import history "github.com/aevea/git/v2"
+import (
+	history "github.com/aevea/git/v3"
+	"github.com/apex/log"
+)
 
 // logBranch outputs the branch which is being checked into the console
 func (pipeline *Pipeline) logBranch(gitRepo *history.Git) error {
@@ -10,7 +13,7 @@ func (pipeline *Pipeline) logBranch(gitRepo *history.Git) error {
 		return err
 	}
 
-	pipeline.Logger.Printf("Starting analysis of commits on branch %s", branch.Name())
+	log.Infof("Starting analysis of commits on branch %s", branch.Name())
 
 	return nil
 }

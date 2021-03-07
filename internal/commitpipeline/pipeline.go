@@ -1,16 +1,8 @@
 package commitpipeline
 
-import (
-	"io/ioutil"
-	"log"
-	"os"
-)
-
 type Pipeline struct {
-	Logger      *log.Logger
-	DebugLogger *log.Logger
-	args        []string
-	options     Options
+	args    []string
+	options Options
 }
 
 type Options struct {
@@ -27,14 +19,7 @@ type Options struct {
 	RequiredScopes []string
 }
 
-func New(logger, debugLogger *log.Logger, options *Options, args ...string) (*Pipeline, error) {
-	if logger == nil {
-		logger = log.New(os.Stdout, "", 0)
-	}
-	if debugLogger == nil {
-		debugLogger = log.New(ioutil.Discard, "[DEBUG] ", 0)
-	}
-
+func New(options *Options, args ...string) (*Pipeline, error) {
 	if options == nil {
 		options = &Options{
 			Path:           ".",
@@ -46,10 +31,8 @@ func New(logger, debugLogger *log.Logger, options *Options, args ...string) (*Pi
 	}
 
 	return &Pipeline{
-		Logger:      logger,
-		DebugLogger: debugLogger,
-		options:     *options,
-		args:        args,
+		options: *options,
+		args:    args,
 	}, nil
 }
 
