@@ -7,5 +7,5 @@
   <Image width="16" height="16" type="image/x-icon">https://commitsar.tech/img/favicon.ico</Image>
   <Url type="text/html" method="get" template="https://commitsar.tech/search?q={searchTerms}"/>
   <Url type="application/opensearchdescription+xml" rel="self" template="https://commitsar.tech/opensearch.xml" />
-  <moz:SearchForm>https://commitsar.tech</moz:SearchForm>
+  <moz:SearchForm>https://commitsar.tech/</moz:SearchForm>
 </OpenSearchDescription>
