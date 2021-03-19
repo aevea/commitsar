@@ -35,14 +35,16 @@ commits:
   strict: true
   limit: 0
   all: false
+  upstreamBranch: origin/master
 ```
 
-| Name     | Default Value | Description                                                                                   | Available from |
-| -------- | ------------- | --------------------------------------------------------------------------------------------- | -------------- |
-| disabled | false         | Disables checking commmits. Useful if you want to use commitsar only for PR titles.           | v0.14.0        |
-| strict   | true          | Enforces strict category enforcement.                                                         | v0.14.0        |
-| limit    | none          | Makes commitsar check only the last x commits. Useful if you want to run commitsar on master. | v0.14.0        |
-| all      | false         | Makes commitsar check all the commits in history. **Overrides the `limit` flag**              | v0.14.0        |
+| Name           | Default Value | Description                                                                                             | Available from |
+| -------------- | ------------- | ------------------------------------------------------------------------------------------------------- | -------------- |
+| disabled       | false         | Disables checking commmits. Useful if you want to use commitsar only for PR titles.                     | v0.14.0        |
+| strict         | true          | Enforces strict category enforcement.                                                                   | v0.14.0        |
+| limit          | none          | Makes commitsar check only the last x commits. Useful if you want to run commitsar on master.           | v0.14.0        |
+| all            | false         | Makes commitsar check all the commits in history. **Overrides the `limit` flag**                        | v0.14.0        |
+| upstreamBranch | origin/master | Makes commitsar check against specific branch (e.g. use `origin/main` if `main` is your default branch) | v0.17.0        |
 
 ## Pull Request style settings
 

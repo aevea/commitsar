@@ -2,6 +2,7 @@ package config
 
 import (
 	"github.com/aevea/commitsar/internal/root_runner"
+	"github.com/aevea/integrations"
 	"github.com/spf13/viper"
 )
 
@@ -11,6 +12,7 @@ func CommitConfig() root_runner.RunnerOptions {
 	strict := true
 	limit := 0
 	all := false
+	upstreamBranch := integrations.FindCompareBranch()
 	requiredScopes := []string{}
 
 	if viper.IsSet("commits.strict") {
@@ -25,6 +27,10 @@ func CommitConfig() root_runner.RunnerOptions {
 		all = viper.GetBool("commits.all")
 	}
 
+	if viper.IsSet("commits.upstreamBranch") {
+		upstreamBranch = viper.GetString("commits.upstreamBranch")
+	}
+
 	if viper.IsSet("commits.required-scopes") {
 		requiredScopes = viper.GetStringSlice("commits.required-scopes")
 	}
@@ -33,6 +39,7 @@ func CommitConfig() root_runner.RunnerOptions {
 		Strict:         strict,
 		Limit:          limit,
 		AllCommits:     all,
+		UpstreamBranch: upstreamBranch,
 		RequiredScopes: requiredScopes,
 	}
 }
