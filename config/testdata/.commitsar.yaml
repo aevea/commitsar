@@ -3,3 +3,4 @@ commits:
   strict: false
   limit: 100
   all: true
+  upstreamBranch: origin/main
