@@ -9,7 +9,6 @@ import (
 	"github.com/logrusorgru/aurora"
 
 	"github.com/aevea/commitsar/internal/root_runner"
-	"github.com/aevea/integrations"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 
@@ -27,7 +26,6 @@ var commit string
 var date string
 
 func runRoot(cmd *cobra.Command, args []string) error {
-	upstreamBranch := integrations.FindCompareBranch()
 	if viper.GetBool("verbose") {
 		log.SetLevel(log.DebugLevel)
 	}
@@ -35,8 +33,6 @@ func runRoot(cmd *cobra.Command, args []string) error {
 	runner := root_runner.New()
 
 	commitConfig := config.CommitConfig()
-
-	commitConfig.UpstreamBranch = upstreamBranch
 
 	commitConfig.Path = "."
 
