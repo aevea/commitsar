@@ -11,7 +11,7 @@ require (
 	github.com/apex/log v1.9.0
 	github.com/go-git/go-git/v5 v5.2.0
 	github.com/go-openapi/strfmt v0.19.5 // indirect
-	github.com/google/go-github/v32 v32.1.0
+	github.com/google/go-github/v33 v33.0.0
 	github.com/imdario/mergo v0.3.11 // indirect
 	github.com/jedib0t/go-pretty v4.3.0+incompatible
 	github.com/kevinburke/ssh_config v0.0.0-20201106050909-4977a11b4351 // indirect
