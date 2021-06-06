@@ -10,6 +10,7 @@ require (
 	github.com/apex/log v1.9.0
 	github.com/go-git/go-git/v5 v5.3.0
 	github.com/go-openapi/strfmt v0.19.5 // indirect
+	github.com/google/go-cmp v0.5.6 // indirect
 	github.com/google/go-github/v32 v32.1.0
 	github.com/jedib0t/go-pretty v4.3.0+incompatible
 	github.com/logrusorgru/aurora v2.0.3+incompatible
