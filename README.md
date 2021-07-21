@@ -1,5 +1,5 @@
 # Commitsar
-
+Just atest
 [![Go Report Card](https://goreportcard.com/badge/github.com/aevea/commitsar)](https://goreportcard.com/report/github.com/aevea/commitsar)
 ![Test](https://github.com/aevea/commitsar/workflows/Test/badge.svg)
 ![GitHub release (latest by date)](https://img.shields.io/github/v/release/aevea/commitsar?style=flat-square)
