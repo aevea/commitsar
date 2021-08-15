@@ -11,11 +11,11 @@ Tool to make sure your commits are compliant with [conventional commits](https:/
 
 ## Usage
 
-Please check [Documentation](https://commitsar.tech).
+Please check [Documentation](https://commitsar.aevea.ee).
 
 ## Contributing
 
-Contributions are most welcome. Please check the [CONTRIBUTING](https://commitsar.tech/docs/contributing/get_started) section of documentation.
+Contributions are most welcome. Please check the [CONTRIBUTING](https://commitsar.aevea.ee/contributing/get_started) section of documentation.
 
 ## Sponsoring
 
