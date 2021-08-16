@@ -8,7 +8,7 @@ require (
 	github.com/aevea/magefiles v0.0.0-20200424121010-0004d5a7a2fe
 	github.com/aevea/quoad v0.4.0
 	github.com/apex/log v1.9.0
-	github.com/go-git/go-git/v5 v5.3.0
+	github.com/go-git/go-git/v5 v5.4.2
 	github.com/go-openapi/strfmt v0.19.5 // indirect
 	github.com/google/go-cmp v0.5.6 // indirect
 	github.com/google/go-github/v32 v32.1.0
