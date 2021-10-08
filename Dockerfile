@@ -12,7 +12,7 @@ RUN go mod download
 COPY . /app/
 RUN make build/docker
 
-FROM alpine:3.14.1
+FROM alpine:3.14.2
 
 LABEL repository="https://github.com/aevea/commitsar"
 LABEL homepage="https://github.com/aevea/commitsar"
