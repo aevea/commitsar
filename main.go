@@ -36,6 +36,10 @@ func runRoot(cmd *cobra.Command, args []string) error {
 
 	commitConfig.Path = "."
 
+	if len(args) > 0 {
+		commitConfig.Path = args[0]
+	}
+
 	return runner.Run(commitConfig, args...)
 }
 
