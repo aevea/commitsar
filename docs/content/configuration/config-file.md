@@ -50,6 +50,21 @@ commits:
 
 **Pull Request pipeline is still in early stages. Please report any bugs**
 
+#### Convetional style
+
+```yaml
+pull_request:
+  conventional: true
+```
+
+Setting `conventional` to true will enable the pipeline. This is useful for teams that use squash commits and don't care about having all of the commits in the PR compliant with conventional commits.
+
+| Name         | Default Value | Description                                                             | Available from |
+| ------------ | ------------- | ----------------------------------------------------------------------- | -------------- |
+| conventional | false         | Turns on the pipeline and will check for a conventional commit PR title | v0.17.0        |
+
+#### JIRA style
+
 ```yaml
 pull_request:
   jira_title: true

@@ -1,21 +1,18 @@
-package root_runner
+package prpipeline
 
 import (
 	"context"
 	"errors"
 	"strings"
 
-	"golang.org/x/oauth2"
-
-	"github.com/aevea/commitsar/pkg/jira"
 	history "github.com/aevea/git/v3"
 	"github.com/apex/log"
 	"github.com/google/go-github/v32/github"
 	"github.com/spf13/viper"
+	"golang.org/x/oauth2"
 )
 
-// RunPullRequest starts the runner for the PullRequest pipeline
-func (runner *Runner) RunPullRequest(jiraKeys []string) ([]string, error) {
+func getPRTitle(path string) (*string, error) {
 	ghToken := viper.GetString("GITHUB_TOKEN")
 
 	if !viper.IsSet("GITHUB_REPOSITORY") {
@@ -24,7 +21,7 @@ func (runner *Runner) RunPullRequest(jiraKeys []string) ([]string, error) {
 
 	split := strings.Split(viper.GetString("GITHUB_REPOSITORY"), "/")
 
-	gitRepo, err := history.OpenGit(".")
+	gitRepo, err := history.OpenGit(path)
 
 	if err != nil {
 		return nil, err
@@ -55,16 +52,8 @@ func (runner *Runner) RunPullRequest(jiraKeys []string) ([]string, error) {
 		log.Debugf("current commit %s", currentCommit.Hash.String())
 		log.Debugf("%s", response)
 
-		return nil, errors.New("No linked PullRequests found")
+		return nil, errors.New("no linked PullRequests found")
 	}
 
-	title := prs[0].Title
-
-	references, err := jira.FindReferences(jiraKeys, *title)
-
-	if err != nil {
-		return nil, err
-	}
-
-	return references, nil
+	return prs[0].Title, nil
 }

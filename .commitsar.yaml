@@ -3,3 +3,5 @@ verbose: true
 commits:
   strict: true
   disabled: false
+pull_request:
+  conventional: true
