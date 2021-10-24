@@ -13,6 +13,7 @@ require (
 	github.com/google/go-github/v32 v32.1.0
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/jedib0t/go-pretty v4.3.0+incompatible
+	github.com/jedib0t/go-pretty/v6 v6.2.4
 	github.com/logrusorgru/aurora v2.0.3+incompatible
 	github.com/magefile/mage v1.11.0
 	github.com/mattn/go-runewidth v0.0.9 // indirect
