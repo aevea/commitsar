@@ -3,7 +3,7 @@ module github.com/aevea/commitsar
 go 1.16
 
 require (
-	github.com/aevea/git/v3 v3.0.1
+	github.com/aevea/git/v3 v3.1.0
 	github.com/aevea/integrations v0.5.0
 	github.com/aevea/magefiles v0.0.0-20200424121010-0004d5a7a2fe
 	github.com/aevea/quoad v0.4.0

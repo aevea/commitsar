@@ -53,8 +53,8 @@ github.com/ProtonMail/go-crypto v0.0.0-20210428141323-04723f9f07d7 h1:YoJbenK9C6
 github.com/ProtonMail/go-crypto v0.0.0-20210428141323-04723f9f07d7/go.mod h1:z4/9nQmJSSwwds7ejkxaJwO37dru3geImFUdJlaLzQo=
 github.com/acomagu/bufpipe v1.0.3 h1:fxAGrHZTgQ9w5QqVItgzwj235/uYZYgbXitB+dLupOk=
 github.com/acomagu/bufpipe v1.0.3/go.mod h1:mxdxdup/WdsKVreO5GpW4+M/1CE2sMG4jeGJ2sYmHc4=
-github.com/aevea/git/v3 v3.0.1 h1:vx1PB6Q2dcDnO69JXERpO1yG0Nm6vUCjZ84fiKTDTkU=
-github.com/aevea/git/v3 v3.0.1/go.mod h1:FZNax9guQBs0rZL4YP158Q9yS+WbOVVWcjJWDGZ1iLY=
+github.com/aevea/git/v3 v3.1.0 h1:9UIYeugqI/8p5baVGBKVl5PI4I/dqdwFVTplTRFymV4=
+github.com/aevea/git/v3 v3.1.0/go.mod h1:FZNax9guQBs0rZL4YP158Q9yS+WbOVVWcjJWDGZ1iLY=
 github.com/aevea/integrations v0.5.0 h1:+p3WOIMh0nIRxlLvWTNFmoBGEr7N4c+wW6e5J5bwJwA=
 github.com/aevea/integrations v0.5.0/go.mod h1:8Tau6XUahSL9xG+XLED6BqaGR3zWf9ROVechRyE1AYI=
 github.com/aevea/magefiles v0.0.0-20200424121010-0004d5a7a2fe h1:vQ3Ixsc+ONvCRhhRssVwY5/CnlLAhEkpG9F4TWLrC0k=
