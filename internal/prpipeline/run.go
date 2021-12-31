@@ -7,6 +7,7 @@ import (
 	"github.com/aevea/commitsar/pkg/jira"
 	"github.com/aevea/commitsar/pkg/text"
 	"github.com/aevea/quoad"
+	"github.com/apex/log"
 	"github.com/logrusorgru/aurora"
 )
 
@@ -17,6 +18,7 @@ func (pipeline *Pipeline) Run() (*dispatcher.PipelineSuccess, error) {
 		return nil, err
 	}
 
+	log.Info("test")
 	switch pipeline.options.Style {
 	case JiraStyle:
 		references, err := jira.FindReferences(pipeline.options.Keys, *title)
