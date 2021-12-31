@@ -62,6 +62,10 @@ func (runner *Runner) Run(options RunnerOptions, args ...string) error {
 		pipelines = append(pipelines, prPipe)
 	}
 
+	if len(pipelines) == 0 {
+		return errors.New("no pipelines defined")
+	}
+
 	result := dispatch.RunPipelines(pipelines)
 
 	if len(result.Errors) != 0 {
