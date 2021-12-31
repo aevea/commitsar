@@ -59,7 +59,7 @@ func (pipeline *Pipeline) Run() (*dispatcher.PipelineSuccess, error) {
 
 		log.Debugf("Commit found: [hash] %v [message] %v", parsedCommit.Hash.String(), parsedCommit.Heading)
 
-		if !text.IsMergeCommit(commitObject.Message) && !text.IsInitialCommit(commitObject.Message) {
+		if !text.IsMergeCommit(commitObject.Message) && !text.IsInitialCommit(commitObject.Message) && !text.IsRevertCommit(commitObject.Message) {
 			filteredCommits = append(filteredCommits, commitHash)
 		}
 	}
