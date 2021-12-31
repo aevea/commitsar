@@ -5,6 +5,7 @@ import (
 
 	"github.com/apex/log"
 	"github.com/apex/log/handlers/memory"
+	"github.com/spf13/viper"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -72,4 +73,21 @@ func TestFromToCommits(t *testing.T) {
 	err := runner.Run(options, "7dbf3e7db93ae2e02902cae9d2f1de1b1e5c8c92...d0240d3ed34685d0a5329b185e120d3e8c205be4")
 
 	assert.NoError(t, err)
+}
+
+func TestMissingPipelines(t *testing.T) {
+	handler := memory.New()
+
+	log.SetHandler(handler)
+
+	runner := Runner{}
+
+	viper.Set("commits.disabled", true)
+
+	err := runner.Run(RunnerOptions{})
+
+	assert.Error(t, err)
+	assert.Equal(t, "no pipelines defined", err.Error())
+
+	viper.Set("commits.disabled", "")
 }
