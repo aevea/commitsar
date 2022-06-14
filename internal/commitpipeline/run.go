@@ -67,6 +67,12 @@ func (pipeline *Pipeline) Run() (*dispatcher.PipelineSuccess, error) {
 	log.Infof("%v commits filtered out", len(commits)-len(filteredCommits))
 	log.Infof("Found %v commit to check", len(filteredCommits))
 
+	if len(filteredCommits) == 0 && len(commits) > 0 {
+		return &dispatcher.PipelineSuccess{
+			Message:      aurora.Sprintf(aurora.Green("All commits have been filtered out. Nothing to check."), len(commits)),
+			PipelineName: pipeline.Name(),
+		}, nil
+	}
 	if len(filteredCommits) == 0 {
 		return nil, errors.New(aurora.Red("No commits found, please check you are on a branch outside of main").String())
 	}
