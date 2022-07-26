@@ -17,7 +17,7 @@ require (
 	github.com/magefile/mage v1.13.0
 	github.com/mattn/go-runewidth v0.0.9 // indirect
 	github.com/spf13/cobra v1.4.0
-	github.com/spf13/viper v1.10.1
+	github.com/spf13/viper v1.12.0
 	github.com/stretchr/testify v1.7.1
-	golang.org/x/oauth2 v0.0.0-20220309155454-6242fa91716a
+	golang.org/x/oauth2 v0.0.0-20220411215720-9780585627b5
 )
