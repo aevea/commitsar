@@ -6,15 +6,13 @@ jobs:
   validate-commits:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Go 1.13
-        uses: actions/setup-go@v3
-        with:
-          go-version: 1.16.x
       - name: Check out code into the Go module directory
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
           ref: ${{ github.event.pull_request.head.sha }}
+      - name: asdf_install
+        uses: asdf-vm/actions/install@v1
       - uses: actions/cache@v3
         with:
           path: ~/go/pkg/mod

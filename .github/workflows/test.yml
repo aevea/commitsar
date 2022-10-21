@@ -7,17 +7,11 @@ jobs:
     name: "Go Test"
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        go-version: [1.16.x]
-
     steps:
-      - name: Install Go
-        uses: actions/setup-go@v3
-        with:
-          go-version: ${{ matrix.go-version }}
       - name: Check out code into the Go module directory
         uses: actions/checkout@v3
+      - name: asdf_install
+        uses: asdf-vm/actions/install@v1
       - uses: actions/cache@v3
         with:
           path: ~/go/pkg/mod
@@ -33,12 +27,10 @@ jobs:
     name: "Go mod tidy"
     runs-on: ubuntu-latest
     steps:
-      - name: Install Go
-        uses: actions/setup-go@v3
-        with:
-          go-version: 1.16.x
       - name: Check out code into the Go module directory
         uses: actions/checkout@v3
+      - name: asdf_install
+        uses: asdf-vm/actions/install@v1
       - uses: actions/cache@v3
         with:
           path: ~/go/pkg/mod
