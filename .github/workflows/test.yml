@@ -20,6 +20,7 @@ jobs:
             ${{ runner.os }}-go-
       - name: Test
         run: |
+          asdf reshim golang
           go install github.com/magefile/mage
           mage test
 
@@ -39,5 +40,6 @@ jobs:
             ${{ runner.os }}-go-
       - name: Tidy check
         run: |
+          asdf reshim golang
           go install github.com/magefile/mage
           mage gomodtidy
