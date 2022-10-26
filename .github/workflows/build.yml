@@ -20,3 +20,11 @@ jobs:
           cache: true
           cache_registry: aevea/cache
           strip_tag_prefix: v
+
+      - name: Sync Readme
+        uses: ms-jpq/sync-dockerhub-readme@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_PASSWORD }}
+          repository: aevea/commitsar
+          readme: "./README.md"
