@@ -13,7 +13,7 @@ require (
 	github.com/jedib0t/go-pretty v4.3.0+incompatible
 	github.com/logrusorgru/aurora v2.0.3+incompatible
 	github.com/magefile/mage v1.14.0
-	github.com/spf13/cobra v1.6.0
+	github.com/spf13/cobra v1.6.1
 	github.com/spf13/viper v1.13.0
 	github.com/stretchr/testify v1.8.0
 	golang.org/x/oauth2 v0.1.0
