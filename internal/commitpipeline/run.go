@@ -57,7 +57,7 @@ func (pipeline *Pipeline) Run() (*dispatcher.PipelineSuccess, error) {
 
 		parsedCommit := quoad.ParseCommitMessage(commitObject.Message)
 
-		log.Debugf("Commit found: [hash] %v [message] %v", parsedCommit.Hash.String(), parsedCommit.Heading)
+		log.Debugf("Commit found: [hash] %v [message] %v", commitObject.Hash, parsedCommit.Heading)
 
 		if !text.IsMergeCommit(commitObject.Message) && !text.IsInitialCommit(commitObject.Message) && !text.IsRevertCommit(commitObject.Message) {
 			filteredCommits = append(filteredCommits, commitHash)
