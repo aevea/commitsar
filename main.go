@@ -64,6 +64,11 @@ func bindRootFlags(rootCmd *cobra.Command) error {
 	if err != nil {
 		return err
 	}
+	rootCmd.Flags().String("config-path", "", "path to your .commitsar.yaml config file")
+	err = viper.BindPFlag("commits.config-path", rootCmd.Flags().Lookup("config-path"))
+	if err != nil {
+		return err
+	}
 
 	// Not used. TODO: Documentation
 	rootCmd.Flags().StringP("path", "d", ".", "dir points to the path of the repository")

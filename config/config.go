@@ -21,6 +21,10 @@ func LoadConfig() error {
 		viper.AddConfigPath(viper.GetString(CommitsarConfigPath))
 	}
 
+	if viper.IsSet("commits.config-path"){
+		viper.AddConfigPath(viper.GetString("commits.config-path"))
+	}
+
 	viper.AddConfigPath(".")
 
 	if err := viper.ReadInConfig(); err != nil {
