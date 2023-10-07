@@ -10,6 +10,7 @@ For more advanced usage a set of flags are provided.
 | Verbose | --v   | false    | false   | Debug output into console                                                          |
 | Strict  | --s   | false    | true    | Strict check of category types                                                     |
 | All     | --all | false    | false   | Whether to check all commits on given branch. **Takes precedence over LIMIT flag** |
+| Config path     | --config-path | false    | current directory | Path where .commitsar.yaml file is |
 
 On top of that a single argument is allowed:
 
