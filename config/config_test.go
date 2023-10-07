@@ -9,6 +9,7 @@ import (
 )
 
 func TestLoadConfigCustomPath(t *testing.T) {
+	viper.Reset()
 	err := os.Setenv(CommitsarConfigPath, "./testdata")
 	assert.NoError(t, err)
 
