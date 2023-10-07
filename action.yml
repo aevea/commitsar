@@ -6,8 +6,10 @@ branding:
   color: "blue"
 inputs:
   config:
-    description: "Path of the Commitsar config file"
+    description: "Path to the folder where your .commitsar.yaml is"
     required: false
 runs:
   using: "docker"
   image: "Dockerfile"
+  args:
+    - "--config-path=${{ inputs.config }}"
