@@ -12,4 +12,5 @@ runs:
   using: "docker"
   image: "Dockerfile"
   args:
+    - commitsar
     - "--config-path=${{ inputs.config }}"
