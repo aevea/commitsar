@@ -8,6 +8,7 @@ inputs:
   config:
     description: "Path to the folder where your .commitsar.yaml is"
     required: false
+    default: "."
 runs:
   using: "docker"
   image: "Dockerfile"
