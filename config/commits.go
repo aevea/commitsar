@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/viper"
 	"fmt"
 	"os"
-	"log"
+	"github.com/apex/log"
 )
 
 const (
@@ -26,6 +26,10 @@ func CommitConfig() root_runner.RunnerOptions {
 	if err := LoadConfig(); err != nil {
 		fmt.Println(err)
 		os.Exit(1)
+	}
+
+	if viper.GetBool("verbose") {
+		log.SetLevel(log.DebugLevel)
 	}
 
 	if viper.IsSet("commits.strict") {
@@ -72,7 +76,7 @@ func LoadConfig() error {
 	if err := viper.ReadInConfig(); err != nil {
 		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
 			// Config file not found; ignore error if desired
-			log.Println("config file not found, using defaults")
+			log.Warn("config file not found, using defaults")
 		} else {
 			// Config file was found but another error was produced
 			return err

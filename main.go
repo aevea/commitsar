@@ -26,10 +26,6 @@ var commit string
 var date string
 
 func runRoot(cmd *cobra.Command, args []string) error {
-	if viper.GetBool("verbose") {
-		log.SetLevel(log.DebugLevel)
-	}
-
 	runner := root_runner.New()
 
 	commitConfig := config.CommitConfig()
