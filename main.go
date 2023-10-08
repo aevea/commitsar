@@ -64,8 +64,8 @@ func bindRootFlags(rootCmd *cobra.Command) error {
 	if err != nil {
 		return err
 	}
-	rootCmd.Flags().String("config-path", "", "path to your .commitsar.yaml config file")
-	err = viper.BindPFlag("commits.config-path", rootCmd.Flags().Lookup("config-path"))
+	rootCmd.Flags().String("config-path", ".", "path to your .commitsar.yaml config file")
+	err = viper.BindPFlag("config-path", rootCmd.Flags().Lookup("config-path"))
 	if err != nil {
 		return err
 	}
@@ -82,16 +82,6 @@ func bindRootFlags(rootCmd *cobra.Command) error {
 func main() {
 	log.SetHandler(cli.Default)
 
-	if err := bindRootFlags(rootCmd); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
-	if err := config.LoadConfig(); err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
-
 	var rootCmd = &cobra.Command{
 		Use:           "commitsar <from?>...<to>",
 		Short:         "Checks if commits comply",
@@ -100,6 +90,11 @@ func main() {
 		SilenceUsage:  true,
 		SilenceErrors: true,
 		Args:          cobra.MinimumNArgs(0),
+	}
+
+	if err := bindRootFlags(rootCmd); err != nil {
+		fmt.Println(err)
+		os.Exit(1)
 	}
 
 	// Version returns undefined if not on a tag. This needs to reset it.
