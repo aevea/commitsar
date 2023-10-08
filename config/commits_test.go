@@ -41,7 +41,7 @@ func TestDefaultConfig(t *testing.T) {
 
 	err := LoadConfig()
 	assert.NoError(t, err)
-	assert.Equal(t, false, viper.GetBool("verbose"), "expected verbose to be true, but got false")
+	assert.Equal(t, false, viper.GetBool("verbose"))
 
 	os.Clearenv()
 }
@@ -53,7 +53,7 @@ func TestLoadConfigCustomPathFromEnv(t *testing.T) {
 
 	err = LoadConfig()
 	assert.NoError(t, err)
-	assert.Equal(t, true, viper.GetBool("verbose"), "expected verbose to be true, but got false")
+	assert.Equal(t, true, viper.GetBool("verbose"))
 
 	os.Clearenv()
 }
@@ -64,7 +64,7 @@ func TestLoadConfigCustomPathFromParams(t *testing.T){
 
 	err := LoadConfig()
 	assert.NoError(t, err)
-	assert.Equal(t, true, viper.GetBool("verbose"), "expected verbose to be true, but got false")
+	assert.Equal(t, true, viper.GetBool("verbose"))
 
 	os.Clearenv()
 }
@@ -77,7 +77,7 @@ func TestLoadConfigCustomPathParamOverridesEnv(t *testing.T){
 
 	err = LoadConfig()
 	assert.NoError(t, err)
-	assert.Equal(t, true, viper.GetBool("verbose"), "expected verbose to be true, but got false")
+	assert.Equal(t, true, viper.GetBool("verbose"))
 
 	os.Clearenv()
 }
