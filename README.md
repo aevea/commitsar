@@ -19,4 +19,4 @@ Contributions are most welcome. Please check the [CONTRIBUTING](https://commitsa
 
 ## Sponsoring
 
-If you feel like showing even more support for this project you can sponsor it using the Sponsor button on Github. A little help goes a long way when it comes with OSS and it'll help support this project.
+If you feel like showing even more support for this project you can sponsor it using the Sponsor button on GitHub. A little help goes a long way when it comes with OSS and it'll help support this project.
