@@ -11,7 +11,7 @@ const (
 	CommitsarConfigPath = "COMMITSAR_CONFIG_PATH"
 )
 
-// LoadConfig iterrates through possible config paths. No config will be loaded if no files are present.
+// LoadConfig iterates through possible config paths. No config will be loaded if no files are present.
 func LoadConfig() error {
 	viper.AutomaticEnv()
 	viper.SetConfigName(".commitsar")

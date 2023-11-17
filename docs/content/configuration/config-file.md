@@ -7,9 +7,9 @@ title: Configuration File
 
 **Name:** `.commitsar.yml`
 
-In order to make configuration easier than through flags we provide configuration file support. Most up to date examples can be found in <https://github.com/aevea/commitsar/tree/master/config/testdata>.
+In order to make configuration easier than through flags we provide configuration file support. Most up-to-date examples can be found in <https://github.com/aevea/commitsar/tree/master/config/testdata>.
 
-By default the current working directory is used to scan for the file. However this can be overriden by specifying `COMMITSAR_CONFIG_PATH` environment variable. Accepts relative or absolute paths.
+By default the current working directory is used to scan for the file. However this can be overridden by specifying `COMMITSAR_CONFIG_PATH` environment variable. Accepts relative or absolute paths.
 
 Example: `COMMITSAR_CONFIG_PATH=./testdata` will scan for `.commitsar.yaml` in the `testdata` folder.
 
@@ -40,17 +40,17 @@ commits:
 
 | Name           | Default Value | Description                                                                                             | Available from |
 | -------------- | ------------- | ------------------------------------------------------------------------------------------------------- | -------------- |
-| disabled       | false         | Disables checking commmits. Useful if you want to use commitsar only for PR titles.                     | v0.14.0        |
+| disabled       | false         | Disables checking commits. Useful if you want to use commitsar only for PR titles.                    | v0.14.0        |
 | strict         | true          | Enforces strict category enforcement.                                                                   | v0.14.0        |
-| limit          | none          | Makes commitsar check only the last x commits. Useful if you want to run commitsar on master.           | v0.14.0        |
-| all            | false         | Makes commitsar check all the commits in history. **Overrides the `limit` flag**                        | v0.14.0        |
+| limit          | none          | Makes commitsar check only the last x commits. Useful if you want to run commitsar on master.          | v0.14.0        |
+| all            | false         | Makes commitsar check all the commits in history. **Overrides the `limit` flag**                    | v0.14.0        |
 | upstreamBranch | origin/master | Makes commitsar check against specific branch (e.g. use `origin/main` if `main` is your default branch) | v0.17.0        |
 
 ## Pull Request style settings
 
 **Pull Request pipeline is still in early stages. Please report any bugs**
 
-#### Convetional style
+#### Conventional style
 
 ```yaml
 pull_request:
