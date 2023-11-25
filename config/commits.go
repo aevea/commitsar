@@ -6,7 +6,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-// CommitConfig will return the RunnerOptions using defaults unless overriden in config or flags
+// CommitConfig will return the RunnerOptions using defaults unless overridden in config or flags
 func CommitConfig() root_runner.RunnerOptions {
 	// defaults
 	strict := true

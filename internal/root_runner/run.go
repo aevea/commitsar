@@ -50,7 +50,7 @@ func (runner *Runner) Run(options RunnerOptions, args ...string) error {
 		}
 
 		if viper.IsSet("pull_request.conventional") {
-			prOptions.Style = prpipeline.ConvetionalStyle
+			prOptions.Style = prpipeline.ConventionalStyle
 		}
 
 		prPipe, err := prpipeline.New(prOptions)

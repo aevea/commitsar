@@ -13,4 +13,4 @@ docker run --rm --name="commitsar" -w /src -v "$(pwd)":/src aevea/commitsar
 docker run --rm --name="commitsar" -w /src -v "$(pwd)":/src aevea/commitsar ./path-to-repo
 ```
 
-Make sure to load the working directory where `.git` folder is present. Commitsar will not work without the `.git` folder. This can be overriden by setting the path argument.
+Make sure to load the working directory where `.git` folder is present. Commitsar will not work without the `.git` folder. This can be overridden by setting the path argument.
