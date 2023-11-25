@@ -31,7 +31,7 @@ func (pipeline *Pipeline) Run() (*dispatcher.PipelineSuccess, error) {
 				Message:      aurora.Sprintf(aurora.Green("Success! Found the following JIRA issue references: %v"), references),
 			}, nil
 		}
-	case ConvetionalStyle:
+	case ConventionalStyle:
 		commit := quoad.ParseCommitMessage(*title)
 
 		err := text.CheckMessageTitle(commit, true)
