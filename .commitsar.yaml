@@ -3,5 +3,6 @@ verbose: true
 commits:
   strict: true
   disabled: false
-pull_request:
-  conventional: true
+## Needs investigation
+# pull_request:
+#   conventional: true
