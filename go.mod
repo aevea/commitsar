@@ -10,6 +10,7 @@ require (
 	github.com/apex/log v1.9.0
 	github.com/go-git/go-git/v5 v5.10.0
 	github.com/google/go-github/v32 v32.1.0
+	github.com/google/go-github/v59 v59.0.0
 	github.com/jedib0t/go-pretty v4.3.0+incompatible
 	github.com/logrusorgru/aurora v2.0.3+incompatible
 	github.com/magefile/mage v1.15.0
