@@ -28,3 +28,4 @@ func FormatFailingCommits(commits []FailingCommit) table.Writer {
 
 	return t
 }
+
