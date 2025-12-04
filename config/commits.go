@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"os"
 	"github.com/apex/log"
-	"log"
 )
 
 const (
