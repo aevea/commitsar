@@ -6,10 +6,9 @@ import (
 
 	"github.com/aevea/commitsar/internal/dispatcher"
 	"github.com/aevea/commitsar/pkg/text"
-	history "github.com/aevea/git/v3"
+	history "github.com/aevea/git/v4"
 	"github.com/aevea/quoad"
 	"github.com/apex/log"
-	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/logrusorgru/aurora"
 )
 
@@ -26,7 +25,7 @@ func (pipeline *Pipeline) Run() (*dispatcher.PipelineSuccess, error) {
 		return nil, err
 	}
 
-	var commits []plumbing.Hash
+	var commits []history.Hash
 
 	if len(pipeline.args) == 0 {
 		commitsBetweenBranches, err := pipeline.commitsBetweenBranches(gitRepo)
@@ -46,7 +45,7 @@ func (pipeline *Pipeline) Run() (*dispatcher.PipelineSuccess, error) {
 		commits = commitsBetweenHashes
 	}
 
-	var filteredCommits []plumbing.Hash
+	var filteredCommits []history.Hash
 
 	for _, commitHash := range commits {
 		commitObject, commitErr := gitRepo.Commit(commitHash)
