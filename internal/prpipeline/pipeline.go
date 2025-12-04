@@ -3,8 +3,8 @@ package prpipeline
 type Options struct {
 	// Path to the git repository
 	Path string
-	// Style is the style of PR title to enforce
-	Style PRStyle
+	// Styles are the styles of PR title to enforce (can be multiple)
+	Styles []PRStyle
 	// Keys checks for required keys in the PR title
 	Keys []string
 }
