@@ -1,4 +1,4 @@
-FROM debian:12-slim as builder
+FROM debian:13-slim as builder
 RUN mkdir /app
 WORKDIR /app
 
@@ -36,7 +36,7 @@ RUN mise exec -- go mod download
 COPY . /app/
 RUN mise exec -- make build/docker
 
-FROM debian:12-slim
+FROM debian:13-slim
 
 LABEL repository="https://github.com/aevea/commitsar"
 LABEL homepage="https://github.com/aevea/commitsar"
