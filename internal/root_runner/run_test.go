@@ -70,7 +70,7 @@ func TestFromToCommits(t *testing.T) {
 		Strict:         false,
 	}
 
-	err := runner.Run(options, "7dbf3e7db93ae2e02902cae9d2f1de1b1e5c8c92...d0240d3ed34685d0a5329b185e120d3e8c205be4")
+	err := runner.Run(options, "d0240d3ed34685d0a5329b185e120d3e8c205be4...7dbf3e7db93ae2e02902cae9d2f1de1b1e5c8c92")
 
 	assert.NoError(t, err)
 }

@@ -1,19 +1,18 @@
 package commitpipeline
 
 import (
-	history "github.com/aevea/git/v3"
-	"github.com/go-git/go-git/v5/plumbing"
+	history "github.com/aevea/git/v4"
 )
 
-func (pipeline *Pipeline) commitsBetweenBranches(gitRepo *history.Git) ([]plumbing.Hash, error) {
-	var commits []plumbing.Hash
+func (pipeline *Pipeline) commitsBetweenBranches(gitRepo *history.Git) ([]history.Hash, error) {
+	var commits []history.Hash
 
 	currentBranch, currentBranchErr := gitRepo.CurrentBranch()
 	if currentBranchErr != nil {
 		return nil, currentBranchErr
 	}
 
-	sameBranch, err := IdentifySameBranch(currentBranch.Name().String(), pipeline.options.UpstreamBranch, gitRepo)
+	sameBranch, err := IdentifySameBranch(currentBranch.Name(), pipeline.options.UpstreamBranch, gitRepo)
 
 	if err != nil {
 		return nil, err
@@ -50,7 +49,7 @@ func (pipeline *Pipeline) commitsBetweenBranches(gitRepo *history.Git) ([]plumbi
 		return commits, nil
 	}
 
-	commitsOnBranch, err := gitRepo.BranchDiffCommits(currentBranch.Name().String(), pipeline.options.UpstreamBranch)
+	commitsOnBranch, err := gitRepo.BranchDiffCommits(currentBranch.Name(), pipeline.options.UpstreamBranch)
 
 	if err != nil {
 		return nil, err

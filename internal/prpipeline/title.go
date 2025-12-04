@@ -5,7 +5,7 @@ import (
 	"errors"
 	"strings"
 
-	history "github.com/aevea/git/v3"
+	history "github.com/aevea/git/v4"
 	"github.com/apex/log"
 	"github.com/google/go-github/v32/github"
 	"github.com/spf13/viper"

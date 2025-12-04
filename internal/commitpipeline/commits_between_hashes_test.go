@@ -3,7 +3,7 @@ package commitpipeline
 import (
 	"testing"
 
-	history "github.com/aevea/git/v3"
+	history "github.com/aevea/git/v4"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -3,19 +3,18 @@ module github.com/aevea/commitsar
 go 1.19
 
 require (
-	github.com/aevea/git/v3 v3.1.0
+	github.com/aevea/git/v4 v4.0.1
 	github.com/aevea/integrations v0.5.0
 	github.com/aevea/magefiles v0.0.0-20200424121010-0004d5a7a2fe
 	github.com/aevea/quoad v0.4.0
 	github.com/apex/log v1.9.0
-	github.com/go-git/go-git/v5 v5.11.0
 	github.com/google/go-github/v32 v32.1.0
 	github.com/jedib0t/go-pretty v4.3.0+incompatible
 	github.com/logrusorgru/aurora v2.0.3+incompatible
 	github.com/magefile/mage v1.15.0
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/viper v1.17.0
-	github.com/stretchr/testify v1.9.0
+	github.com/stretchr/testify v1.11.1
 	golang.org/x/oauth2 v0.14.0
 )
 
@@ -32,6 +31,7 @@ require (
 	github.com/fsnotify/fsnotify v1.6.0 // indirect
 	github.com/go-git/gcfg v1.5.1-0.20230307220236-3a3c6141e376 // indirect
 	github.com/go-git/go-billy/v5 v5.5.0 // indirect
+	github.com/go-git/go-git/v5 v5.11.0 // indirect
 	github.com/go-openapi/errors v0.19.2 // indirect
 	github.com/go-openapi/strfmt v0.19.5 // indirect
 	github.com/go-stack/stack v1.8.0 // indirect

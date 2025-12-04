@@ -3,7 +3,7 @@ package commitpipeline
 import (
 	"testing"
 
-	history "github.com/aevea/git/v3"
+	history "github.com/aevea/git/v4"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -36,7 +36,7 @@ func TestAllCommits(t *testing.T) {
 	firstCommit, err := gitRepo.Commit(commits[101])
 
 	assert.NoError(t, err)
-	assert.Equal(t, "Initial commit", firstCommit.Message)
+	assert.Equal(t, "Initial commit\n", firstCommit.Message)
 }
 
 func TestLimitCommits(t *testing.T) {

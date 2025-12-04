@@ -1,7 +1,7 @@
 package commitpipeline
 
 import (
-	history "github.com/aevea/git/v3"
+	history "github.com/aevea/git/v4"
 )
 
 // IdentifySameBranch breaks up the reference names and tries to identify if the branches are the same

@@ -3,14 +3,13 @@ package commitpipeline
 import (
 	"strings"
 
-	history "github.com/aevea/git/v3"
-	"github.com/go-git/go-git/v5/plumbing"
+	history "github.com/aevea/git/v4"
 )
 
-func commitsBetweenHashes(gitRepo *history.Git, args []string) ([]plumbing.Hash, error) {
-	var commits []plumbing.Hash
-	var fromCommit plumbing.Hash
-	var toCommit plumbing.Hash
+func commitsBetweenHashes(gitRepo *history.Git, args []string) ([]history.Hash, error) {
+	var commits []history.Hash
+	var fromCommit history.Hash
+	var toCommit history.Hash
 
 	arg := args[0]
 
@@ -25,12 +24,22 @@ func commitsBetweenHashes(gitRepo *history.Git, args []string) ([]plumbing.Hash,
 
 		fromCommit = currentCommit.Hash
 
-		toCommit = plumbing.NewHash(splitArgs[0])
+		toCommit, err = history.NewHash(splitArgs[0])
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	if len(splitArgs) == 2 {
-		fromCommit = plumbing.NewHash(splitArgs[1])
-		toCommit = plumbing.NewHash(splitArgs[0])
+		var err error
+		fromCommit, err = history.NewHash(splitArgs[1])
+		if err != nil {
+			return nil, err
+		}
+		toCommit, err = history.NewHash(splitArgs[0])
+		if err != nil {
+			return nil, err
+		}
 	}
 
 	logCommits, err := gitRepo.CommitsBetween(fromCommit, toCommit)
