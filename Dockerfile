@@ -1,18 +1,42 @@
-FROM golang:1.21.4-alpine as builder
+FROM debian:12-slim as builder
 RUN mkdir /app
 WORKDIR /app
 
-RUN apk add --no-cache make git gcc musl-dev
+# Install mise and dependencies
+RUN apt-get update && \
+    apt-get -y --no-install-recommends install \
+        sudo curl git ca-certificates build-essential make gcc && \
+    rm -rf /var/lib/apt/lists/*
+
+# Set up mise environment variables (before installation)
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+ENV MISE_DATA_DIR="/mise"
+ENV MISE_CONFIG_DIR="/mise"
+ENV MISE_CACHE_DIR="/mise/cache"
+ENV MISE_INSTALL_PATH="/usr/local/bin/mise"
+ENV PATH="/mise/shims:/usr/local/bin:$PATH"
+
+# Install mise
+RUN curl https://mise.run | sh
+
+# Copy mise config
+COPY .mise.toml /app/
+
+# Trust the mise config file
+RUN mise trust
+
+# Install Go via mise
+RUN mise install
 
 # This step is done separately than `COPY . /app/` in order to
 # cache dependencies.
 COPY go.mod go.sum Makefile /app/
-RUN go mod download
+RUN mise exec -- go mod download
 
 COPY . /app/
-RUN make build/docker
+RUN mise exec -- make build/docker
 
-FROM alpine:3.18.4
+FROM debian:12-slim
 
 LABEL repository="https://github.com/aevea/commitsar"
 LABEL homepage="https://github.com/aevea/commitsar"
@@ -23,7 +47,9 @@ LABEL com.github.actions.description="Check commit message compliance with conve
 LABEL com.github.actions.icon="code"
 LABEL com.github.actions.color="blue"
 
-RUN  apk add --no-cache --virtual=.run-deps ca-certificates git &&\
+RUN apt-get update && \
+    apt-get -y --no-install-recommends install ca-certificates git && \
+    rm -rf /var/lib/apt/lists/* && \
     mkdir /app
 
 WORKDIR /app
