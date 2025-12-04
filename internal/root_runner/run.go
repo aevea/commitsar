@@ -41,16 +41,17 @@ func (runner *Runner) Run(options RunnerOptions, args ...string) error {
 		log.Debug("PR pipeline")
 
 		prOptions := prpipeline.Options{
-			Path: options.Path,
+			Path:   options.Path,
+			Styles: []prpipeline.PRStyle{},
 		}
 
 		if viper.IsSet("pull_request.jira_title") {
-			prOptions.Style = prpipeline.JiraStyle
+			prOptions.Styles = append(prOptions.Styles, prpipeline.JiraStyle)
 			prOptions.Keys = viper.GetStringSlice("pull_request.jira_keys")
 		}
 
 		if viper.IsSet("pull_request.conventional") {
-			prOptions.Style = prpipeline.ConventionalStyle
+			prOptions.Styles = append(prOptions.Styles, prpipeline.ConventionalStyle)
 		}
 
 		prPipe, err := prpipeline.New(prOptions)
