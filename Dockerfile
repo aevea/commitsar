@@ -34,6 +34,8 @@ COPY go.mod go.sum Makefile /app/
 RUN mise exec -- go mod download
 
 COPY . /app/
+# Fix git ownership issue
+RUN git config --global --add safe.directory /app
 RUN mise exec -- make build/docker
 
 FROM debian:13-slim
