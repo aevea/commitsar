@@ -13,11 +13,18 @@ import (
 )
 
 func (pipeline *Pipeline) Run() (*dispatcher.PipelineSuccess, error) {
+	log.Debugf("Opening git repository at path: %s", pipeline.options.Path)
+	log.Debugf("Pipeline options: AllCommits=%v, Limit=%d, Strict=%v, UpstreamBranch=%s",
+		pipeline.options.AllCommits, pipeline.options.Limit, pipeline.options.Strict, pipeline.options.UpstreamBranch)
+
 	gitRepo, err := history.OpenGit(pipeline.options.Path)
 
 	if err != nil {
+		log.Errorf("Failed to open git repository at '%s': %v", pipeline.options.Path, err)
 		return nil, err
 	}
+
+	log.Debug("Git repository opened successfully")
 
 	err = pipeline.logBranch(gitRepo)
 
@@ -28,6 +35,7 @@ func (pipeline *Pipeline) Run() (*dispatcher.PipelineSuccess, error) {
 	var commits []history.Hash
 
 	if len(pipeline.args) == 0 {
+		log.Debug("No specific commit hashes provided, analyzing commits between branches...")
 		commitsBetweenBranches, err := pipeline.commitsBetweenBranches(gitRepo)
 
 		if err != nil {
@@ -36,9 +44,11 @@ func (pipeline *Pipeline) Run() (*dispatcher.PipelineSuccess, error) {
 
 		commits = commitsBetweenBranches
 	} else {
+		log.Debugf("Analyzing specific commit range: %v", pipeline.args)
 		commitsBetweenHashes, err := commitsBetweenHashes(gitRepo, pipeline.args)
 
 		if err != nil {
+			log.Errorf("Failed to get commits between hashes: %v", err)
 			return nil, err
 		}
 
