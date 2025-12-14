@@ -53,11 +53,14 @@ RUN apt-get update && \
     apt-get -y --no-install-recommends install ca-certificates git && \
     rm -rf /var/lib/apt/lists/* && \
     mkdir /app && \
-    git config --global --add safe.directory '*'
+    git config --system --add safe.directory '*'
 
 WORKDIR /app
 COPY --from=builder /app/build/commitsar ./commitsar
+COPY entrypoint.sh /entrypoint.sh
 
-RUN ln -s $PWD/commitsar /usr/local/bin
+RUN ln -s $PWD/commitsar /usr/local/bin && \
+    chmod +x /entrypoint.sh
 
+ENTRYPOINT ["/entrypoint.sh"]
 CMD ["commitsar"]
