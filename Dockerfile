@@ -52,7 +52,8 @@ LABEL com.github.actions.color="blue"
 RUN apt-get update && \
     apt-get -y --no-install-recommends install ca-certificates git && \
     rm -rf /var/lib/apt/lists/* && \
-    mkdir /app
+    mkdir /app && \
+    git config --global --add safe.directory '*'
 
 WORKDIR /app
 COPY --from=builder /app/build/commitsar ./commitsar
