@@ -9,6 +9,7 @@ require (
 	github.com/aevea/quoad v0.4.0
 	github.com/apex/log v1.9.0
 	github.com/google/go-github/v32 v32.1.0
+	github.com/google/go-github/v82 v82.0.0
 	github.com/jedib0t/go-pretty v4.3.0+incompatible
 	github.com/logrusorgru/aurora v2.0.3+incompatible
 	github.com/magefile/mage v1.15.0
@@ -37,7 +38,7 @@ require (
 	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/go-viper/mapstructure/v2 v2.4.0 // indirect
 	github.com/golang/groupcache v0.0.0-20210331224755-41bb18bfe9da // indirect
-	github.com/google/go-querystring v1.1.0 // indirect
+	github.com/google/go-querystring v1.2.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
 	github.com/kevinburke/ssh_config v1.2.0 // indirect
