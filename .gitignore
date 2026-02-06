@@ -7,3 +7,6 @@ www/public
 tmp
 .idea
 dist
+
+# Generated files
+/target/
