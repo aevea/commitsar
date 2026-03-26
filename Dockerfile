@@ -14,7 +14,7 @@ COPY . /app/
 RUN git config --global --add safe.directory /app
 RUN make build/docker
 
-FROM alpine:3.18
+FROM alpine:3.23
 
 LABEL repository="https://github.com/aevea/commitsar"
 LABEL homepage="https://github.com/aevea/commitsar"
